@@ -17,9 +17,12 @@ import CustomerChangePassword from './components/auth/CustomerChangePassword'
 import AdminChangePassword from './components/auth/AdminChangePassword';
 import CustomerLogin from './components/auth/CustomerLogin';
 import AdminLogin from './components/auth/AdminLogin';
+// import shoppingCart from './components/auth/shoppingCart';
+
 import ResetPassword from './components/auth/ResetPassword';
 import AdminRegister from './components/auth/AdminRegister';
 import CustomerRegister from './components/auth/CustomerRegister';
+import shoppingCart from './components/auth/shoppingCart';
 // import ViewTrip from './components/ViewTrip';
 // import admindetails from './components/admindetails';
 // import edittripobj from './components/edittripobj';
@@ -38,7 +41,9 @@ const  App =()=>{
         <Route path="/eto" component={ edittripobj } />
         <Route path="/f" component={ Farm } />*/}
         <Route path="/register" component={ CustomerRegister } /> 
-        <Route path="/register-admin" component={ AdminRegister } />
+        <Route path="/shoppingCart" component={ shoppingCart } /> 
+
+        <Route path="/registerAdmin" component={ AdminRegister } />
         <Route exact path="/login-admin" component={ AdminLogin } />
         <Route exact path="/login" component={ CustomerLogin } />
         <Route exact path="/forgot-password" component={ CustomerForgotPassword } />
