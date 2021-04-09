@@ -8,11 +8,13 @@ async function connectToDb(){
 connectToDb();
 
 router.route('/signup').post(async (req,res) => {
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
     let email = req.body.email;
     let password = req.body.password;
     let username = req.body.username;
     let phoneNumber = req.body.phoneNumber;
-    if(typeof email === "undefined" || typeof password === "undefined" || typeof username === "undefined" || typeof phoneNumber === "undefined"){
+    if(typeof email === "undefined" || typeof firstName === "undefined" || typeof lastName === "undefined" || typeof password === "undefined" || typeof username === "undefined" || typeof phoneNumber === "undefined"){
         res.status(400).json('Please fill all the fields');
         return;
     }
@@ -52,12 +54,18 @@ router.route('/update').post(async (req, res) =>{
     let customerName = req.body.customerName;
     let whatToChange = req.body.whatToChange;
     let change = req.body.change;
-    
+
     let found = await client.db("Users").collections("Customers").findOne({"name":customerName});
     let id = found._id;
 
     if(whatToChange == "username"){
         found.name = change;
+    }
+    else if(whatToChange == "firstName"){
+        found.firstName = change;
+    }
+    else if(whatToChange == "lastName"){
+        found.lastName = change;
     }
     else if (whatToChange == "email"){
         found.email = change;
