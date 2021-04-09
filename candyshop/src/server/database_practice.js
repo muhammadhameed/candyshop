@@ -49,7 +49,7 @@ async function listDatabases(client){
 
 
 async function AddCustomer(client, username, email, password, phoneNumber){
-    if(typeof email === "undefined" || typeof password === null || typeof username === null || typeof phoneNumber === "undefined"){
+    if(typeof email === "undefined" || typeof password === "undefined" || typeof username === "undefined" || typeof phoneNumber === "undefined"){
         console.log("Please fill all spaces");
         return;
     }
