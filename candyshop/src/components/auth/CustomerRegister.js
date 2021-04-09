@@ -15,6 +15,7 @@ class CustomerRegister extends Component {
         email: "",
         password: "",
         rePassword: "",
+        phoneNumber: "",
         errors: {}
     }
     onChange = e => {
@@ -29,14 +30,36 @@ class CustomerRegister extends Component {
     }
     onSubmit = e => {
         e.preventDefault();
-        const newUser = {
+        var email = this.state.email;
+        var firstName = this.state.firstName;
+        var lastName = this.state.lastName;
+        var name = this.state.name;
+        var password = this.state.password;
+        var phoneNumber = this.state.phoneNumber;
+        var totalinput = {name,email, password, phoneNumber};
+        /*const newUser = {
             email: this.state.email,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
+            name: this.state.name,
             password: this.state.password,
-        }
+            phoneNumber: this.state.phoneNumber,
+        }*/
         if (this.state.password === this.state.rePassword)
-            api('account/customer/signup', newUser, 200).then(res => {
+            fetch('http://localhost:3000/customers/',{
+                method: 'post',
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(totalinput)
+            }).then(function(response){
+                return response.text();
+            }).then(function(text){
+                console.log(text);
+            }).catch(function(error) {
+                console.error(error);
+            })
+            /*api('account/customer/signup', newUser, 200).then(res => {
                
                 if (res.statusCode == 200) {
                     this.props.history.push("/login");
@@ -45,7 +68,7 @@ class CustomerRegister extends Component {
                 else {
                     alert("Error")
                 }
-            })
+            })*/
         else
             alert("Passwords do not Match!")
     }
@@ -78,6 +101,15 @@ class CustomerRegister extends Component {
                         <FormGroup>
                             <Input
                                 type="text"
+                                placeholder="Username"
+                                onChange={this.onChange}
+                                value={this.state.name}
+                                id="name"
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input
+                                type="text"
                                 placeholder="Enter your email address"
                                 onChange={this.onChange}
                                 value={this.state.email}
@@ -106,6 +138,15 @@ class CustomerRegister extends Component {
                                 Password must be greater than 8 characters long and
                                 must contain atleast 1 digit and 1 special character
                             </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <Input
+                                type="number"
+                                placeholder="Phone Number"
+                                onChange={this.onChange}
+                                value={this.state.phoneNumber}
+                                id="phoneNumber"
+                            />
                         </FormGroup>
                         <div className="btn-handler">
                             <Button className="signup-btn">Sign Up</Button>

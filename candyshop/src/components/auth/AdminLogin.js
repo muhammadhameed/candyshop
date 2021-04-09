@@ -65,7 +65,7 @@ class AdminLogin extends Component {
                                 placeholder="Enter your password"
                                 onChange={this.onChange}
                                 value={this.state.password}
-                                id="password"
+                                id="password"x
                             />
                             <p></p>
                             <Link to="/forgot-password-admin" className="link">Forgot Password? :(</Link>
