@@ -68,7 +68,7 @@ class AdminLogin extends Component {
                                 id="password"
                             />
                             <p></p>
-                            <Link to="/forgot-password/admin" className="link">Forgot Password? :(</Link>
+                            <Link to="/forgot-password-admin" className="link">Forgot Password? :(</Link>
 
                         </FormGroup>
                         <div className="btn-handler">
