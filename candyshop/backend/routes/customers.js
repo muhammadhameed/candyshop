@@ -7,7 +7,7 @@ async function connectToDb(){
 }
 connectToDb();
 
-router.route('/signupcustomer').post(async (req,res) => {
+router.route('/signup').post(async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
     let username = req.body.username;
@@ -33,7 +33,7 @@ router.route('/signupcustomer').post(async (req,res) => {
 
 })
 
-router.route('/signincustomer').post(async (req,res) => {
+router.route('/signin').post(async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
     if(typeof email === "undefined" || typeof password === "undefined"){
@@ -47,6 +47,32 @@ router.route('/signincustomer').post(async (req,res) => {
     }
     res.json("Sucess. You are signed in");
 })
+
+router.route('/update').post(async (req, res) =>{
+    let customerName = req.body.customerName;
+    let whatToChange = req.body.whatToChange;
+    let change = req.body.change;
+    
+    let found = await client.db("Users").collections("Customers").findOne({"name":customerName});
+    let id = found._id;
+
+    if(whatToChange == "username"){
+        found.name = change;
+    }
+    else if (whatToChange == "email"){
+        found.email = change;
+    }
+    else if (whatToChange == "password"){
+        found.password = change;
+    }
+    else if (whatToChange == "phoneNumber"){
+        found.phoneNumber = change;
+    }
+
+    await client.db("Product").collection("Candy").updateOne({"_id": id}, {$set : found});
+
+})
+
 
 
 module.exports = router;
