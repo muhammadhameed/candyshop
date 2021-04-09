@@ -44,7 +44,7 @@ class CustomerLogin extends Component {
     render() {
 
         return (
-            <div className="home-page">
+            <div className="container">
                 <div className="container main">
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Login</p>

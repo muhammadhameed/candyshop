@@ -16,6 +16,10 @@ import AdminForgotPassword from './components/auth/CustomerForgotPassword';
 import CustomerChangePassword from './components/auth/CustomerChangePassword';
 import AdminChangePassword from './components/auth/AdminChangePassword';
 import CustomerLogin from './components/auth/CustomerLogin';
+
+import Home from './components/auth/Home';
+import Menu from './components/auth/Menu';
+
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
 
@@ -42,6 +46,9 @@ const  App =()=>{
         <Route path="/f" component={ Farm } />*/}
         <Route path="/register" component={ CustomerRegister } /> 
         <Route path="/shoppingCart" component={ shoppingCart } /> 
+
+        <Route path="/home" component={ Home } />
+        <Route path="/menu" component={ Menu } />
 
         <Route path="/registerAdmin" component={ AdminRegister } />
         <Route exact path="/login-admin" component={ AdminLogin } />
