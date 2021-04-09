@@ -68,7 +68,7 @@ class CustomerLogin extends Component {
                             />
                         </FormGroup>
                         <div className="btn-handler">
-                            <Link to="/forgot-password/customer" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
+                            <Link to="/forgot-password" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
                         </div>
                         <div className="btn-handler">
                             <Button className="signup-btn">LOGIN</Button>
