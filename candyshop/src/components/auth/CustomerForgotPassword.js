@@ -38,7 +38,7 @@ class CustomerForgotPassword extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="home-page">
+            <div className="home-page_1">
                 <div className="container main">
                     {/* <img src={ logo } alt={ "Logo" } /> */}
                     <p className="brand-name">CANDY SHOP</p>
