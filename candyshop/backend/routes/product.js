@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('body-parser');
 var client = require('./connection');
 
 async function connectToDb(){
@@ -10,9 +11,10 @@ connectToDb();
 
 router.route('/').get(async(req,res) =>{
 
-    let found = await client.db("Product").collection("Candy").find({});
-    let x = json(found);
-    res.json(x);
+    let cursor = await client.db("Product").collection("Candy").find({});
+    let arr = new Array();
+    await cursor.forEach(function  (doc) {arr.push(doc);});
+    res.json(arr);
 })
 
 

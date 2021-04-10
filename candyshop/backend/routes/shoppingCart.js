@@ -11,7 +11,9 @@ router.route('/').get(async (req,res) =>{
     let customerName = req.body.customerName;
 
     let found = await client.db("Users").collection("Customers").findOne({"name": customerName});
-    res.json(found.shoppingCart);
+    let arr = new Array();
+    await cursor.forEach(function  (doc) {arr.push(doc);});
+    res.json(arr);
 })
 
 
