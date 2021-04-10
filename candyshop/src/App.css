@@ -186,12 +186,22 @@ body {
 }
 .home-page {
   height: 100vh;
-  /* background: url(./components/img/Home.png) no-repeat center center fixed; 
+  background: url(./components/img/bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  z-index: -999;background-color: #FF69B4; */
+  z-index: -999;background-color: #FF69B4;
+}
+.home-page_1 {
+  height: 100vh;
+  background: url(./components/img/—Pngtree—hand\ drawn\ square\ cans\ of_4710201\ 1.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: contain;
+  background-repeat:space;
+  z-index: -999;background-color: #FF69B4;
 }
 .main-container {
   width: 90%;
@@ -206,7 +216,7 @@ body {
   text-align: center;
 }
 .reg-form {
-  width: 10%;
+  width: 40%;
   margin: 0 auto;
 }
 .input-field {
@@ -247,33 +257,23 @@ input[type="email"]:hover ~ .pop-up {
 .title {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
-  margin-top: 5% auto;
+  color: rgb(66, 222, 233);
+  margin-top: 2% auto;
   font-weight: bolder;
   font-size: 300%;
   text-shadow: 2px 2px 4px #000000
 }
 
-.orderNow-btn {
-  
-  
-  /* position: relative; */
-  width: 50%;
+.signup-btn {
+  margin: 0 auto;
+  margin-top: 2%;
+  width: 60%;
   border-radius: 20px;
-  margin-top: 450px;
-  margin-left: -110px;
-  background-color: #9464E2; 
-  font-size: 130%;
-  color: rgb(0, 0, 0);
-  text-shadow: 0.5px 0.5px 0.5px #000000
-  /* margin-left: -0; 
-  margin-right: 400px;
-  
-  padding-right: 110px;
-  padding-left: 20px;
- 
+  background-color: rgb(109, 20, 121);
   border: solid 1px whitesmoke;
-   */
+  font-size: 130%;
+  color: rgb(97, 215, 245);
+  text-shadow: 0.5px 0.5px 0.5px #5bf15b
 }
 .menuu-btn {
   
@@ -324,33 +324,11 @@ input[type="email"]:hover ~ .pop-up {
 }
 
 .btn-handler {
- 
-  width: 50%;
-  margin-top: 150px;
-  margin-left: -100px;
-
- 
-  
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 4%;
 }
-
-.aboutt-btn-handler {
- 
-  width: 50%;
-  margin-top: 150px;
-  margin-left: -100px;
-
-  
-}
-/*.container{
-  /* margin:0;
-  padding:0; 
-  height: 95vh;
-  background: url("./components/img/Home.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed
-}*/
 
 .nav-button {
   background-color: #6c757d00;
@@ -725,7 +703,8 @@ div {
   }
 
   .brand-name {
-    font-size: 600%;
+    font-size: 500%;
+    color: yellow;
   }
   .reg-form {
     width: 40%;

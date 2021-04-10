@@ -49,11 +49,6 @@ class Home extends Component {
             // <div className="home-page">
             
           <container>
-            <button type="button" class="btn btn-outline-dark btn">MENU</button>
-            <button type="button" class="btn btn-outline-dark">ABOUT US</button>
-            <button type="button" class="btn btn-outline-dark">DEALS</button>
-            <button type="button" class="btn btn-outline-dark">LOGIN</button>
-            <img src={bg} alt="bg" className="img-fluid"/> 
             
                 <div className="container main">
                 {/* <div className="btn-handler">         
@@ -115,7 +110,7 @@ class Home extends Component {
                     </Form>
                 </div>
          
-        </container>
+         </container>
         
         
       

@@ -74,7 +74,7 @@ class CustomerRegister extends Component {
     }
     render() {
         return (
-            <div className="home-page">
+            <div className="home-page_1">
                 <div className="container main">
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Register</p>
@@ -117,6 +117,15 @@ class CustomerRegister extends Component {
                             />
                             {/* <span className="red-text">{errors.email}</span> */}
                         </FormGroup>
+                        <FormGroup>
+                            <Input
+                                type="number"
+                                placeholder="Phone Number"
+                                onChange={this.onChange}
+                                value={this.state.phoneNumber}
+                                id="phoneNumber"
+                            />
+                        </FormGroup>
                         <FormGroup className="password-container">
                             <Input
                                 type="password"
@@ -138,15 +147,6 @@ class CustomerRegister extends Component {
                                 Password must be greater than 8 characters long and
                                 must contain atleast 1 digit and 1 special character
                             </div>
-                        </FormGroup>
-                        <FormGroup>
-                            <Input
-                                type="number"
-                                placeholder="Phone Number"
-                                onChange={this.onChange}
-                                value={this.state.phoneNumber}
-                                id="phoneNumber"
-                            />
                         </FormGroup>
                         <div className="btn-handler">
                             <Button className="signup-btn">Sign Up</Button>

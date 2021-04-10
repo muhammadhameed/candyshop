@@ -11,48 +11,58 @@ connectToDb();
 const complexityOptions = {
     string: true,
     required: true,
+    trim:true,
     min: 5,
+    max: 30,
     lowerCase: 1,
     upperCase: 1,
-    numeric: 1,
-    requirementCount: 2,
+    numeric: 1, 
+    requirementCount: 3,
   };
 
 const passwordComplexity = require("joi-password-complexity"); 
 const schema = Joi.object().keys({ //adjust this to how the body sends the data 
     firstName: Joi.string().trim().required(),
     lastName: Joi.string().trim().required(),
+    name: Joi.string().required(),
     email: Joi.string().trim().email().required(),
     password: passwordComplexity(complexityOptions),
     repeat_password: Joi.ref('password'),
-    username: Joi.string().required(),
-    phoneNumber: Joi.string().trim().required().regex(/^[0-9]{11}$/)
+    phoneNumber: Joi.number().required().integer().min(999999999).max(999999999999) //this allows the number to be of 11 digits
 
 });
 
 router.route('/signup').post(async (req,res) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
-    let username = req.body.username;
+    let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
     let repeat_password = req.body.repeat_password;
     let phoneNumber = req.body.phoneNumber;
 
     let data = req.body;
-    Joi.validate(data, schema, (err,value) =>{
-        if (err){
+    schema.validate(data, (value,error) =>{
+        console.log("Huh");
+        if (error){
+            console.log("why");
             res.status(400).json("Error: " + err);
             return;
         }
     })
+    const validation = schema.validate(data);
+    if(validation.error)
+    {
+        res.json('Error' + validation.error);
+    }
+    
 
     let found = await client.db("Users").collection("Customers").findOne({"email" : email});
     if(found !==null) {
         res.status(400).json("User with this email already exists");
         return;
     }
-    found = await client.db("Users").collection("Customers").findOne({"name" : username});
+    found = await client.db("Users").collection("Customers").findOne({"name" : name});
     if(found !==null) {
         res.status(400).json("User with this username already exists");
         return;
