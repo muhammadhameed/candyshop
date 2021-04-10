@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import bg from "../img/Home.png";
 import {
     Button,
+    Container,
     Form,
     FormGroup,
     Input
@@ -10,7 +12,7 @@ import api from "./api"
 
 
 
-class CustomerLogin extends Component {
+class Home extends Component {
     state = {
         email: "",
         password: "",
@@ -44,12 +46,16 @@ class CustomerLogin extends Component {
     render() {
 
         return (
-            <div className="container">
+            // <div className="home-page">
+            
+          <Container>
+            
+                 <img src={bg} alt="bg" className="img-fluid"/> 
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
-                    <p className="title">Login</p>
+                    {/*<p className="brand-name">CANDY SHOP</p>*/}
+                    {/* <p className="title">Login</p> */}
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
-                        <FormGroup>
+                        {/* <FormGroup>
                             <Input
                                 type="email"
                                 placeholder="Enter your email address"
@@ -57,8 +63,8 @@ class CustomerLogin extends Component {
                                 value={this.state.email}
                                 id="email"
                             />
-                        </FormGroup>
-                        <FormGroup className="password-container">
+                        </FormGroup> */}
+                        {/* <FormGroup className="password-container">
                             <Input
                                 type="password"
                                 placeholder="Enter your password"
@@ -66,25 +72,29 @@ class CustomerLogin extends Component {
                                 value={this.state.password}
                                 id="password"
                             />
-                        </FormGroup>
+                        </FormGroup> */}
+                        {/* <div className="btn-handler">
+                            <Link to="/forgot-password/customer" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
+                        </div> */}
                         <div className="btn-handler">
-                            <Link to="/forgot-password" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
+                            {/* <Button className="signup-btn">LOGIN</Button> */}
+                                
+                            <Button className="orderNow" onClick={() => {
+                                this.props.history.push('/menu');
+                            }}>Order Now</Button>
                         </div>
-                        <div className="btn-handler">
-                            <Button className="signup-btn">LOGIN</Button>
-
-                            <Button className="signup-btn" onClick={() => {
-                                this.props.history.push('/register/customer');
-                            }}>SIGNUP</Button>
-                        </div>
-                        <div className="btn-handler">
+                        {/* <div className="btn-handler">
                             <Link to="/login/admin" className="link">Login as Admin</Link>
-                        </div>
+                        </div> */}
                     </Form>
                 </div>
-            </div>
-        )
+         
+         </Container>
+        
+        
+      
+        )    
     }
 }
 
-export default CustomerLogin;   
+export default Home;   

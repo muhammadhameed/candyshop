@@ -44,7 +44,7 @@ class shoppingCart extends Component {
                 <p className="brand-name">View Finances</p>
                 <div style={{marginLeft:'0px'}}>
                 <h1>
-                    Monthly Finances
+                    
                 </h1>
                 </div>
                 <div style={{marginLeft:'100px'}}>

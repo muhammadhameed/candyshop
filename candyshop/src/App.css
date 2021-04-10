@@ -7,7 +7,7 @@
 
 .h3white {
   text-align: center;
-  color: pink;
+  color: white;
   align-self: start;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -185,13 +185,13 @@ body {
   display: block;
 }
 .home-page {
-  height: 100vh;
-  background: url(./components/img/bg.jpg) no-repeat center center fixed; 
+  height: 95vh;
+  /* background: url(./components/img/Home.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  z-index: -999;background-color: #FF69B4;
+  z-index: -999;background-color: #FF69B4; */
 }
 .main-container {
   width: 90%;
@@ -206,7 +206,7 @@ body {
   text-align: center;
 }
 .reg-form {
-  width: 40%;
+  width: 10%;
   margin: 0 auto;
 }
 .input-field {
@@ -254,24 +254,57 @@ input[type="email"]:hover ~ .pop-up {
   text-shadow: 2px 2px 4px #000000
 }
 
-.signup-btn {
-  margin: 0 auto;
-  margin-top: 2%;
-  width: 60%;
+.orderNow-btn {
+  
+  
+  /* position: relative; */
+  width: 100%;
   border-radius: 20px;
-  background-color: whitesmoke;
-  border: solid 1px whitesmoke;
+  margin-top: 250px;
+  background-color: #9464E2; 
   font-size: 130%;
   color: grey;
   text-shadow: 0.5px 0.5px 0.5px #000000
+  /* margin-left: -0; 
+  margin-right: 400px;
+  
+  padding-right: 110px;
+  padding-left: 20px;
+ 
+  border: solid 1px whitesmoke;
+   */
 }
 
 .btn-handler {
-  width: 100%;
+  /* position: relative; 
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 4%;
+  margin-bottom: 10%;
+  margin-top: ; 
+   bottom: 0px;
+  right: 0px;
+  position: absolute; */
+  width: 100%;
+  margin-top: 250px;
+  margin-left: -30px;
+  /* margin-left: -px;
+  margin-right: 1000px;
+  padding-top: 200px;
+  padding-right: 100px;
+  padding-left: -9px; */
+  
+  
 }
+/*.container{
+  /* margin:0;
+  padding:0; 
+  height: 95vh;
+  background: url("./components/img/Home.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed
+}*/
 
 .nav-button {
   background-color: #6c757d00;
