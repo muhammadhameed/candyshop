@@ -48,10 +48,32 @@ class Home extends Component {
         return (
             // <div className="home-page">
             
-          <Container>
+          <container>
+            <button type="button" class="btn btn-outline-dark btn">MENU</button>
+            <button type="button" class="btn btn-outline-dark">ABOUT US</button>
+            <button type="button" class="btn btn-outline-dark">DEALS</button>
+            <button type="button" class="btn btn-outline-dark">LOGIN</button>
+            <img src={bg} alt="bg" className="img-fluid"/> 
             
-                 <img src={bg} alt="bg" className="img-fluid"/> 
                 <div className="container main">
+                {/* <div className="btn-handler">         
+                    <Button className="menuu-btn" onClick={() => {
+                       
+                    }}>MENU</Button>
+                </div>
+
+                <div className="aboutt-btn-handler">         
+                    <Button className="aboutt-btn" onClick={() => {
+                        
+                    }}>ABOUT US</Button>
+                </div>
+
+                <div className="btn-handler">         
+                    <Button className="loginn-btn" onClick={() => {
+                        this.props.history.push('/login');
+                    }}>LOGIN</Button>
+                </div> */}
+                
                     {/*<p className="brand-name">CANDY SHOP</p>*/}
                     {/* <p className="title">Login</p> */}
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
@@ -76,20 +98,24 @@ class Home extends Component {
                         {/* <div className="btn-handler">
                             <Link to="/forgot-password/customer" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
                         </div> */}
-                        <div className="btn-handler">
-                            {/* <Button className="signup-btn">LOGIN</Button> */}
+                        <div className="order-btn-handler">
+                            
                                 
-                            <Button className="orderNow" onClick={() => {
+                            <Button className="orderNow-btn" onClick={() => {
                                 this.props.history.push('/menu');
                             }}>Order Now</Button>
                         </div>
+
+                        
+
+
                         {/* <div className="btn-handler">
                             <Link to="/login/admin" className="link">Login as Admin</Link>
                         </div> */}
                     </Form>
                 </div>
          
-         </Container>
+        </container>
         
         
       
