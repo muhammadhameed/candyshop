@@ -41,7 +41,7 @@ class ForgotCustomerPassword extends Component {
 
     render() {
         return (
-            <div className="home-page">
+            <div className="home-page_1">
                 <div className="container main">
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Change Password</p>
