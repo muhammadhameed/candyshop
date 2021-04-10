@@ -48,7 +48,7 @@ class Home extends Component {
         return (
             // <div className="home-page">
             
-          <Container>
+          <container>
             
                  <img src={bg} alt="bg" className="img-fluid"/> 
                 <div className="container main">
@@ -89,7 +89,7 @@ class Home extends Component {
                     </Form>
                 </div>
          
-         </Container>
+         </container>
         
         
       

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
     Button,
+    Container,
     Form,
     FormGroup,
     Input
@@ -74,9 +75,14 @@ class CustomerRegister extends Component {
     }
     render() {
         return (
-            <div className="home-page">
+            
+            <div className="home-page_1">
+                
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    
+                    <p className="brand-name">    
+                       
+                          CANDY SHOP</p>
                     <p className="title">Register</p>
                     <Form className="reg-form mt-3" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>
@@ -117,6 +123,15 @@ class CustomerRegister extends Component {
                             />
                             {/* <span className="red-text">{errors.email}</span> */}
                         </FormGroup>
+                        <FormGroup>
+                            <Input
+                                type="number"
+                                placeholder="Phone Number"
+                                onChange={this.onChange}
+                                value={this.state.phoneNumber}
+                                id="phoneNumber"
+                            />
+                        </FormGroup>
                         <FormGroup className="password-container">
                             <Input
                                 type="password"
@@ -139,16 +154,7 @@ class CustomerRegister extends Component {
                                 must contain atleast 1 digit and 1 special character
                             </div>
                         </FormGroup>
-                        <FormGroup>
-                            <Input
-                                type="number"
-                                placeholder="Phone Number"
-                                onChange={this.onChange}
-                                value={this.state.phoneNumber}
-                                id="phoneNumber"
-                            />
-                        </FormGroup>
-                        <div className="btn-handler">
+                        <div className="btn-handler_1">
                             <Button className="signup-btn">Sign Up</Button>
                         </div>
                     </Form>
