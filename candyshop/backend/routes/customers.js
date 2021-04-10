@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const Joi = require('joi');
 var client = require('./connection');
 
 async function connectToDb(){
@@ -7,17 +8,44 @@ async function connectToDb(){
 }
 connectToDb();
 
+const complexityOptions = {
+    string: true,
+    required: true,
+    min: 5,
+    lowerCase: 1,
+    upperCase: 1,
+    numeric: 1,
+    requirementCount: 2,
+  };
+
+const passwordComplexity = require("joi-password-complexity"); 
+const schema = Joi.object().keys({ //adjust this to how the body sends the data 
+    firstName: Joi.string().trim().required(),
+    lastName: Joi.string().trim().required(),
+    email: Joi.string().trim().email().required(),
+    password: passwordComplexity(complexityOptions),
+    repeat_password: Joi.ref('password'),
+    username: Joi.string().required(),
+    phoneNumber: Joi.string().trim().required().regex(/^[0-9]{11}$/)
+
+});
+
 router.route('/signup').post(async (req,res) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
+    let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
-    let username = req.body.username;
+    let repeat_password = req.body.repeat_password;
     let phoneNumber = req.body.phoneNumber;
-    if(typeof email === "undefined" || typeof firstName === "undefined" || typeof lastName === "undefined" || typeof password === "undefined" || typeof username === "undefined" || typeof phoneNumber === "undefined"){
-        res.status(400).json('Please fill all the fields');
-        return;
-    }
+
+    let data = req.body;
+    Joi.validate(data, schema, (err,value) =>{
+        if (err){
+            res.status(400).json("Error: " + err);
+            return;
+        }
+    })
 
     let found = await client.db("Users").collection("Customers").findOne({"email" : email});
     if(found !==null) {
@@ -35,6 +63,7 @@ router.route('/signup').post(async (req,res) => {
 
 })
 
+
 router.route('/signin').post(async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -49,6 +78,7 @@ router.route('/signin').post(async (req,res) => {
     }
     res.json("Sucess. You are signed in");
 })
+
 
 router.route('/update').post(async (req, res) =>{
     let customerName = req.body.customerName;

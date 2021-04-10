@@ -1,11 +1,10 @@
 const express = require ('express');
 const cors = require('cors');
-// const mongoose = require('mongoose');
 require('dotenv').config();
 const {MongoClient} = require('mongodb');
 
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.port || 7000;
 
 app.use(cors());
 app.use (express.json());
@@ -22,16 +21,6 @@ async function connectToDb(){
 }
 connectToDb();
 
-
-// mongoose.connect(uri, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   });
-// const connection = mongoose.connection;
-
-// connection.once('open', () => {
-//     console.log(`Connection established successfully`);
-// })
 
 const CustomersRouter = require('./routes/customers');
 const AdminRouter = require('./routes/admin');
