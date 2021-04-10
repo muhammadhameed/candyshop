@@ -275,6 +275,53 @@ input[type="email"]:hover ~ .pop-up {
   color: rgb(97, 215, 245);
   text-shadow: 0.5px 0.5px 0.5px #5bf15b
 }
+.menuu-btn {
+  
+  
+  /* position: relative; */
+  width: 20%;
+  border-radius: 20px;
+  margin-top: -90px;
+  margin-left: 300px ;
+  background-color: transparent;
+  border: none;
+  font-size: 130%;
+  color: rgb(0, 0, 0);
+  text-shadow: 0.5px 0.5px 0.5px #000000
+ 
+}
+
+.aboutt-btn {
+  
+  
+  /* position: relative; */
+  width: 25%;
+  border-radius: 20px;
+  margin-top: -90px;
+  margin-left: 300px ;
+  background-color: transparent;
+  border: none;
+  font-size: 130%;
+  color: rgb(0, 0, 0);
+  text-shadow: 0.5px 0.5px 0.5px #000000
+ 
+}
+
+.loginn-btn {
+  
+  
+  /* position: relative; */
+  width: 20%;
+  border-radius: 20px;
+  margin-top: -440px;
+  margin-left: 430px ;
+  background-color: transparent;
+  border: none;
+  font-size: 130%;
+  color: rgb(0, 0, 0);
+  text-shadow: 0.5px 0.5px 0.5px #000000
+ 
+}
 
 .btn-handler {
   width: 100%;
