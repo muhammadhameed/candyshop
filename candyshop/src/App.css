@@ -275,15 +275,15 @@ input[type="email"]:hover ~ .pop-up {
   color: rgb(97, 215, 245);
   text-shadow: 0.5px 0.5px 0.5px #5bf15b
 }
-.menuu-btn {
+.orderNow-btn {
   
   
   /* position: relative; */
-  width: 20%;
+  width: 15%;
   border-radius: 20px;
-  margin-top: -90px;
-  margin-left: 300px ;
-  background-color: transparent;
+  margin-top: -700px;
+  margin-left: 475px ;
+  background-color: #9464E2;
   border: none;
   font-size: 130%;
   color: rgb(0, 0, 0);
