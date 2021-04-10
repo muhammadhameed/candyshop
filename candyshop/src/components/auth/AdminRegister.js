@@ -54,7 +54,7 @@ class AdminRegister extends Component {
         const { errors } = this.state;
         console.log("Here: ", errors);
         return (
-            <div className="home-page">
+            <div className="home-page_1">
                 <div className="container main">
                 <p className="brand-name">CANDY SHOP</p>
                 <p className="title">Admin Register</p>

@@ -186,22 +186,21 @@ body {
 }
 .home-page {
   height: 100vh;
-  /* width:  100vh; */
-  background: url(./components/img/Home.png) no-repeat center center fixed; 
+  background: url(./components/img/bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: contain;
+  background-size: cover;
   z-index: -999;background-color: #FF69B4;
 }
 .home-page_1 {
-  height: 120vh;
-  /* width:  100vh; */
+  height: 100vh;
   background: url(./components/img/—Pngtree—hand\ drawn\ square\ cans\ of_4710201\ 1.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: contain;
+  background-repeat:space;
   z-index: -999;background-color: #FF69B4;
 }
 .main-container {
@@ -217,7 +216,7 @@ body {
   text-align: center;
 }
 .reg-form {
-  width: 10%;
+  width: 40%;
   margin: 0 auto;
 }
 .input-field {
@@ -256,92 +255,37 @@ input[type="email"]:hover ~ .pop-up {
   font-weight: bolder;
 }
 .title {
-  text-align: right;
-  margin-right: 6.75%;
+  text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(228, 217, 66);
-  margin-top: 5% auto;
+  color: rgb(66, 222, 233);
+  margin-top: 2% auto;
   font-weight: bolder;
   font-size: 300%;
   text-shadow: 2px 2px 4px #000000
 }
 
-.orderNow-btn {
-  
-  
-  /* position: relative; */
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 250px;
-  background-color: #9464E2; 
-  font-size: 130%;
-  color: grey;
-  text-shadow: 0.5px 0.5px 0.5px #000000
-  /* margin-left: -0; 
-  margin-right: 400px;
-  
-  padding-right: 110px;
-  padding-left: 20px;
- 
-  border: solid 1px whitesmoke;
-   */
-}
-.btn-handler_1 {
-  /* position: relative; 
+.signup-btn {
   margin: 0 auto;
-  text-align: center;
-  margin-bottom: 10%;
-  margin-top: ; 
-   bottom: 0px;
-  right: 0px;
-  position: absolute; */
-  width: 100%;
-  margin-bottom: 100%;
-  margin-left: 30px;
-  /* margin-left: -px;
-  margin-right: 1000px;
-  padding-top: 200px;
-  padding-right: 100px;
-  padding-left: -9px; */
-  
-  
+  margin-top: 2%;
+  width: 60%;
+  border-radius: 20px;
+  background-color: rgb(109, 20, 121);
+  border: solid 1px whitesmoke;
+  font-size: 130%;
+  color: rgb(97, 215, 245);
+  text-shadow: 0.5px 0.5px 0.5px #5bf15b
 }
 
 .btn-handler {
-  /* position: relative; 
+  width: 100%;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 10%;
-  margin-top: ; 
-   bottom: 0px;
-  right: 0px;
-  position: absolute; */
-  width: 100%;
-  margin-top: 250px;
-  margin-left: -30px;
-  /* margin-left: -px;
-  margin-right: 1000px;
-  padding-top: 200px;
-  padding-right: 100px;
-  padding-left: -9px; */
-  
-  
+  margin-bottom: 4%;
 }
-/*.container{
-  /* margin:0;
-  padding:0; 
-  height: 95vh;
-  background: url("./components/img/Home.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed
-}*/
 
 .nav-button {
   background-color: #6c757d00;
   border-color: #6c757d00;
-  /* margin-top: 60% ; */
 }
 
 .nav-button:hover {
@@ -637,7 +581,6 @@ div {
     height: 100px;
   }
   .brand-name {
-    /* margin-top: 20px; */
     font-size: 300%;
   }
   .reg-form {
@@ -647,11 +590,7 @@ div {
     margin-bottom: 15px;
   }
   .signup-btn {
-    width: 10%;
-  }
-  .signup-btn_1 {
-    width: 70%;
-    margin-top: 40%;
+    width: 100%;
   }
   .login-btn {
     width: 100%;
@@ -686,7 +625,6 @@ div {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .brand-name {
-    margin-top: 40%;
     font-size: 500%;
   }
   .reg-form {
@@ -711,7 +649,6 @@ div {
     font-size: 18px;
     text-align: center;
   }
-  
 
   .separator {
     width: 1.5px;
@@ -719,19 +656,11 @@ div {
   }
 
   .brand-name {
-    /* align-items: left; */
-    margin-top: 35%;
-   margin-left: 0%;
-   color: mediumturquoise;
-    font-size: 400%;
+    font-size: 500%;
+    color: yellow;
   }
   .reg-form {
-    width: 30%;
-    margin-top: 40%;
-    /* margin: 60%; */
-    margin-left: 70%;
-    /* background-col; */
-
+    width: 40%;
   }
   #firstName {
     margin-bottom: 0px;
