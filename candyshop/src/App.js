@@ -19,13 +19,9 @@ import CustomerLogin from './components/auth/CustomerLogin';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
-<<<<<<< HEAD
+import Menu2 from './components/auth/Menu2';
 import homeClient from './components/auth/homeClient';
 import homeServer from './components/auth/homeServer';
-=======
-import Menu2 from './components/auth/Menu2';
-
->>>>>>> 086d80c1a1f30101d5076d8630daafd92befc1e7
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
