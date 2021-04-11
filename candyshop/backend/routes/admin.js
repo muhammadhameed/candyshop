@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Joi = require('joi');
-var client = require('./connection');
+const client = require('./connection');
 
 async function connectToDb(){
     await client.connect();

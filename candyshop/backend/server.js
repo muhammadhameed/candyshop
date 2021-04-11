@@ -4,7 +4,7 @@ require('dotenv').config();
 const {MongoClient} = require('mongodb');
 
 const app = express();
-const port = process.env.port || 7000;
+const port = process.env.port || 5000;
 
 app.use(cors());
 app.use (express.json());

@@ -1,6 +1,5 @@
 const router = require('express').Router();
-const { json } = require('body-parser');
-var client = require('./connection');
+const client = require('./connection');
 
 async function connectToDb(){
     await client.connect();
