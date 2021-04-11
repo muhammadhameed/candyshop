@@ -60,16 +60,6 @@ class ChangeAdminUsername extends Component {
 
                             <Input
                                 className="input-field"
-                                type="password"
-                                placeholder="Enter password"
-                                onChange={this.onChange}
-                                value={this.state.password}
-                                error={errors.password}
-                                id="password"
-                            />
-                            <p></p>
-                            <Input
-                                className="input-field"
                                 type="text"
                                 placeholder="New Username"
                                 onChange={this.onChange}

@@ -57,17 +57,6 @@ class ChangeCustomerUsername extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="password-container">
-
-                            <Input
-                                className="input-field"
-                                type="password"
-                                placeholder="Enter password"
-                                onChange={this.onChange}
-                                value={this.state.password}
-                                error={errors.password}
-                                id="password"
-                            />
-                            <p></p>
                             <Input
                                 className="input-field"
                                 type="text"

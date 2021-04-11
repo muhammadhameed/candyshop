@@ -42,7 +42,7 @@ class homeClient extends Component {
                     <Button className="signup-btn">Reviews</Button>
                 </div>
                 </Link>
-                <Link to ="/change-password-admin">
+                <Link to ="/change-password">
                 <div className="btn-handler">
                         <Button className="signup-btn">Change Password</Button>
                     </div>
