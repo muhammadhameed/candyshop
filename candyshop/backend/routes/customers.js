@@ -51,7 +51,8 @@ router.route('/signup').post(async (req,res) => {
     const validation = schema.validate(data);
     if(validation.error)
     {
-        res.json('Error' + validation.error);
+        res.status(400).json('Error' + validation.error);
+        return;
     }
     
 
