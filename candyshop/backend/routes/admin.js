@@ -133,6 +133,7 @@ router.route('/signinadmin').post( async (req,res) => {
     res.status(200).json("You are signed in. Welcome.");
 });
 
+
 router.route('/update').post(async (req, res) =>{
     let adminName = req.body.adminName;
     let whatToChange = req.body.whatToChange;
@@ -140,6 +141,12 @@ router.route('/update').post(async (req, res) =>{
 
     let found = await client.db("Users").collection("Admin").findOne({"name":adminName});
     let id = found._id;
+
+    if (id == null)
+    {
+        res.status(400).json("The username entered is incorrect.");
+        return;
+    }
 
     if(whatToChange == "username"){
         found.name = change;
@@ -167,6 +174,40 @@ router.route('/update').post(async (req, res) =>{
 })
 
 
+var nodeMailer = require('nodemailer');
+router.route('/forgotPassword').post(async (req,res) => {
+    let email = req.body.email;
+    let found = await client.db("Users").collection("Admin").findOne({"email":email});
+    
+    if(found === null){
+        res.status(400).json("Invalid email");
+        return;
+    }
+
+    var transporter = nodeMailer.createTransport({
+        service:'gmail',
+        auth: {
+            user: 'noreplycandyscape@gmail.com',
+            pass: 'Group12-SE-Candyscape'
+        }
+    });
+
+    var mailOptions = {
+        from: 'noreplycandyscape@gmail.com',
+        to : email,
+        subject: 'Password Candyscape',
+        text : 'Your password is ' + found.password
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            res.status(400).json(error);
+        }
+        else{
+            res.status(200).json('Email sent ' + info.response);
+        }
+    });
+})
 
 
 module.exports = router;

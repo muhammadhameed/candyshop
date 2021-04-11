@@ -12,7 +12,7 @@ import AddUser from './components/auth/AddUser';
 import AdminAppNavbar from './components/subcomponents/AdminAppNavbar';
 import CustomerAppNavbar from './components/subcomponents/CustomerAppNavbar';
 import CustomerForgotPassword from './components/auth/CustomerForgotPassword';
-import AdminForgotPassword from './components/auth/CustomerForgotPassword';
+import AdminForgotPassword from './components/auth/AdminForgotPassword';
 import CustomerChangePassword from './components/auth/CustomerChangePassword';
 import AdminChangePassword from './components/auth/AdminChangePassword';
 import CustomerLogin from './components/auth/CustomerLogin';
