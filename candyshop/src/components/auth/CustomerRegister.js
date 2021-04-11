@@ -137,8 +137,8 @@ class CustomerRegister extends Component {
                                 id="rePassword"
                             />
                             <div className="pop-up">
-                                Password must be greater than 8 characters long and
-                                must contain atleast 1 digit and 1 special character
+                            Password must be greater than 8 characters long and
+                                must contain atleast 1 upper case and lowercase character
                             </div>
                         </FormGroup>
                         <div className="btn-handler">

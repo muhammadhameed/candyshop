@@ -40,7 +40,7 @@ class ChangeCustomerPassword extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="home-page">
+            <div className="home-page_2">
                 <div className="container main">
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Change Password</p>

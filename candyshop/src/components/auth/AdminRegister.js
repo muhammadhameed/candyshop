@@ -16,7 +16,7 @@ class AdminRegister extends Component {
         password: "",
         rePassword: "",
         errors: {}
-        
+
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -114,7 +114,7 @@ class AdminRegister extends Component {
                             />
                             <div className="pop-up">
                                 Password must be greater than 8 characters long and
-                                must contain atleast 1 digit and 1 special character
+                                must contain atleast 1 upper case and lowercase character
                             </div>
                         </FormGroup>
                         <div className="btn-handler">
