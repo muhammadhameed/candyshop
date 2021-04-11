@@ -92,22 +92,6 @@ router.route('/update').post(async (req,res) =>{
     }
 })
 
-// router.route('/add').post(async(req,res)=>){
-//     let customerName = req.body.customerName;
-//     let productName = req.body.productName;
-//     let collectionName = req.body.collectionName;
-//     let quantity = req.body.quantity;
-//     let price;
-
-//     let found = await client.db("Users").collection("Customers").findOne({"name": customerName});
-//     let foundProduct = await client.db("Product").collection(collectionName).findOne({"name":productName}); 
-
-//     if (typeof foundProduct.price !== "undefined"){
-//         price = foundProduct.price;
-//     }
-
-
-// }
 
 
 router.route('/add').post(async(req,res)=>{
@@ -120,9 +104,8 @@ router.route('/add').post(async(req,res)=>{
     
     if(typeof (foundProduct.price) !== "undefined"){ //this means this is a box
         price = foundProduct.price;
-        let names = new Array();
-        let quantities = new Array();
-        let AddToCart = [{"Box" : productName, [productName] : {"price" : price, "name": names, "quantity": new Array()}}]; //this is box when shoppingCart is not empty
+
+        let AddToCart = [{"Box" : productName, [productName] : {"price" : price, "name": new Array(), "quantity": new Array()}}]; //this is box when shoppingCart is not empty
         await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": AddToCart}});
         res.json("Successfully added to shopping cart");
         return;

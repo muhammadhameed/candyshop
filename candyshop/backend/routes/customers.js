@@ -12,7 +12,7 @@ const complexityOptions = {
     string: true,
     required: true,
     trim:true,
-    min: 5,
+    min: 8,
     max: 30,
     lowerCase: 1,
     upperCase: 1,
@@ -24,7 +24,7 @@ const passwordComplexity = require("joi-password-complexity");
 const schema = Joi.object().keys({ //adjust this to how the body sends the data 
     firstName: Joi.string().trim().required(),
     lastName: Joi.string().trim().required(),
-    name: Joi.string().required(),
+    name: Joi.string().trim().required(),
     email: Joi.string().trim().email().required(),
     password: passwordComplexity(complexityOptions),
     phoneNumber: Joi.number().required().integer().min(999999999).max(999999999999) //this allows the number to be of 11 digits
@@ -40,18 +40,12 @@ router.route('/signup').post(async (req,res) => {
     let phoneNumber = req.body.phoneNumber;
 
     let data = req.body;
-    schema.validate(data, (value,error) =>{
-        console.log("Huh");
-        if (error){
-            console.log("why");
-            res.status(400).json("Error: " + err);
-            return;
-        }
-    })
+    
     const validation = schema.validate(data);
     if(validation.error)
     {
         res.json('Error' + validation.error);
+        return;
     }
     
 

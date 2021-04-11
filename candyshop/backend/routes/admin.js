@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const Joi = require('joi');
 var client = require('./connection');
 
 async function connectToDb(){
@@ -7,9 +8,69 @@ async function connectToDb(){
 }
 connectToDb();
 
-router.route('/signinadmin').get( async (req,res) => {
+
+const complexityOptions = {
+    string: true,
+    required: true,
+    trim:true,
+    min: 8,
+    max: 30,
+    lowerCase: 1,
+    upperCase: 1,
+    numeric: 1, 
+    requirementCount: 3,
+  };
+
+const passwordComplexity = require("joi-password-complexity"); 
+const schema = Joi.object().keys({ //adjust this to how the body sends the data 
+    firstName: Joi.string().trim().required(),
+    lastName: Joi.string().trim().required(),
+    // name: Joi.string().trim().required(),
+    email: Joi.string().trim().email().required(),
+    password: passwordComplexity(complexityOptions),
+
+});
+
+
+router.route('/signupadmin').post( async (req,res) => {
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    // let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
+
+    let data = req.body;
+    
+    const validation = schema.validate(data);
+    if(validation.error)
+    {
+        res.json('Error' + validation.error);
+        return;
+    }
+    
+
+    let found = await client.db("Users").collection("Admin").findOne({"email" : email});
+    if(found !==null) {
+        res.status(400).json("User with this email already exists");
+        return;
+    }
+    // found = await client.db("Users").collection("Admin").findOne({"name" : name});
+    // if(found !==null) {
+    //     res.status(400).json("User with this username already exists");
+    //     return;
+    // }
+    const doc = {"firstName": firstName, "lastName" : lastName,  "email":email, "password":password};
+    await client.db("Users").collection("Admin").insertOne(doc);
+    res.json("User Added");
+
+})
+
+
+
+router.route('/signinadmin').post( async (req,res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
     if(typeof email === "undefined" || typeof password === "undefined"){
         res.status(400).json("Please fill all spaces");
         return;
@@ -20,36 +81,6 @@ router.route('/signinadmin').get( async (req,res) => {
         return;
     }
     res.json("You are signed in. Welcome.");
-});
-
-router.route('/signupadmin').get( async (req,res) => {
-    let email = req.body.email;
-    let password = req.body.password;
-    if(typeof email === "undefined" || typeof password === "undefined"){
-        res.status(400).json("Please fill all spaces");
-        return;
-    }
-
-    let found1 = await client.db("Users").collection("Admin").findOne({"email" : cus.email});
-    if(found1 !==null) {
-        //console.log("Admin with this email already exists");
-        res.status(400).json("User with this email already exists");
-        return;
-    }
-
-    let found = await client.db("Users").collection("Admin").findOne({"email":email, "password":password});
-    if (found === null){
-        res.status(400).json("Please enter your details again");
-        return;
-    }
-
-    const doc = {"email":cus.email, "password":cus.password};
-    try {
-            await client.db("Users").collection("Admin").insertOne(doc);
-        } catch (e) {
-            console.log(e);
-    };
-    res.json("Welcome.");
 });
 
 
