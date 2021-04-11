@@ -18,12 +18,13 @@ class addProduct extends Component {
   state = {
     modal: true,
     name: "",
-    description: "",
+    collectionName: "",
+    quantity: 0,
     image : [],
     price: 0,
 
-    manufacturedate: Date(),
-    expirydate:  Date(),
+    startDate: Date(),
+    endDate:  Date(),
     
   };
   componentDidMount() {
@@ -56,25 +57,31 @@ class addProduct extends Component {
   
   onSubmit = (e) => {
     e.preventDefault();
-    const userData = {
-      name: this.state.name,
-      description: this.state.description,
-      price: this.state.price,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      
-    }
-
-    api("api/trip/create", userData, 200).then(res => {
-      if (res.statusCode === 200) {
-        this.props.history.push("/home/admin");
-        console.log(res)
-      }
-      else {
-        alert("Error")
-      }
-    }
-    )
+    
+    var productName = this.state.name;
+    var collectionName = this.state.collectionName;
+    var price = this.state.price;
+    var quantity= this.state.quantity;
+    var startDate = this.state.startDate;
+    var endDate = this.state.endDate;
+    var totalinput = {collectionName, productName, quantity, price};
+    console.log(totalinput);
+    
+    fetch('http://localhost:7000/product/add/',{
+        method: 'post',
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(totalinput)
+    }).then(function(response){
+        response.text().then(function(text){alert(text);});
+        if (response.status != 400)
+        {
+            window.location = "http://localhost:3000/home/";
+        }
+    }).catch(function(error) {
+        console.error(error);
+    })
   };
 
   render() {
@@ -111,14 +118,14 @@ class addProduct extends Component {
           <div style={{ marginTop: "20px" }}>
             <div style={{ width: "200%", margin: "0 auto" }}>
               <FormGroup style={{ width: "100%", paddingBottom: "30px" }}>
-                <Label className="title-sm">Name:</Label>
+                <Label className="title-sm">Category:</Label>
                 <Input
                   type="text"
-                  style={{ marginLeft: "115px" }}
-                  id="name"
-                  placeholder="Enter Product Name"
+                  style={{ marginLeft: "70px" }}
+                  id="collectionName"
+                  placeholder="Enter Category"
                   onChange={this.onChange}
-                  value={this.state.name}
+                  value={this.state.collectionName}
                 />
                 <Label className="title-sm"style = {{marginLeft: "20px"}}>Image:</Label>
                 <input type="file"
@@ -131,14 +138,14 @@ class addProduct extends Component {
             
               </FormGroup>
               <FormGroup style={{ width: "50%", paddingBottom: "30px" }}>
-                <Label className="title-sm">Description:</Label>
+                <Label className="title-sm">Name:</Label>
                 <Input
                   type="textarea"
-                  style={{ marginLeft: "55px", width: "60%" }}
-                  id="description"
-                  placeholder="Enter Description"
+                  style={{ marginLeft: "90px", width: "60%" }}
+                  id="name"
+                  placeholder="Enter Product Name"
                   onChange={this.onChange}
-                  value={this.state.description}
+                  value={this.state.name}
                 />
               </FormGroup>
               <FormGroup style={{ width: "200%", paddingBottom: "30px" }}>
@@ -149,16 +156,16 @@ class addProduct extends Component {
                   id="quantity"
                   placeholder="Enter Quantity"
                   onChange={this.onChange}
-                  value={this.state.capacity}
+                  value={this.state.quantity}
                 />
 
                 <Label className="title-sm-l" style = {{marginLeft: "20px"}}>Price: </Label>
                 <Input
-                  style={{ marginLeft: "15px" }}
+                  style={{ marginLeft: "40px" }}
                   type="number"
                   placeholder="Enter Price"
                   onChange={this.onChange}
-                  value={this.state.number}
+                  value={this.state.price}
                   id="price"
                 />
               </FormGroup>
@@ -169,8 +176,8 @@ class addProduct extends Component {
                   type="Date"
                   placeholder="Manufacture Date"
                   onChange={this.onChange}
-                  value={this.state.Date}
-                  id="manufacturedate"
+                  value={this.state.startDate}
+                  id="startDate"
                 />
                 <Label className="title-sm-l" style={{ marginLeft: "20px" }}> Expiry Date: </Label>
                 <Input
@@ -179,12 +186,13 @@ class addProduct extends Component {
                   placeholder="Enter Expiry Date"
                   onChange={this.onChange}
                   value={this.state.endDate}
-                  id="expirydate"
+                  id="endDate"
                 />
               </FormGroup>
 
             </div>
           </div>
+
           <div className="btn-handler">
             <Button className="signup-btn" type="submit">Add Product</Button>
             {/* <Button className="signup-btn" type="reset" onClick={() => window.location.href = "/add-product/admin"}>Create Location</Button> */}
