@@ -364,6 +364,23 @@ ul#horizontal-list {
   text-align: center;
   margin-bottom: 4%;
 }
+.pdd{
+  margin-top: 30px;
+
+
+}
+div.text_box {
+  display: block;
+  float: left;
+  width: 48vh;
+  height: 8vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 0px 1.5px black;
+  margin: 1vh 1vh 1vh 1vh;
+  font-size: 2.5vh;
+  padding: 1vh 1vh 1vh 1vh;
+}
 
 .nav-button {
   background-color: #6c757d00;
@@ -652,7 +669,7 @@ div {
 }
 
 .manualBg{
-  padding-left: 67px;
+  padding-left: 55px;
   background-color: #E2C6EC  ;
  
 }
