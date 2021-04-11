@@ -16,6 +16,7 @@ class AdminRegister extends Component {
         password: "",
         rePassword: "",
         errors: {}
+        
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -77,6 +78,17 @@ class AdminRegister extends Component {
                                         value={this.state.lastName}
                                         error={errors.lastName}
                                         id="lastName"
+                                    />
+                            
+                        </FormGroup>
+                        <FormGroup>
+                                    <Input
+                                        type="text"
+                                        placeholder="Email"
+                                        onChange={this.onChange}
+                                        value={this.state.email}
+                                        error={errors.email}
+                                        id="email"
                                     />
                             
                         </FormGroup>

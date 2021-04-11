@@ -192,17 +192,17 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  z-index: -999;background-color: #FF69B4;
+  z-index: -999;background-color: #D776D3;
 }
 .home-page_1 {
   height: 100vh;
-  background: url(./components/img/—Pngtree—hand\ drawn\ square\ cans\ of_4710201\ 1.png) no-repeat center center fixed; 
+  background: url(./components/img/WhatsApp\ Image\ 2021-04-11\ at\ 06.03.00.jpeg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: contain;
   background-repeat:space;
-  z-index: -999;background-color: #FF69B4;
+  z-index: -999;background-color: #D776D3;
 }
 .main-container {
   width: 90%;
@@ -234,7 +234,7 @@ body {
   /* position:absolute;
   top: 0px;
   right: 0px; */
-  color:#FF69B4;
+  color:#2c0d72;
 }
 input[type="password"]:hover ~ .pop-up {
   visibility: visible;
@@ -412,7 +412,7 @@ ul#horizontal-list {
 
 
 .link {
-  color: #FF69B4;
+  color: #10a02f;
   text-align: center;
   margin: 0 auto;
   margin-left: 3%;
