@@ -116,7 +116,7 @@ router.route('/update').post(async (req, res) =>{
     }
 
     await client.db("Product").collection("Candy").updateOne({"_id": id}, {$set : found});
-    res.status(200),json("Successfully updated product");
+    res.status(200).json("Successfully updated product");
 })
 
 
