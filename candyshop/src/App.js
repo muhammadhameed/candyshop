@@ -19,13 +19,13 @@ import CustomerLogin from './components/auth/CustomerLogin';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
-<<<<<<< HEAD
+
 import homeClient from './components/auth/homeClient';
 import homeServer from './components/auth/homeServer';
-=======
+
 import Menu2 from './components/auth/Menu2';
 
->>>>>>> 086d80c1a1f30101d5076d8630daafd92befc1e7
+
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
@@ -36,6 +36,7 @@ import CustomerRegister from './components/auth/CustomerRegister';
 import shoppingCart from './components/auth/shoppingCart';
 import addProduct from './components/auth/addProduct';
 import Error from './components/auth/Error';
+import ViewAdmin from './components/auth/ViewAdmin';
 
 // import viewProducts from './components/auth/viewProducts';
 // import admindetails from './components/admindetails';
@@ -68,7 +69,7 @@ const  App =()=>{
         <Route exact path="/forgot-password-admin" component={ AdminForgotPassword } />
         <Route exact path="/change-password" component={ CustomerChangePassword } />
         <Route exact path="/change-password-admin" component={ AdminChangePassword } />
-        {/* <Route exact path="/view-products" component={ viewProducts } /> */}
+        <Route exact path="/view-admins" component={ ViewAdmin } />
 
         
         <Route exact path="/adduser" component={ AddUser } />
