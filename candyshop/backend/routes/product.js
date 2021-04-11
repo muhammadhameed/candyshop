@@ -21,6 +21,7 @@ router.route('/').get(async(req,res) =>{
 router.route('/add').post( async (req,res) => {
     let productName = req.body.productName;
     let collectionName = req.body.collectionName;
+    let price = req.body.price;
     let quantity = req.body.quantity;
 
     let found = await client.db("Product").collection(collectionName).findOne({"name" : productName});
@@ -28,7 +29,14 @@ router.route('/add').post( async (req,res) => {
         res.status(400).json("A product with this name already exists");
         return;
     }
-    await client.db("Product").collection(collectionName).insertOne({"name":productName, "quantity":quantity});
+
+    if (typeof (price) === "undefined"){
+        await client.db("Product").collection(collectionName).insertOne({"name":productName, "quantity":quantity});
+        res.status(200).json("Product successfully added");
+        return;
+    }
+    
+    await client.db("Product").collection(collectionName).insertOne({"name":productName, "quantity":quantity, "price": price});
     res.status(200).json("Product successfully added");
 
 })

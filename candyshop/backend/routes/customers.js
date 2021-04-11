@@ -103,6 +103,11 @@ router.route('/update').post(async (req, res) =>{
         found.email = change;
     }
     else if (whatToChange == "password"){
+        let oldPassword = req.body.oldPassword;
+        if (found.password !== oldPassword){
+            res.status(400).json("Old password is incorrect");
+            return;
+        }
         found.password = change;
     }
     else if (whatToChange == "phoneNumber"){
@@ -112,6 +117,7 @@ router.route('/update').post(async (req, res) =>{
     await client.db("Users").collection("Customers").updateOne({"_id": id}, {$set : found});
     res.status(200).json("Successfully updated customer details");
 })
+
 
 
 
