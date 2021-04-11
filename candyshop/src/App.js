@@ -27,6 +27,7 @@ import ResetPassword from './components/auth/ResetPassword';
 import AdminRegister from './components/auth/AdminRegister';
 import CustomerRegister from './components/auth/CustomerRegister';
 import shoppingCart from './components/auth/shoppingCart';
+import addProduct from './components/auth/addProduct';
 // import ViewTrip from './components/ViewTrip';
 // import admindetails from './components/admindetails';
 // import edittripobj from './components/edittripobj';
@@ -49,6 +50,7 @@ const  App =()=>{
 
         <Route path="/home" component={ Home } />
         <Route path="/menu" component={ Menu } />
+        <Route path="/add-product" component={ addProduct } />
 
         <Route path="/registerAdmin" component={ AdminRegister } />
         <Route exact path="/login-admin" component={ AdminLogin } />

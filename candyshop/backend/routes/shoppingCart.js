@@ -92,7 +92,22 @@ router.route('/update').post(async (req,res) =>{
     }
 })
 
+// router.route('/add').post(async(req,res)=>){
+//     let customerName = req.body.customerName;
+//     let productName = req.body.productName;
+//     let collectionName = req.body.collectionName;
+//     let quantity = req.body.quantity;
+//     let price;
 
+//     let found = await client.db("Users").collection("Customers").findOne({"name": customerName});
+//     let foundProduct = await client.db("Product").collection(collectionName).findOne({"name":productName}); 
+
+//     if (typeof foundProduct.price !== "undefined"){
+//         price = foundProduct.price;
+//     }
+
+
+// }
 
 
 module.exports = router;
