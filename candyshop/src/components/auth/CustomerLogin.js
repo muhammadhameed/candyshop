@@ -27,6 +27,29 @@ class CustomerLogin extends Component {
             password: this.state.password
         }
 
+        var email = this.state.email;
+        var firstName = this.state.firstName;
+        var lastName = this.state.lastName;
+        var name = this.state.name;
+        var password = this.state.password;
+        var phoneNumber = this.state.phoneNumber;
+        var totalinput = {firstName, lastName, name, email, password, phoneNumber};
+        
+        if (this.state.password === this.state.rePassword)
+            fetch('http://localhost:3000/customers/',{
+                method: 'post',
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(totalinput)
+            }).then(function(response){
+                return response.text();
+            }).then(function(text){
+                alert(text);
+            }).catch(function(error) {
+                console.error(error);
+            })
+
         api("auth/customer/login", userData, 200).then(res => {
             
             if (res.statusCode == 200) {
