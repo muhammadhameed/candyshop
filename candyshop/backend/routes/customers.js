@@ -76,12 +76,12 @@ router.route('/signin').post(async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
     if(typeof email === "undefined" || typeof password === "undefined"){
-        res.error(400).json("Please fill all spaces");
+        res.status(400).json("Please fill all spaces");
         return;
     }
     let found = await client.db("Users").collection("Customers").findOne({"email":email, "password":password});
     if (found === null){
-        res.error(400).json("Incorrect details");
+        res.status(400).json("Incorrect details");
         return;
     }
     res.status(200).json("Sucess. You are signed in");
