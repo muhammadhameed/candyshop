@@ -22,8 +22,8 @@ const complexityOptions = {
 
 const passwordComplexity = require("joi-password-complexity"); 
 const schema = Joi.object().keys({ //adjust this to how the body sends the data 
-    firstName: Joi.string().trim().required().regex(/^[A-Za-z]$/),
-    lastName: Joi.string().trim().required().regex(/^[A-Za-z]$/),
+    firstName: Joi.string().trim().required(),
+    lastName: Joi.string().trim().required(),
     name: Joi.string().required(),
     email: Joi.string().trim().email().required(),
     password: passwordComplexity(complexityOptions),
