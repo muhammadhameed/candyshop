@@ -68,7 +68,7 @@ router.route('/update').post(async (req,res) =>{
                 cart[i].quantity = cart[i].quantity + quantityChange;
                 cart[i].price = cart[i].quantity * price;
                 await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": cart}});
-                console.log("Successfully updated shopping cart"); 
+                res.json("Successfully updated shopping cart"); 
                 return;
             }
         }
@@ -85,29 +85,13 @@ router.route('/update').post(async (req,res) =>{
                     cart.splice(i,1);
                 }
                 await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": cart}});
-                console.log("Successfully updated shopping cart"); 
+                res.json("Successfully updated shopping cart"); 
                 return;
             }
         }
     }
 })
 
-// router.route('/add').post(async(req,res)=>){
-//     let customerName = req.body.customerName;
-//     let productName = req.body.productName;
-//     let collectionName = req.body.collectionName;
-//     let quantity = req.body.quantity;
-//     let price;
-
-//     let found = await client.db("Users").collection("Customers").findOne({"name": customerName});
-//     let foundProduct = await client.db("Product").collection(collectionName).findOne({"name":productName}); 
-
-//     if (typeof foundProduct.price !== "undefined"){
-//         price = foundProduct.price;
-//     }
-
-
-// }
 
 
 router.route('/add').post(async(req,res)=>{
@@ -120,9 +104,8 @@ router.route('/add').post(async(req,res)=>{
     
     if(typeof (foundProduct.price) !== "undefined"){ //this means this is a box
         price = foundProduct.price;
-        let names = new Array();
-        let quantities = new Array();
-        let AddToCart = [{"Box" : productName, [productName] : {"price" : price, "name": names, "quantity": new Array()}}]; //this is box when shoppingCart is not empty
+
+        let AddToCart = [{"Box" : productName, [productName] : {"price" : price, "name": new Array(), "quantity": new Array()}}]; //this is box when shoppingCart is not empty
         await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": AddToCart}});
         res.json("Successfully added to shopping cart");
         return;
@@ -131,7 +114,7 @@ router.route('/add').post(async(req,res)=>{
     else{ //this is not box. Tell frontend that if the person clicks on add to cart on candy after box is full then they should display error message again
         
         if(typeof (found.shoppingCart) === "undefined"){
-            res.json("Please select a box first");
+            res.status(400).json("Please select a box first");
             return;
         }
 
@@ -143,7 +126,7 @@ router.route('/add').post(async(req,res)=>{
         
         if (typeof (Cart[length].Box.quantity) !== "undefined"){
             if (foundBox.quantity === (Cart[length].Box.quantity.reduce((a, b) => a + b, 0))){
-                res.json("Box is full. Get a new box");
+                res.status(400).json("Box is full. Get a new box");
                 return;
             }
         }
