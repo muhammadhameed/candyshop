@@ -35,7 +35,7 @@ class CustomerLogin extends Component {
             response.text().then(function(text){alert(text);});
             if (response.status != 400)
             {
-                window.location = "http://localhost:3000/menu/";
+                window.location = "http://localhost:3000/home-client/";
             }
         }).catch(function(error) {
             console.error(error);

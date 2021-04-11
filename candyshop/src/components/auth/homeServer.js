@@ -37,11 +37,6 @@ class homeServer extends Component {
                     </div>
                     {/* </Link> */}
                    
-                <Link>
-                <div className="btn-handler">
-                    <Button className="signup-btn">Customer Reviews</Button>
-                </div>
-                </Link>
   
                 <Link to ="/change-password-admin">
                 <div className="btn-handler">
