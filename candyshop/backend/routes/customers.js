@@ -65,7 +65,7 @@ router.route('/signup').post(async (req,res) => {
         res.status(400).json("User with this username already exists");
         return;
     }
-    const doc = {"name" : name, "email":email, "password":password, "phoneNumber":phoneNumber};
+    const doc = {"firstName": firstName, "lastName" : lastName, "name" : name, "email":email, "password":password, "phoneNumber":phoneNumber};
     await client.db("Users").collection("Customers").insertOne(doc);
     res.json("User Added");
 
