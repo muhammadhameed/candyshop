@@ -31,6 +31,39 @@ const schema = Joi.object().keys({ //adjust this to how the body sends the data
 
 });
 
+// router.route('/signupadmin').post( async (req,res) => { //this is for the case front end doesnt implement approval
+//     let firstName = req.body.firstName;
+//     let lastName = req.body.lastName;
+//     let name = req.body.name;
+//     let email = req.body.email;
+//     let password = req.body.password;
+
+//     let data = req.body;
+    
+//     const validation = schema.validate(data);
+//     if(validation.error)
+//     {
+//         res.status(400).json('Error' + validation.error);
+//         return;
+//     }
+    
+
+//     let found1 = await client.db("Users").collection("Admin").findOne({"email" : email});
+//     if(found1 !==null) {
+//         res.status(400).json("User with this email already exists");
+//         return;
+//     }
+
+//     found = await client.db("Users").collection("Admin").findOne({"name" : name});
+//     if(found !==null) {
+//         res.status(400).json("User with this username already exists");
+//         return;
+//     }
+//     const doc = {"firstName": firstName, "lastName" : lastName, "name": name,  "email":email, "password":password};
+//     await client.db("Users").collection("Admin").insertOne(doc);
+//     res.status(200).json("User Added");
+
+// })
 
 router.route('/signupadmin').post( async (req,res) => {
     let firstName = req.body.firstName;
