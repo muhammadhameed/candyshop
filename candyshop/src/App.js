@@ -19,6 +19,9 @@ import CustomerLogin from './components/auth/CustomerLogin';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
+import Menu160 from './components/auth/Menu160';
+import Menu320 from './components/auth/Menu320';
+import Menu500 from './components/auth/Menu500';
 
 
 import homeClient from './components/auth/homeClient';
@@ -65,7 +68,9 @@ const  App =()=>{
         <Route path="/home-server" component={ homeServer } />
 
         <Route path="/menu" component={ Menu } />
-        <Route path="/menu2" component={ Menu2 } />
+        <Route path="/menu160" component={ Menu160 } />
+        <Route path="/menu320" component={ Menu320 } />
+        <Route path="/menu500" component={ Menu500 } />
         <Route path="/add-product" component={ addProduct } />
         <Route path="/error" component={ Error } />
         <Route path="/change-customer-username" component={ ChangeCustomerUsername } />
