@@ -11,6 +11,7 @@ import api from "./api"
 
 class ChangeAdminPassword extends Component {
     state = {
+        name: "",
         oldPassword: "",
         password: "",
         rePassword: "",
@@ -21,25 +22,31 @@ class ChangeAdminPassword extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            oldPassword: this.state.oldPassword,
-            newPassword: this.state.password
-        }
-        if (this.state.password === this.state.rePassword) {
-            api("account/admin/change-password", userData, 200).then(res => {
-                if (res.statusCode == 200) {
-                    this.props.history.push("/home/admin");
-                    console.log(res)
+        var adminName = this.state.name;
+        var change = this.state.password;
+        var whatToChange = "password";
+        var oldPassword = this.state.oldPassword;
+        var totalinput = {adminName, whatToChange, change, oldPassword};
+        
+        if (this.state.password === this.state.rePassword)
+            fetch('http://localhost:5000/admin/update',{
+                method: 'post',
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(totalinput)
+            }).then(function(response){
+                response.text().then(function(text){alert(text);});
+                if (response.status != 400)
+                {
+                    window.location = "http://localhost:3000/home-server/";
                 }
-                else {
-                    alert("Error")
-                }
-            }
-            )
-        }
-        else {
-            alert("Passwords do not match")
-        }
+            }).catch(function(error) {
+                console.error(error);
+            })
+            
+        else
+            alert("Passwords do not Match!")
 
 
     }
@@ -52,6 +59,15 @@ class ChangeAdminPassword extends Component {
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Change Password</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
+                        <FormGroup>
+                            <Input
+                                type="text"
+                                placeholder="Username"
+                                onChange={this.onChange}
+                                value={this.state.name}
+                                id="name"
+                            />
+                        </FormGroup>
                         <FormGroup>
                             <Input
                                 className="input-field"

@@ -141,6 +141,12 @@ router.route('/update').post(async (req, res) =>{
     let found = await client.db("Users").collection("Admin").findOne({"name":adminName});
     let id = found._id;
 
+    if (id == null)
+    {
+        res.status(400).json("The username entered is incorrect.");
+        return;
+    }
+
     if(whatToChange == "username"){
         found.name = change;
     }
