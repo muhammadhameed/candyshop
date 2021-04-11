@@ -36,15 +36,8 @@ class CustomerRegister extends Component {
         var name = this.state.name;
         var password = this.state.password;
         var phoneNumber = this.state.phoneNumber;
-        var totalinput = {name,email, password, phoneNumber};
-        /*const newUser = {
-            email: this.state.email,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            name: this.state.name,
-            password: this.state.password,
-            phoneNumber: this.state.phoneNumber,
-        }*/
+        var totalinput = {firstName, lastName, name, email, password, phoneNumber};
+        
         if (this.state.password === this.state.rePassword)
             fetch('http://localhost:3000/customers/',{
                 method: 'post',
@@ -55,7 +48,7 @@ class CustomerRegister extends Component {
             }).then(function(response){
                 return response.text();
             }).then(function(text){
-                console.log(text);
+                alert(text);
             }).catch(function(error) {
                 console.error(error);
             })

@@ -67,13 +67,15 @@ class AdminLogin extends Component {
                                 value={this.state.password}
                                 id="password"x
                             />
-                            <p></p>
-                            <Link to="/forgot-password-admin" className="link">Forgot Password? :(</Link>
+                           
 
                         </FormGroup>
                         <div className="btn-handler">
                             <Button className="signup-btn">LOGIN</Button>
                         </div>
+                        <Link to="/registerAdmin" className="link">Sign-up</Link>
+                        <Link to="/forgot-password-admin" className="link">Forgot Password? :(</Link>
+
                     </Form>
                 </div>
             </div>
