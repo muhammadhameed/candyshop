@@ -175,7 +175,7 @@ class ViewAdmin extends Component {
                 copyObj[k] = orgObj[k];
             }
         }
-        api("account/admin/fetch", copyObj, 200).then(
+        api("/admin/fetch", copyObj, 200).then(
             (e) => {
                 console.log("res", e)
                 {

@@ -26,7 +26,7 @@ class AdminLogin extends Component {
         var email = this.state.email;
         var password = this.state.password;
         var totalinput = {email, password};
-        fetch('http://localhost:7000/admin/signinadmin/',{
+        fetch('http://localhost:5000/admin/signinadmin/',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",
@@ -36,7 +36,7 @@ class AdminLogin extends Component {
             response.text().then(function(text){alert(text);});
             if (response.status != 400)
             {
-                window.location = "http://localhost:3000/home/";
+                window.location = "http://localhost:3000/home-server/";
             }
         }).catch(function(error) {
             console.error(error);

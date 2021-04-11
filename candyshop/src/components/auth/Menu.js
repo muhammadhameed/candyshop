@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import s from  "../img/small.png";
 import m from  "../img/medium.png";
@@ -39,9 +38,9 @@ class Menu extends Component {
                     <div id="menu-outer"  >
                         <div className="tableD" >
                             <ul id="horizontal-list" className="manualBg" >
-                                <li className="space" onClick={()=>this.setState(160)}><a href='http://localhost:3000/menu2'><img src={s} /></a></li>
-                                <li className="space"><a href='http://localhost:3000/menu2'><img src={m} /></a></li>
-                                <li className="space"><a href='http://localhost:3000/menu2'><img src={l} /></a></li>
+                                <li className="space" ><a href='http://localhost:3000/menu160'><img src={s} /></a></li>
+                                <li className="space"><a href='http://localhost:3000/menu320'><img src={m} /></a></li>
+                                <li className="space"><a href='http://localhost:3000/menu500'><img src={l} /></a></li>
                             </ul>
                         </div>
                     </div>
@@ -53,4 +52,4 @@ class Menu extends Component {
     }
     }
 
-    export default Menu;   
+    export default Menu;

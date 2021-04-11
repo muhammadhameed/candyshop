@@ -214,6 +214,23 @@ body {
   background-repeat:space;
   z-index: -999;background-color: #D776D3;
 }
+.pdd{
+  margin-top: 30px;
+
+
+}
+div.text_box {
+  display: block;
+  float: left;
+  width: 48vh;
+  height: 8vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 0px 1.5px black;
+  margin: 1vh 1vh 1vh 1vh;
+  font-size: 2.5vh;
+  padding: 1vh 1vh 1vh 1vh;
+}
 .home-page_3 {
   height: 100vh;
   background: url(./components/img/WhatsApp\ Image\ 2021-04-11\ at\ 06.02.59.jpeg) no-repeat center center fixed; 
@@ -373,6 +390,23 @@ ul#horizontal-list {
   margin: 0 auto;
   text-align: center;
   margin-bottom: 4%;
+}
+.pdd{
+  margin-top: 30px;
+
+
+}
+div.text_box {
+  display: block;
+  float: left;
+  width: 48vh;
+  height: 8vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 0px 1.5px black;
+  margin: 1vh 1vh 1vh 1vh;
+  font-size: 2.5vh;
+  padding: 1vh 1vh 1vh 1vh;
 }
 
 .nav-button {
@@ -662,7 +696,7 @@ div {
 }
 
 .manualBg{
-  padding-left: 67px;
+  padding-left: 5px;
   background-color: #E2C6EC  ;
  
 }

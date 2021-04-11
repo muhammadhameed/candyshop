@@ -24,9 +24,17 @@ class Home extends Component {
             <figure className="position-relative">
             <img src={bg} alt="bg" className="img-fluid"></img>
             <figcaption>
-            <Button className="orderNow-btn" onClick={() => {
+                <p></p>
+                <p></p>
+                <div className ="btn-handler" marginLeft="100px">
+                {/* <li className="space" onClick={()=>this.setState(160)}><a href='http://localhost:3000/menu2'><img src={s} /></a></li> */}
+            <div className ="btn-handler_1">
+                <p></p>
+            <Button className="orderNow-btn"  onClick={() => {
                                 this.props.history.push('/login');
                             }}>ORDER NOW</Button>
+                            </div>
+                            </div>
             </figcaption>
             </figure>
                

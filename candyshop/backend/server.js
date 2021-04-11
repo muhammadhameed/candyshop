@@ -25,6 +25,16 @@ async function connectToDb(){
 }
 connectToDb();
 
+if (process.env.NODE_ENV === "production")
+{
+    var distDir = __dirname + "/dist/";
+    app.use(express.static(distDir));
+
+    app.get('/', function(req, res) {
+        res.sendFile(path.join(__dirname + '/Home.js'));
+    });
+}
+
 
 const CustomersRouter = require('./routes/customers');
 const AdminRouter = require('./routes/admin');

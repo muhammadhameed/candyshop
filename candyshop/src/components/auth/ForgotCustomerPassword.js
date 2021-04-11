@@ -10,9 +10,7 @@ import api from "./api"
 
 class ForgotCustomerPassword extends Component {
     state = {
-        password : "",
-        rePassword: "",
-        errors: {}        
+        email: "",        
     }
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -20,22 +18,25 @@ class ForgotCustomerPassword extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            password: this.state.password
-        }
-        const token = window.location.href.substring( window.location.href.lastIndexOf('=') +1)
-        window.localStorage.setItem('token', token)
-        if(this.state.password === this.state.rePassword)
-        api("account/customer/forgot-password/res", userData,200).then(res=>  
-        {   
-            if(res.statusCode == 200)
-            {  this.props.history.push("/login"); 
+        var email = this.state.email;
+        var totalinput = {email};
+        
+        fetch('http://localhost:5000/customers/forgotPassword',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){alert(text);});
+            if (response.status != 400)
+            {
+                window.location = "http://localhost:3000/home/";
             }
-            else{
-                alert("Error")
-            }})
-        else
-        {alert("Passwords do not match")}
+        }).catch(function(error) {
+            console.error(error);
+        })
+
 
     }
 
@@ -47,29 +48,15 @@ class ForgotCustomerPassword extends Component {
                     <p className="title">Change Password</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         
-                        <FormGroup className="password-container">
-                            
-                            <Input 
-                                className="input-field"
-                                type="password" 
-                                placeholder="Enter new password" 
+                    <FormGroup>
+                            <Input
+                                type="text"
+                                placeholder="Enter your email address"
                                 onChange={this.onChange}
-                                value={this.state.password} 
-                                id="password"
-                                />
-                            <p></p>
-                            <Input 
-                                className="input-field"
-                                type="password" 
-                                placeholder="Confirm new password" 
-                                onChange={this.onChange}
-                                value={this.state.rePassword} 
-                                id="rePassword"
-                                />
-                            <div className="pop-up">
-                                Password must be greater than 8 characters long and
-                                must contain atleast 1 digit and 1 special character
-                            </div>
+                                value={this.state.email}
+                                id="email"
+                            />
+                            {/* <span className="red-text">{errors.email}</span> */}
                         </FormGroup>
                         <div className="btn-handler">
                             <Button className="signup-btn">Confirm</Button>

@@ -32,11 +32,7 @@ class homeClient extends Component {
                         </Button>
                     </div>
                     </Link>
-                    <Link to = "menu2">
-                <div className="btn-handler">
-                    <Button className="signup-btn">Cart</Button>
-                </div>
-                </Link>
+                
                 <Link>
                 <div className="btn-handler">
                     <Button className="signup-btn">Reviews</Button>
