@@ -19,6 +19,8 @@ import CustomerLogin from './components/auth/CustomerLogin';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
+import Menu2 from './components/auth/Menu2';
+
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
@@ -50,6 +52,7 @@ const  App =()=>{
 
         <Route path="/home" component={ Home } />
         <Route path="/menu" component={ Menu } />
+        <Route path="/menu2" component={ Menu2 } />
         <Route path="/add-product" component={ addProduct } />
 
         <Route path="/registerAdmin" component={ AdminRegister } />

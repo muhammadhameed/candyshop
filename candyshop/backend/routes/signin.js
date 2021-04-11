@@ -1,5 +1,5 @@
 const router = require('express').Router();
-var client = require('./connection');
+const client = require('./connection');
 
 async function connectToDb(){
     await client.connect();
