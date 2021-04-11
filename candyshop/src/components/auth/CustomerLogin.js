@@ -22,46 +22,24 @@ class CustomerLogin extends Component {
     }
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            email: this.state.email,
-            password: this.state.password
-        }
-
         var email = this.state.email;
-        var firstName = this.state.firstName;
-        var lastName = this.state.lastName;
-        var name = this.state.name;
         var password = this.state.password;
-        var phoneNumber = this.state.phoneNumber;
-        var totalinput = {firstName, lastName, name, email, password, phoneNumber};
-        
-        if (this.state.password === this.state.rePassword)
-            fetch('http://localhost:3000/customers/',{
-                method: 'post',
-                headers: {
-                "Content-Type": "application/json",
-                },
-                body: JSON.stringify(totalinput)
-            }).then(function(response){
-                return response.text();
-            }).then(function(text){
-                alert(text);
-            }).catch(function(error) {
-                console.error(error);
-            })
-
-        api("auth/customer/login", userData, 200).then(res => {
-            
-            if (res.statusCode == 200) {
-                window.localStorage.setItem('token', res.token);
-                this.props.history.push("/home/customer");
-                
+        var totalinput = {email, password};
+        fetch('http://localhost:7000/customers/signin/',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){alert(text);});
+            if (response.status != 400)
+            {
+                window.location = "http://localhost:3000/menu/";
             }
-            else {
-                alert("Error")
-            }
-        }
-        ).catch(e => console.log(e))
+        }).catch(function(error) {
+            console.error(error);
+        })
     }
 
     render() {
@@ -94,12 +72,11 @@ class CustomerLogin extends Component {
                             <Link to="/forgot-password" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
                         </div>
                         <div className="btn-handler">
-                            <Button className="signup-btn" onClick={() => {
-                                this.props.history.push('/menu');
-                            }}>LOGIN</Button>
+                            <Button className="signup-btn"
+                            >LOGIN</Button>
 
                             <Button className="signup-btn" onClick={() => {
-                                this.props.history.push('/register/customer');
+                                this.props.history.push('/register/');
                             }}>SIGNUP</Button>
                         </div>
                         <div className="btn-handler">
