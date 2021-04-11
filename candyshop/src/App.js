@@ -19,6 +19,9 @@ import CustomerLogin from './components/auth/CustomerLogin';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
+import Menu2 from './components/auth/Menu2';
+import homeClient from './components/auth/homeClient';
+import homeServer from './components/auth/homeServer';
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
@@ -28,7 +31,9 @@ import AdminRegister from './components/auth/AdminRegister';
 import CustomerRegister from './components/auth/CustomerRegister';
 import shoppingCart from './components/auth/shoppingCart';
 import addProduct from './components/auth/addProduct';
-// import ViewTrip from './components/ViewTrip';
+import Error from './components/auth/Error';
+
+// import viewProducts from './components/auth/viewProducts';
 // import admindetails from './components/admindetails';
 // import edittripobj from './components/edittripobj';
 // import toggleAdmin from './components/toggleAdmin';
@@ -39,18 +44,18 @@ const  App =()=>{
   return (
     <Router>
       <div className="App">
-        {/* <Route path="/" component={ CustomerAppNavbar } /> */}
-        {/* <Route path="/vt" component={ ViewTrip } />
-        <Route path="/vf" component={ ViewFinance } />
-        
-        <Route path="/eto" component={ edittripobj } />
-        <Route path="/f" component={ Farm } />*/}
+   
         <Route path="/register" component={ CustomerRegister } /> 
         <Route path="/shoppingCart" component={ shoppingCart } /> 
 
         <Route path="/home" component={ Home } />
+        <Route path="/home-client" component={ homeClient } />
+        <Route path="/home-server" component={ homeServer } />
+
         <Route path="/menu" component={ Menu } />
+        <Route path="/menu2" component={ Menu2 } />
         <Route path="/add-product" component={ addProduct } />
+        <Route path="/error" component={ Error } />
 
         <Route path="/registerAdmin" component={ AdminRegister } />
         <Route exact path="/login-admin" component={ AdminLogin } />
@@ -59,8 +64,7 @@ const  App =()=>{
         <Route exact path="/forgot-password-admin" component={ AdminForgotPassword } />
         <Route exact path="/change-password" component={ CustomerChangePassword } />
         <Route exact path="/change-password-admin" component={ AdminChangePassword } />
-        {/*/ <Route exact path="/va" component={ admindetails } />
-        // <Route exact path="/toggleAdmin" component={ toggleAdmin } /> */}
+        {/* <Route exact path="/view-products" component={ viewProducts } /> */}
 
         
         <Route exact path="/adduser" component={ AddUser } />
