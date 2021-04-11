@@ -26,7 +26,7 @@ class Home extends Component {
             <figcaption>
             <Button className="orderNow-btn" onClick={() => {
                                 this.props.history.push('/login');
-                            }}>Order Now</Button>
+                            }}>ORDER NOW</Button>
             </figcaption>
             </figure>
                

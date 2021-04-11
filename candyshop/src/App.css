@@ -38,6 +38,7 @@ input[type="radio"] {
   background-color: #FF69B4;
 }
 table {
+  padding-top: 200px;
   align-self: centre;
   width: 300px;
   border-collapse: collapse;
@@ -307,6 +308,30 @@ input[type="email"]:hover ~ .pop-up {
  
 }
 
+#menu-outer {
+  padding-top: 180px;
+	height: 84px;
+
+}
+
+
+
+.tableD {
+	display: table;   /* Allow the centering to work */
+  margin-top: 500px;
+	margin: 0 auto;
+}
+
+ul#horizontal-list {
+  height: -100px;
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+	ul#horizontal-list li {
+		display: inline;
+	}
+
 .loginn-btn {
   
   
@@ -333,6 +358,27 @@ input[type="email"]:hover ~ .pop-up {
 .nav-button {
   background-color: #6c757d00;
   border-color: #6c757d00;
+}
+
+.outBG{
+  padding-top: 5.7%;
+  background-color: #D776D3;
+  
+}
+.tt{
+  font-size: 450%;
+  width: 100%;
+  position: absolute;
+  left:-10%;
+  top: 10%;
+  color: #4B3252;
+  text-align: center;
+  font-family: Imprima;
+  background-color: #D776D3;
+  border: #999;
+  
+
+
 }
 
 .nav-button:hover {
@@ -362,6 +408,8 @@ input[type="email"]:hover ~ .pop-up {
 .col-sm-12 mt-5 mb-2{
   margin-left: 90%;
 }
+
+
 
 .link {
   color: #FF69B4;
@@ -591,6 +639,16 @@ div {
   margin: 0 10px 0 0;
   font-size: 2em;
   margin-left: 7px;
+}
+
+.manualBg{
+  padding-left: 67px;
+  background-color: #E2C6EC  ;
+ 
+}
+
+.space{
+  padding-right: 250px;
 }
 
 .top-icon {

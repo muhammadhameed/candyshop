@@ -71,7 +71,9 @@ class CustomerLogin extends Component {
                             <Link to="/forgot-password/customer" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
                         </div>
                         <div className="btn-handler">
-                            <Button className="signup-btn">LOGIN</Button>
+                            <Button className="signup-btn" onClick={() => {
+                                this.props.history.push('/menu');
+                            }}>LOGIN</Button>
 
                             <Button className="signup-btn" onClick={() => {
                                 this.props.history.push('/register/customer');
