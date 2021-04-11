@@ -56,16 +56,7 @@ class CustomerRegister extends Component {
             }).catch(function(error) {
                 console.error(error);
             })
-            /*api('account/customer/signup', newUser, 200).then(res => {
-               
-                if (res.statusCode == 200) {
-                    this.props.history.push("/login");
-                   
-                }
-                else {
-                    alert("Error")
-                }
-            })*/
+            
         else
             alert("Passwords do not Match!")
     }
