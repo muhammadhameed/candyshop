@@ -12,7 +12,7 @@ const complexityOptions = {
     string: true,
     required: true,
     trim:true,
-    min: 8,
+    min: 5,
     max: 30,
     lowerCase: 1,
     upperCase: 1,
@@ -24,7 +24,7 @@ const passwordComplexity = require("joi-password-complexity");
 const schema = Joi.object().keys({ //adjust this to how the body sends the data 
     firstName: Joi.string().trim().required(),
     lastName: Joi.string().trim().required(),
-    name: Joi.string().trim().required(),
+    name: Joi.string().required(),
     email: Joi.string().trim().email().required(),
     password: passwordComplexity(complexityOptions),
     phoneNumber: Joi.number().required().integer().min(999999999).max(999999999999) //this allows the number to be of 11 digits
@@ -40,12 +40,18 @@ router.route('/signup').post(async (req,res) => {
     let phoneNumber = req.body.phoneNumber;
 
     let data = req.body;
-    
+    schema.validate(data, (value,error) =>{
+        console.log("Huh");
+        if (error){
+            console.log("why");
+            res.status(400).json("Error: " + err);
+            return;
+        }
+    })
     const validation = schema.validate(data);
     if(validation.error)
     {
-        res.status(400).json('Error' + validation.error);
-        return;
+        res.json('Error' + validation.error);
     }
     
 
@@ -59,7 +65,7 @@ router.route('/signup').post(async (req,res) => {
         res.status(400).json("User with this username already exists");
         return;
     }
-    const doc = {"firstName": firstName, "lastName" : lastName, "name" : name, "email":email, "password":password, "phoneNumber":phoneNumber};
+    const doc = {"firstName": firstName, "lastName": lastName, "name" : name, "email":email, "password":password, "phoneNumber":phoneNumber};
     await client.db("Users").collection("Customers").insertOne(doc);
     res.status(200).json("User Added");
 
@@ -70,12 +76,12 @@ router.route('/signin').post(async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
     if(typeof email === "undefined" || typeof password === "undefined"){
-        res.status(400).json("Please fill all spaces");
+        res.error(400).json("Please fill all spaces");
         return;
     }
     let found = await client.db("Users").collection("Customers").findOne({"email":email, "password":password});
     if (found === null){
-        res.status(400).json("Incorrect details");
+        res.error(400).json("Incorrect details");
         return;
     }
     res.status(200).json("Sucess. You are signed in");
@@ -110,7 +116,7 @@ router.route('/update').post(async (req, res) =>{
     }
 
     await client.db("Product").collection("Candy").updateOne({"_id": id}, {$set : found});
-    res.status(200).json("Successfully updated");
+    res.status(200),json("Successfully updated product");
 })
 
 
