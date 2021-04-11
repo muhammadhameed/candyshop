@@ -13,7 +13,7 @@ class Menu2 extends Component {
         
         return(
                
-                <div>hiii</div>
+                <div>menu2</div>
         
     
         )
