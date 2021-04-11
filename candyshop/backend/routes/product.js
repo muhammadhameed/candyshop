@@ -20,27 +20,28 @@ router.route('/').get(async(req,res) =>{
 
 router.route('/add').post( async (req,res) => {
     let productName = req.body.productName;
-    let price = req.body.price;
+    let collectionName = req.body.collectionName;
     let quantity = req.body.quantity;
 
-    let found = await client.db("Product").collection("Candy").findOne({"name" : productName});
+    let found = await client.db("Product").collection(collectionName).findOne({"name" : productName});
     if (found !== null){
         res.status(400).json("A product with this name already exists");
         return;
     }
-    await client.db("Product").collection("Candy").insertOne({"name":productName, "price":price, "quantity":quantity});
+    await client.db("Product").collection(collectionName).insertOne({"name":productName, "quantity":quantity});
     res.json("Product successfully added");
 
 })
 
 
 router.route('/update').post(async(req,res) => {
-    let productName = req.body.productName
-    let whatToChange = req.body.whatToChange
+    let productName = req.body.productName;
+    let collectionName = req.body.collectionName;
+    let whatToChange = req.body.whatToChange;
     let change = req.body.change;
     let operation = req.body.operation;
 
-    let found = await client.db("Product"). collection("Candy").findOne({"name":productName});
+    let found = await client.db("Product"). collection(collectionName).findOne({"name":productName});
     let id = found._id;
 
     if (whatToChange === "price"){
@@ -64,8 +65,9 @@ router.route('/update').post(async(req,res) => {
     else if(whatToChange === "name"){
         found.name = change;
     }
-    await client.db("Product").collection("Candy").updateOne({"_id": id}, {$set : found});
+    await client.db("Product").collection(collectionName).updateOne({"_id": id}, {$set : found});
     res.json("Successfully updated product details");
 })
+
 
 module.exports = router;
