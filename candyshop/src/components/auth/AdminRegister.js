@@ -30,26 +30,35 @@ class AdminRegister extends Component {
     }
     onSubmit = e => {
         e.preventDefault();
-        const newUser = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            password: this.state.password,
-        }
-        const token = window.location.href.substring( window.location.href.lastIndexOf('=') + 1)
-        window.localStorage.setItem('token', token);
-        console.log(window.localStorage.getItem("token"))
-        console.log("2",newUser)
-        api('account/admin/signup', newUser, 200).then(res=>  
-        {console.log(res)
-            if(res.statusCode == 200)
-            {  
+        //const token = window.location.href.substring( window.location.href.lastIndexOf('=') + 1)
+        //window.localStorage.setItem('token', token);
+        //console.log(window.localStorage.getItem("token"))
+        var email = this.state.email;
+        var firstName = this.state.firstName;
+        var lastName = this.state.lastName;
+        var name = this.state.name;
+        var password = this.state.password;
+        var totalinput = {firstName, lastName, name, email, password};
+        
+        if (this.state.password === this.state.rePassword)
+            fetch('http://localhost:7000/admin/signupadmin/',{
+                method: 'post',
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(totalinput)
+            }).then(function(response){
+                response.text().then(function(text){alert(text);});
+                if (response.status != 400)
+                {
+                    window.location = "http://localhost:3000/home/";
+                }
+            }).catch(function(error) {
+                console.error(error);
+            })
             
-            this.props.history.push("/login/admin"); 
-            console.log(res)}
-            else{
-                alert("Error")
-            }}
-    )
+        else
+            alert("Passwords do not Match!")
     }
     render() {
         const { errors } = this.state;
@@ -80,6 +89,15 @@ class AdminRegister extends Component {
                                         id="lastName"
                                     />
                             
+                        </FormGroup>
+                        <FormGroup>
+                            <Input
+                                type="text"
+                                placeholder="Username"
+                                onChange={this.onChange}
+                                value={this.state.name}
+                                id="name"
+                            />
                         </FormGroup>
                         <FormGroup>
                                     <Input

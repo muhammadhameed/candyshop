@@ -23,23 +23,24 @@ class AdminLogin extends Component {
     }
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            email: this.state.email,
-            password: this.state.password
-        }
-        api("auth/admin/login", userData, 200).then(res => {
-            console.log(res);
-            console.log(res.token)
-            if (res.statusCode == 200) {
-                window.localStorage.setItem('token', res.token);
-                this.props.history.push("/home/admin");
-                console.log(res)
+        var email = this.state.email;
+        var password = this.state.password;
+        var totalinput = {email, password};
+        fetch('http://localhost:7000/admin/signinadmin/',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){alert(text);});
+            if (response.status != 400)
+            {
+                window.location = "http://localhost:3000/home/";
             }
-            else {
-                alert("Error")
-            }
-        }
-        )
+        }).catch(function(error) {
+            console.error(error);
+        })
     }
 
     render(props) {

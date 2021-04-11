@@ -19,8 +19,13 @@ import CustomerLogin from './components/auth/CustomerLogin';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
+<<<<<<< HEAD
 import homeClient from './components/auth/homeClient';
 import homeServer from './components/auth/homeServer';
+=======
+import Menu2 from './components/auth/Menu2';
+
+>>>>>>> 086d80c1a1f30101d5076d8630daafd92befc1e7
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
@@ -52,6 +57,7 @@ const  App =()=>{
         <Route path="/home-server" component={ homeServer } />
 
         <Route path="/menu" component={ Menu } />
+        <Route path="/menu2" component={ Menu2 } />
         <Route path="/add-product" component={ addProduct } />
         <Route path="/error" component={ Error } />
 

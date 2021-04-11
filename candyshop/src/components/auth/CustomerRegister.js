@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import axios from 'axios';
 import {
     Button,
     Form,
@@ -46,26 +48,19 @@ class CustomerRegister extends Component {
                 },
                 body: JSON.stringify(totalinput)
             }).then(function(response){
-                return response.text();
-            }).then(function(text){
-                alert(text);
+                response.text().then(function(text){alert(text);});
+                if (response.status != 400)
+                {
+                    window.location = "http://localhost:3000/home/";
+                }
             }).catch(function(error) {
                 console.error(error);
             })
-            /*api('account/customer/signup', newUser, 200).then(res => {
-               
-                if (res.statusCode == 200) {
-                    this.props.history.push("/login");
-                   
-                }
-                else {
-                    alert("Error")
-                }
-            })*/
+            
         else
             alert("Passwords do not Match!")
     }
-    render() {
+    render(props) {
         return (
             <div className="home-page_1">
                 <div className="container main">
