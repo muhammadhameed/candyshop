@@ -13,7 +13,7 @@ router.route('/').get(async (req,res) =>{
     let found = await client.db("Users").collection("Customers").findOne({"name": customerName});
     let arr = new Array();
     await cursor.forEach(function  (doc) {arr.push(doc);});
-    res.json(arr);
+    res.status(200).json(arr);
 })
 
 
@@ -68,7 +68,7 @@ router.route('/update').post(async (req,res) =>{
                 cart[i].quantity = cart[i].quantity + quantityChange;
                 cart[i].price = cart[i].quantity * price;
                 await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": cart}});
-                res.json("Successfully updated shopping cart"); 
+                res.status(200).json("Successfully updated shopping cart"); 
                 return;
             }
         }
@@ -85,7 +85,7 @@ router.route('/update').post(async (req,res) =>{
                     cart.splice(i,1);
                 }
                 await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": cart}});
-                res.json("Successfully updated shopping cart"); 
+                res.status(200).json("Successfully updated shopping cart"); 
                 return;
             }
         }
@@ -107,7 +107,7 @@ router.route('/add').post(async(req,res)=>{
 
         let AddToCart = [{"Box" : productName, [productName] : {"price" : price, "name": new Array(), "quantity": new Array()}}]; //this is box when shoppingCart is not empty
         await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": AddToCart}});
-        res.json("Successfully added to shopping cart");
+        res.status(200).json("Successfully added to shopping cart");
         return;
     }
 
@@ -140,7 +140,7 @@ router.route('/add').post(async(req,res)=>{
                 if (CartNames[i] === productName){
                     CartQuantities[i] = CartQuantities[i] + 10;
                     await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": Cart}});
-                    res.json("Successfully added to shopping cart");
+                    res.status(200).json("Successfully added to shopping cart");
                     return;
                 }
             }
@@ -149,7 +149,7 @@ router.route('/add').post(async(req,res)=>{
         CartNames.push(productName);
         CartQuantities.push(10);
         await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": Cart}});
-        res.json("Successfully added to shopping cart");
+        res.status(200).json("Successfully added to shopping cart");
         
     }
 })

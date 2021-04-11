@@ -61,7 +61,7 @@ router.route('/signup').post(async (req,res) => {
     }
     const doc = {"firstName": firstName, "lastName" : lastName, "name" : name, "email":email, "password":password, "phoneNumber":phoneNumber};
     await client.db("Users").collection("Customers").insertOne(doc);
-    res.json("User Added");
+    res.status(200).json("User Added");
 
 })
 
@@ -78,7 +78,7 @@ router.route('/signin').post(async (req,res) => {
         res.status(400).json("Incorrect details");
         return;
     }
-    res.json("Sucess. You are signed in");
+    res.status(200).json("Sucess. You are signed in");
 })
 
 
@@ -110,7 +110,7 @@ router.route('/update').post(async (req, res) =>{
     }
 
     await client.db("Product").collection("Candy").updateOne({"_id": id}, {$set : found});
-    res.json("Successfully updated");
+    res.status(200).json("Successfully updated");
 })
 
 

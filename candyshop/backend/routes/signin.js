@@ -23,10 +23,10 @@ router.route('/').post( async (req, res) => {
     }
 
     if (found!== null){
-        res.json("Success customer signed in");
+        res.status(200).json("Success customer signed in");
     }
     if (found1 !== null){
-        res.json("Success admin signed in");
+        res.status(200).json("Success admin signed in");
     }
 
 

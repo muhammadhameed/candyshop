@@ -61,7 +61,7 @@ router.route('/signupadmin').post( async (req,res) => {
     // }
     const doc = {"firstName": firstName, "lastName" : lastName,  "email":email, "password":password};
     await client.db("Users").collection("Admin").insertOne(doc);
-    res.json("User Added");
+    res.status(200).json("User Added");
 
 })
 
@@ -80,7 +80,7 @@ router.route('/signinadmin').post( async (req,res) => {
         res.status(400).json("Please enter your details again");
         return;
     }
-    res.json("You are signed in. Welcome.");
+    res.status(200).json("You are signed in. Welcome.");
 });
 
 

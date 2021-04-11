@@ -14,7 +14,7 @@ router.route('/').get(async(req,res) =>{
     let cursor = await client.db("Product").collection("Candy").find({});
     let arr = new Array();
     await cursor.forEach(function  (doc) {arr.push(doc);});
-    res.json(arr);
+    res.status(200).json(arr);
 })
 
 
@@ -29,7 +29,7 @@ router.route('/add').post( async (req,res) => {
         return;
     }
     await client.db("Product").collection(collectionName).insertOne({"name":productName, "quantity":quantity});
-    res.json("Product successfully added");
+    res.status(200).json("Product successfully added");
 
 })
 
@@ -66,7 +66,7 @@ router.route('/update').post(async(req,res) => {
         found.name = change;
     }
     await client.db("Product").collection(collectionName).updateOne({"_id": id}, {$set : found});
-    res.json("Successfully updated product details");
+    res.status(200).json("Successfully updated product details");
 })
 
 
