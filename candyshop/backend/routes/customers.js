@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Joi = require('joi');
 const client = require('./connection');
 
+
 async function connectToDb(){
     await client.connect();
     console.log(client.isConnected());
@@ -87,7 +88,7 @@ router.route('/update').post(async (req, res) =>{
     let whatToChange = req.body.whatToChange;
     let change = req.body.change;
 
-    let found = await client.db("Users").collections("Customers").findOne({"name":customerName});
+    let found = await client.db("Users").collection("Customers").findOne({"name":customerName});
     let id = found._id;
 
     if(whatToChange == "username"){
@@ -119,6 +120,43 @@ router.route('/update').post(async (req, res) =>{
 })
 
 
+var nodeMailer = require('nodemailer');
+router.route('/forgotPassword').post(async (req,res) => {
+    let email = req.body.email;
+    let found = await client.db("Users").collection("Customers").findOne({"email":email});
+    
+    if(found === null){
+        res.status(400).json("Invalid email");
+        return;
+    }
+
+    var transporter = nodeMailer.createTransport({
+        service:'gmail',
+        auth: {
+            user: 'noreplycandyscape@gmail.com',
+            pass: 'Group12-SE-Candyscape'
+        }
+    });
+
+    var mailOptions = {
+        from: 'noreplycandyscape@gmail.com',
+        to : email,
+        subject: 'Password Candyscape',
+        text : 'Your password is ' + found.password
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            res.status(400).json(error);
+        }
+        else{
+            res.status(200).json('Email sent ' + info.response);
+        }
+    });
+})
+
+
 
 
 module.exports = router;
+

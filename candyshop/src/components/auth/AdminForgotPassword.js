@@ -20,26 +20,30 @@ class AdminForgotPassword extends Component {
     
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            email: this.state.email
-        }
-        api("account/admin/forgot-password/req", userData,200).then(res=>  
-        {   console.log(res)
-            if(res.statusCode == 200)
-            {  
-            this.props.history.push("/login/admin"); 
-            console.log(res)}
-            else{
-                alert("Error")
-            }}
-    )
-
+        var email = this.state.email;
+        var totalinput = {email};
+        
+        fetch('http://localhost:5000/admin/forgotPassword',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){alert(text);});
+            if (response.status != 400)
+            {
+                window.location = "http://localhost:3000/home-server/";
+            }
+        }).catch(function(error) {
+            console.error(error);
+        })
     }
 
     render() {
         const { errors } = this.state;
         return (
-            <div className="home-page">
+            <div className="home-page_2">
                 <div className="container main">
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Forgot Password</p>

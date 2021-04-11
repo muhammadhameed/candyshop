@@ -21,20 +21,31 @@ class ChangeCustomerPassword extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            oldPassword: this.state.oldpassword,
-            newPassword: this.state.password
-        }
-        api("account/customer", userData, 200).then(res => {
-            if (res.statusCode == 200) {
-                this.props.history.push("/home/customer");
-                console.log(res)
-            }
-            else {
-                alert("Error")
-            }
-        }
-        )
+        var customerName = this.state.name;
+        var change = this.state.password;
+        var whatToChange = "password";
+        var oldPassword = this.state.oldpassword;
+        var totalinput = {customerName, whatToChange, change, oldPassword};
+        
+        if (this.state.password === this.state.rePassword)
+            fetch('http://localhost:5000/customers/update',{
+                method: 'post',
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(totalinput)
+            }).then(function(response){
+                response.text().then(function(text){alert(text);});
+                if (response.status != 400)
+                {
+                    window.location = "http://localhost:3000/home-client/";
+                }
+            }).catch(function(error) {
+                console.error(error);
+            })
+            
+        else
+            alert("Passwords do not Match!")
     }
 
     render() {
@@ -45,6 +56,15 @@ class ChangeCustomerPassword extends Component {
                     <p className="brand-name">CANDY SHOP</p>
                     <p className="title">Change Password</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
+                        <FormGroup>
+                            <Input
+                                type="text"
+                                placeholder="Username"
+                                onChange={this.onChange}
+                                value={this.state.name}
+                                id="name"
+                            />
+                        </FormGroup>
                         <FormGroup>
                             <Input
                                 className="input-field"
