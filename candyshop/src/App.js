@@ -42,6 +42,9 @@ import CustomerRegister from './components/auth/CustomerRegister';
 import shoppingCart from './components/auth/shoppingCart';
 import addProduct from './components/auth/addProduct';
 import Error from './components/auth/Error';
+import Menu160 from './components/auth/Menu160';
+import Menu320 from './components/auth/Menu320';
+import Menu500 from './components/auth/Menu500';
 import ViewAdmin from './components/auth/ViewAdmin';
 import ChangeAdminUsername from './components/auth/ChangeAdminUsername';
 
@@ -59,11 +62,13 @@ const  App =()=>{
    
         <Route path="/register" component={ CustomerRegister } /> 
         <Route path="/shoppingCart" component={ shoppingCart } /> 
-
+        
         <Route path="/home" component={ Home } />
         <Route path="/home-client" component={ homeClient } />
         <Route path="/home-server" component={ homeServer } />
-
+        <Route path="/menu160" component={ Menu160 } />
+        <Route path="/menu320" component={ Menu320 } />
+        <Route path="/menu500" component={ Menu500 } />
         <Route path="/menu" component={ Menu } />
         <Route path="/menu2" component={ Menu2 } />
         <Route path="/add-product" component={ addProduct } />
