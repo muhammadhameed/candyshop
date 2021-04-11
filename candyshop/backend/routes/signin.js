@@ -11,14 +11,14 @@ router.route('/').post( async (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     if(typeof email === "undefined" || typeof password === "undefined"){
-        res.error(400).json("Please fill all spaces");
+        res.status(400).json("Please fill all spaces");
         return;
     }
     let found = await client.db("Users").collection("Customers").findOne({"email":email, "password":password});
     let found1 = await client.db("Users").collection("Admin").findOne({"email":email, "password":password});
 
     if (found === null && found1 === null){
-        res.error(400).json("Incorrect details");
+        res.status(400).json("Incorrect details");
         return;
     }
 

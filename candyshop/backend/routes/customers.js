@@ -44,7 +44,7 @@ router.route('/signup').post(async (req,res) => {
     const validation = schema.validate(data);
     if(validation.error)
     {
-        res.json('Error' + validation.error);
+        res.status(400).json('Error' + validation.error);
         return;
     }
     
@@ -70,12 +70,12 @@ router.route('/signin').post(async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
     if(typeof email === "undefined" || typeof password === "undefined"){
-        res.error(400).json("Please fill all spaces");
+        res.status(400).json("Please fill all spaces");
         return;
     }
     let found = await client.db("Users").collection("Customers").findOne({"email":email, "password":password});
     if (found === null){
-        res.error(400).json("Incorrect details");
+        res.status(400).json("Incorrect details");
         return;
     }
     res.json("Sucess. You are signed in");
@@ -110,7 +110,7 @@ router.route('/update').post(async (req, res) =>{
     }
 
     await client.db("Product").collection("Candy").updateOne({"_id": id}, {$set : found});
-
+    res.json("Successfully updated");
 })
 
 
