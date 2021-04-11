@@ -88,7 +88,7 @@ router.route('/update').post(async (req, res) =>{
     let whatToChange = req.body.whatToChange;
     let change = req.body.change;
 
-    let found = await client.db("Users").collections("Customers").findOne({"name":customerName});
+    let found = await client.db("Users").collection("Customers").findOne({"name":customerName});
     let id = found._id;
 
     if(whatToChange == "username"){

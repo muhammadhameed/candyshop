@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import bg from "../img/Home.png";
+// import bg from "../img/Home.png";
 import {
     Button,
     Container,
@@ -18,35 +18,50 @@ class homeServer extends Component {
     render() {
 
         return (
-
-            
-          <container>
-            <figure className="position-relative">
-            <img src={bg} alt="bg" className="img-fluid"></img>
-            <figcaption>
-     
-
-            </figcaption>
-            <Button className="orderNow-btn" onClick={() => {
-                                this.props.history.push('/add-product');
-                            }}>Add Products</Button>
-            <Button className="orderNow-btn" onClick={() => {
-                        this.props.history.push('/login-admin');
-                    }}>Sign Out</Button>
-            </figure>
-               
-                
-                            
-                            
-                       
-
+            <div className="home-page_3">
+            <div className="container main">
+                <p className="brand-name">Welcome!</p>
+              
+                    <Link to = "/add-product">
+                    <div className="btn-handler">
+                        <Button className="signup-btn">Add Product
                         
-
-
+                        </Button>
+                    </div>
+                    </Link>
+                    {/* <Link to = "/menu"> */}
+                    <div className="btn-handler">
+                        <Button className="signup-btn">Orders
+                        
+                        </Button>
+                    </div>
+                    {/* </Link> */}
+                   
+                <Link>
+                <div className="btn-handler">
+                    <Button className="signup-btn">Customer Reviews</Button>
+                </div>
+                </Link>
+  
+                <Link to ="/change-password-admin">
+                <div className="btn-handler">
+                        <Button className="signup-btn">Change Password</Button>
+                    </div>
+                    </Link>
+                    <Link to ="/change-admin-username">
+                <div className="btn-handler">
+                        <Button className="signup-btn">Change Username</Button>
+                    </div>
+                    </Link>
+                    <Link to ="/login-admin">
+                <div className="btn-handler">
+                        <Button className="signup-btn">Sign Out</Button>
+                    </div>
+                    </Link>
                     
-                
-         
-         </container>
+            
+            </div>
+        </div>
         
         
       

@@ -133,6 +133,45 @@ router.route('/signinadmin').post( async (req,res) => {
     res.status(200).json("You are signed in. Welcome.");
 });
 
+router.route('/update').post(async (req, res) =>{
+    let adminName = req.body.adminName;
+    let whatToChange = req.body.whatToChange;
+    let change = req.body.change;
+
+    let found = await client.db("Users").collection("Admin").findOne({"name":adminName});
+    let id = found._id;
+
+    if (id == null)
+    {
+        res.status(400).json("The username entered is incorrect.");
+        return;
+    }
+
+    if(whatToChange == "username"){
+        found.name = change;
+    }
+    else if(whatToChange == "firstName"){
+        found.firstName = change;
+    }
+    else if(whatToChange == "lastName"){
+        found.lastName = change;
+    }
+    else if (whatToChange == "email"){
+        found.email = change;
+    }
+    else if (whatToChange == "password"){
+        let oldPassword = req.body.oldPassword;
+        if (found.password !== oldPassword){
+            res.status(400).json("Old password is incorrect");
+            return;
+        }
+        found.password = change;
+    }
+
+    await client.db("Users").collection("Admin").updateOne({"_id": id}, {$set : found});
+    res.status(200).json("Successfully updated admin details");
+})
+
 
 
 
