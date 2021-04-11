@@ -20,11 +20,17 @@ import CustomerLogin from './components/auth/CustomerLogin';
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
 
+
 import homeClient from './components/auth/homeClient';
 import homeServer from './components/auth/homeServer';
 
 import Menu2 from './components/auth/Menu2';
 
+
+
+import Menu2 from './components/auth/Menu2';
+import homeClient from './components/auth/homeClient';
+import homeServer from './components/auth/homeServer';
 
 
 import AdminLogin from './components/auth/AdminLogin';
