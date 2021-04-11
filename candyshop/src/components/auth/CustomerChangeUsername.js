@@ -11,7 +11,6 @@ import api from "./api"
 class ChangeCustomerUsername extends Component {
     state = {
         oldusername: "",
-        password: "",
         newusername: "",
         errors: {}
     }
@@ -21,20 +20,26 @@ class ChangeCustomerUsername extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            oldusername: this.state.oldusername,
-            newusername: this.state.newusername
-        }
-        api("account/customer", userData, 200).then(res => {
-            if (res.statusCode == 200) {
-                this.props.history.push("/home/customer");
-                console.log(res)
+        var customerName = this.state.oldusername;
+        var change = this.state.newusername;
+        var whatToChange = "username";
+        var totalinput = {customerName, whatToChange, change};
+        
+        fetch('http://localhost:5000/customers/update',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){alert(text);});
+            if (response.status != 400)
+            {
+                window.location = "http://localhost:3000/home-client/";
             }
-            else {
-                alert("Error")
-            }
-        }
-        )
+        }).catch(function(error) {
+            console.error(error);
+        })
     }
 
     render() {

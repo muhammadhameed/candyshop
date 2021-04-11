@@ -21,20 +21,26 @@ class ChangeAdminUsername extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const userData = {
-            oldusername: this.state.oldusername,
-            newusername: this.state.newusername
-        }
-        api("account/customer", userData, 200).then(res => {
-            if (res.statusCode == 200) {
-                this.props.history.push("/home/customer");
-                console.log(res)
+        var adminName = this.state.oldusername;
+        var change = this.state.newusername;
+        var whatToChange = "username";
+        var totalinput = {adminName, whatToChange, change};
+        
+        fetch('http://localhost:5000/admin/update',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){alert(text);});
+            if (response.status != 400)
+            {
+                window.location = "http://localhost:3000/home-server/";
             }
-            else {
-                alert("Error")
-            }
-        }
-        )
+        }).catch(function(error) {
+            console.error(error);
+        })
     }
 
     render() {
