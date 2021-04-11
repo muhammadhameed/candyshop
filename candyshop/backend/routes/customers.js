@@ -22,12 +22,11 @@ const complexityOptions = {
 
 const passwordComplexity = require("joi-password-complexity"); 
 const schema = Joi.object().keys({ //adjust this to how the body sends the data 
-    firstName: Joi.string().trim().required().regex(/^[a-zA-Z]$/),
-    lastName: Joi.string().trim().required().regex(/^[a-zA-Z]$/),
+    firstName: Joi.string().trim().required().regex(/^[A-Za-z]$/),
+    lastName: Joi.string().trim().required().regex(/^[A-Za-z]$/),
     name: Joi.string().required(),
     email: Joi.string().trim().email().required(),
     password: passwordComplexity(complexityOptions),
-    repeat_password: Joi.ref('password'),
     phoneNumber: Joi.number().required().integer().min(999999999).max(999999999999) //this allows the number to be of 11 digits
 
 });
@@ -38,7 +37,6 @@ router.route('/signup').post(async (req,res) => {
     let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
-    let repeat_password = req.body.repeat_password;
     let phoneNumber = req.body.phoneNumber;
 
     let data = req.body;

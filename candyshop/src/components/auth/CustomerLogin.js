@@ -70,7 +70,7 @@ class CustomerLogin extends Component {
             <div className="home-page_1">
                 <div className="container main">
                     <p className="brand-name">Candy Scape</p>
-                    <p className="title">Login</p>
+                    <p className="title">Customer Login</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>
                             <Input
@@ -91,17 +91,19 @@ class CustomerLogin extends Component {
                             />
                         </FormGroup>
                         <div className="btn-handler">
-                            <Link to="/forgot-password/customer" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
+                            <Link to="/forgot-password" className="link" style={{ marginleft: "14%" }}>Forgot Password? :(</Link>
                         </div>
                         <div className="btn-handler">
-                            <Button className="signup-btn">LOGIN</Button>
+                            <Button className="signup-btn" onClick={() => {
+                                this.props.history.push('/menu');
+                            }}>LOGIN</Button>
 
                             <Button className="signup-btn" onClick={() => {
                                 this.props.history.push('/register/customer');
                             }}>SIGNUP</Button>
                         </div>
                         <div className="btn-handler">
-                            <Link to="/login/admin" className="link">Login as Admin</Link>
+                            <Link to="/login-admin" className="link">Login as Admin</Link>
                         </div>
                     </Form>
                 </div>

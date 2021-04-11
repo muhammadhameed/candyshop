@@ -38,6 +38,7 @@ input[type="radio"] {
   background-color: #FF69B4;
 }
 table {
+  padding-top: 200px;
   align-self: centre;
   width: 300px;
   border-collapse: collapse;
@@ -191,17 +192,17 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  z-index: -999;background-color: #FF69B4;
+  z-index: -999;background-color: #D776D3;
 }
 .home-page_1 {
   height: 100vh;
-  background: url(./components/img/—Pngtree—hand\ drawn\ square\ cans\ of_4710201\ 1.png) no-repeat center center fixed; 
+  background: url(./components/img/WhatsApp\ Image\ 2021-04-11\ at\ 06.03.00.jpeg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: contain;
   background-repeat:space;
-  z-index: -999;background-color: #FF69B4;
+  z-index: -999;background-color: #D776D3;
 }
 .main-container {
   width: 90%;
@@ -233,7 +234,7 @@ body {
   /* position:absolute;
   top: 0px;
   right: 0px; */
-  color:#FF69B4;
+  color:#2c0d72;
 }
 input[type="password"]:hover ~ .pop-up {
   visibility: visible;
@@ -307,6 +308,30 @@ input[type="email"]:hover ~ .pop-up {
  
 }
 
+#menu-outer {
+  padding-top: 180px;
+	height: 84px;
+
+}
+
+
+
+.tableD {
+	display: table;   /* Allow the centering to work */
+  margin-top: 500px;
+	margin: 0 auto;
+}
+
+ul#horizontal-list {
+  height: -100px;
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+	ul#horizontal-list li {
+		display: inline;
+	}
+
 .loginn-btn {
   
   
@@ -333,6 +358,27 @@ input[type="email"]:hover ~ .pop-up {
 .nav-button {
   background-color: #6c757d00;
   border-color: #6c757d00;
+}
+
+.outBG{
+  padding-top: 5.7%;
+  background-color: #D776D3;
+  
+}
+.tt{
+  font-size: 450%;
+  width: 100%;
+  position: absolute;
+  left:-10%;
+  top: 10%;
+  color: #4B3252;
+  text-align: center;
+  font-family: Imprima;
+  background-color: #D776D3;
+  border: #999;
+  
+
+
 }
 
 .nav-button:hover {
@@ -363,8 +409,10 @@ input[type="email"]:hover ~ .pop-up {
   margin-left: 90%;
 }
 
+
+
 .link {
-  color: #FF69B4;
+  color: #10a02f;
   text-align: center;
   margin: 0 auto;
   margin-left: 3%;
@@ -591,6 +639,16 @@ div {
   margin: 0 10px 0 0;
   font-size: 2em;
   margin-left: 7px;
+}
+
+.manualBg{
+  padding-left: 67px;
+  background-color: #E2C6EC  ;
+ 
+}
+
+.space{
+  padding-right: 250px;
 }
 
 .top-icon {
