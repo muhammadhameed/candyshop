@@ -1,20 +1,23 @@
 const express = require ('express');
 const cors = require('cors');
 require('dotenv').config();
-const {MongoClient} = require('mongodb');
+// const {MongoClient} = require('mongodb');
 const path = require('path');
+const client = require('./routes/connection');
+
 
 const app = express();
-const port = process.env.port || 5000;
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use (express.json());
 
-const uri = process.env.DB_URI;
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+// const uri = process.env.DB_URI || process.env.MONGODB_URI;
+// console.log(uri);
+// const client = new MongoClient(uri, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   });
 
 async function connectToDb(){
     await client.connect();
@@ -36,15 +39,19 @@ app.use('/product', ProductRouter);
 app.use('/signin', SignInRouter);
 
 
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static ('candyshop/build'));
+// if(process.env.NODE_ENV === 'production'){
+//     app.use(express.static ('candyshop/build'));
 
-    app.get('*', (req,res) => {
-        res.sendFile(path.join(_dirname, 'candyshop', 'build', 'index.html'));
+//     app.get('*', (req,res) => {
+//         res.sendFile(path.join(_dirname, 'candyshop', 'build', 'index.html'));
 
-    }); 
-}
+//     }); 
+// }
 
+// app.use(express.static(path.join(_dirname, '../build')));
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../build'))
+// })
 
 
 app.listen(port, () => {
