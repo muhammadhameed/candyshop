@@ -97,7 +97,7 @@ class addProduct extends Component {
         size = "big"
         
       >
-        <div style={{ backgroundColor: "#FF69B4" }}>
+        <div style={{ backgroundColor: "#e0f143" }}>
           {/* <p>/</p> */}
           <p className="title"> Add Product </p>
           {/* <p>/</p> */}
@@ -127,7 +127,7 @@ class addProduct extends Component {
                   onChange={this.onChange}
                   value={this.state.collectionName}
                 />
-                <Label className="title-sm"style = {{marginLeft: "20px"}}>Image:</Label>
+                <Label className="title-sm"style = {{marginLeft: "20px", fontcolor :"#FF69B4"}}>Image:</Label>
                 <input type="file"
                   style={{ marginLeft: "15px" }}
                   id="image"

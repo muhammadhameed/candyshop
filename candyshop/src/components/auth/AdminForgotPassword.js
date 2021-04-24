@@ -34,6 +34,7 @@ class AdminForgotPassword extends Component {
             if (response.status != 400)
             {
                 window.location = "http://localhost:3000/home-server/";
+                console.log(response)
             }
         }).catch(function(error) {
             console.error(error);

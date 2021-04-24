@@ -18,7 +18,7 @@ class ViewAdmin extends Component {
             active: 0,
             permission: {
                 manageAdmins: 1,
-                manageTrips: 1,
+                manageInventory: 1,
                 manageReqList: 1,
                 manageReports: 1
             }
@@ -31,16 +31,16 @@ class ViewAdmin extends Component {
             active: 1,
             permission: {
                 manageAdmins: 1,
-                manageTrips: 1,
+                manageInventory: 1,
                 manageReqList: 1,
                 manageReports: 1
             }
         }
-        ],
-        id: this.props.location.state.id,
-        email: this.props.location.state.email,
-        firstName: this.props.location.state.firstName,
-        lastName: this.props.location.state.lastName,
+        ]
+        // id: this.props.location.state.id,
+        // email: this.props.location.state.email,
+        // firstName: this.props.location.state.firstName,
+        // lastName: this.props.location.state.lastName,
     }
 
     display = () => {
@@ -86,10 +86,10 @@ class ViewAdmin extends Component {
                         onChange={(e) => {
                             const { admins } = this.state;
                             const newadmins = [...admins];
-                            admins[index].permission.manageTrips = !admins[index].permission.manageTrips;
+                            admins[index].permission.manageInventory = !admins[index].permission.manageInventory;
                             this.setState({ admins: newadmins })
                         }
-                        } checked={i.permission.manageTrips} />}</td>
+                        } checked={i.permission.manageInventory} />}</td>
                     <td className="title-sm-b-s">{<Input type="checkbox"
                         onChange={(e) => {
                             const { admins } = this.state;
@@ -113,7 +113,7 @@ class ViewAdmin extends Component {
                             i.lastName,
                             !!i.active,
                             !!i.permission.manageAdmins,
-                            !!i.permission.manageTrips,
+                            !!i.permission.manageInventory,
                             !!i.permission.manageReqList,
                             !!i.permission.manageReports
                         )
@@ -126,7 +126,7 @@ class ViewAdmin extends Component {
                                 active: !!i.active,
                                 permission: {
                                     manageAdmins: !!i.permission.manageAdmins,
-                                    manageTrips: !!i.permission.manageTrips,
+                                    manageInventory: !!i.permission.manageInventory,
                                     manageReqList: !!i.permission.manageReqList,
                                     manageReports: !!i.permission.manageReports
                                 }
@@ -150,7 +150,7 @@ class ViewAdmin extends Component {
                         <th className="title-sm-b">Surname</th>
                         <th className="title-sm-b">Active</th>
                         <th className="title-sm-b">Admin</th>
-                        <th className="title-sm-b">Trip</th>
+                        <th className="title-sm-b">Inventory</th>
                         <th className="title-sm-b">ReqList</th>
                         <th className="title-sm-b">Reports</th>
                         <th className="title-sm-b">Save</th>
@@ -160,38 +160,44 @@ class ViewAdmin extends Component {
             </Table>
         );
     }
-    componentDidMount() {
-        const orgObj = {
-            id: this.state.id,
-            email: this.state.email,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName
+    // componentDidMount() {
+    //     const orgObj = {
+    //         id: this.state.id,
+    //         email: this.state.email,
+    //         firstName: this.state.firstName,
+    //         lastName: this.state.lastName
 
-        };
-        let copyObj = {};
-        let keysToCopy = Object.keys(orgObj);
-        for (let k of keysToCopy) {
-            if (orgObj[k] !== "" && orgObj[k] !== 0) {
-                copyObj[k] = orgObj[k];
-            }
-        }
-        api("/admin/fetch", copyObj, 200).then(
-            (e) => {
-                console.log("res", e)
-                {
-                    this.setState({ admins: e.admins });
-                    this.render()
-                }
-            });
-    }
+    //     };
+    //     let copyObj = {};
+    //     let keysToCopy = Object.keys(orgObj);
+    //     for (let k of keysToCopy) {
+    //         if (orgObj[k] !== "" && orgObj[k] !== 0) {
+    //             copyObj[k] = orgObj[k];
+    //         }
+    //     }
+    //     api("/admin/fetch", copyObj, 200).then(
+    //         (e) => {
+    //             console.log("res", e)
+    //             {
+    //                 this.setState({ admins: e.admins });
+    //                 this.render()
+    //             }
+    //         });
+    // }
     render() {
         return (
+            <div className="home-page_1">
+                
+                    <p className="brand-name">CANDY SHOP</p>
             <div style={{ marginLeft: '20px' }}>
                 <div className="main-container">
-                    <p className="title-med-left">View Admin</p>
+                    <div className="title">View Admin</div>
                     {this.display()}
                 </div>
             </div>
+            </div>
+            
+            
         )
     }
 }

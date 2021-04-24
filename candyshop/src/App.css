@@ -35,7 +35,7 @@ input[type="radio"] {
 }
 
 .modal-header {
-  background-color: #FF69B4;
+  background-color: #e0f143;
 }
 table {
   padding-top: 200px;
@@ -54,6 +54,9 @@ th, td {
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+.title-sm-b{
+  color: #7f13b1;
 }
 
 .text-label {
@@ -294,11 +297,11 @@ input[type="email"]:hover ~ .pop-up {
 }
 .title {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:lobster;
   color: rgb(66, 222, 233);
   margin-top: 2% auto;
   font-weight: bolder;
-  font-size: 300%;
+  font-size: 250%;
   text-shadow: 2px 2px 4px #000000
 }
 
@@ -453,11 +456,11 @@ div.text_box {
   position: relative;
   top: 20%;
   width: 50%;
-  left:20%;
-  background-color:#2E5984;
-  border-radius: 4%;
-  border-width: 0%;
-  border-color: cornsilk;
+  left:25%;
+  background-color:#6d0b44;
+  border-radius: 10%;
+  border-width: 50%;
+  border-color: rgb(177, 11, 11);
 }
 .col-sm-12 mt-5 mb-2{
   margin-left: 90%;
@@ -525,7 +528,7 @@ div {
 .title-small-2 {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: rgb(250, 208, 92);
   margin-top: 5% auto;
   font-weight: bolder;
   text-shadow: 2px 2px 4px #000000;
@@ -711,6 +714,7 @@ div {
   color: #FF69B4;
 }
 
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   /* Tab */
@@ -817,6 +821,10 @@ div {
   .brand-name {
     font-size: 500%;
     color: yellow;
+    font-family:lobster;
+    font-style: oblique;
+    font-weight: 400;
+    
   }
   .reg-form {
     width: 40%;
