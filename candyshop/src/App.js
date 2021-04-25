@@ -18,6 +18,7 @@ import AdminForgotPassword from './components/auth/AdminForgotPassword';
 import CustomerChangePassword from './components/auth/CustomerChangePassword';
 import AdminChangePassword from './components/auth/AdminChangePassword';
 import CustomerLogin from './components/auth/CustomerLogin';
+import CreatePromoCode from './components/auth/CreatePromoCode';
 
 import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
@@ -67,7 +68,8 @@ const  App =()=>{
         <Route path="/shoppingCart" component={ shoppingCart } /> 
         
         <Route path="/home" component={ Home } />
-        
+        <Route path="/create-promo" component={ CreatePromoCode } />
+
         <Route path="/home-client" component={ homeClient } />
         <Route path="/home-server" component={ homeServer } />
         <Route path="/menu160" component={ Menu160 } />

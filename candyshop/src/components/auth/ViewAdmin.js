@@ -82,14 +82,14 @@ class ViewAdmin extends Component {
                             this.setState({ admins: newadmins })
                         }
                         } checked={i.permission.manageAdmins} />}</td>
-                    <td className="title-sm-b-s">{<Input type="checkbox"
+                    <td className="title-sm-b-s">{<div marginLeft><Input type="checkbox" 
                         onChange={(e) => {
                             const { admins } = this.state;
                             const newadmins = [...admins];
                             admins[index].permission.manageInventory = !admins[index].permission.manageInventory;
                             this.setState({ admins: newadmins })
                         }
-                        } checked={i.permission.manageInventory} />}</td>
+                        } checked={i.permission.manageInventory} /></div>}</td>
                     <td className="title-sm-b-s">{<Input type="checkbox"
                         onChange={(e) => {
                             const { admins } = this.state;
