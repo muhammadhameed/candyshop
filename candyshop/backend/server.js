@@ -22,6 +22,7 @@ connectToDb();
 
 if (process.env.NODE_ENV === "development")
 {
+    console.log("reached")
     var distDir = __dirname + "/dist/";
     app.use(express.static(distDir));
 
