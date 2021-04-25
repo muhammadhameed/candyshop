@@ -73,20 +73,7 @@ router.route('/signupadmin').post( async (req,res) => {
             const doc = {"firstName": firstName, "lastName" : lastName, "name": name, "email":email, "password":hash};
             await client.db("Users").collection("Pending Admin").insertOne(doc);
             let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
-
-            jwt.sign(
-                { id : found._id},
-                process.env.jwtSecret,
-                {expiresIn: 3600},
-
-                (err,token) => {
-                    if(err) throw err;
-                    res.status(200).json({
-                        token: token,
-                        msg : "User Added"
-                    });
-                }
-            )
+            res.status(200).json("User added");
         });
     });
 
