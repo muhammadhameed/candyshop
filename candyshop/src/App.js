@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import AddUser from './components/auth/AddUser';
+
+
 import AdminAppNavbar from './components/subcomponents/AdminAppNavbar';
 import CustomerAppNavbar from './components/subcomponents/CustomerAppNavbar';
 import CustomerForgotPassword from './components/auth/CustomerForgotPassword';
@@ -45,16 +47,14 @@ import CustomerRegister from './components/auth/CustomerRegister';
 import shoppingCart from './components/auth/shoppingCart';
 import addProduct from './components/auth/addProduct';
 import Error from './components/auth/Error';
+import ViewResponses from './components/auth/ViewOrder';
+
 // import Menu160 from './components/auth/Menu160';
 // import Menu320 from './components/auth/Menu320';
 // import Menu500 from './components/auth/Menu500';
 import ViewAdmin from './components/auth/ViewAdmin';
 import ChangeAdminUsername from './components/auth/ChangeAdminUsername';
 
-// import viewProducts from './components/auth/viewProducts';
-// import admindetails from './components/admindetails';
-// import edittripobj from './components/edittripobj';
-// import toggleAdmin from './components/toggleAdmin';
 //will keep user logged in even if refreshes too from a react tutorial
 // import Farm from './components/Trip'
 // import ViewFinance from './components/viewFinances';
@@ -67,6 +67,7 @@ const  App =()=>{
         <Route path="/shoppingCart" component={ shoppingCart } /> 
         
         <Route path="/home" component={ Home } />
+        
         <Route path="/home-client" component={ homeClient } />
         <Route path="/home-server" component={ homeServer } />
         <Route path="/menu160" component={ Menu160 } />
@@ -77,6 +78,8 @@ const  App =()=>{
         <Route path="/menu320" component={ Menu320 } />
         <Route path="/menu500" component={ Menu500 } /> */}
         <Route path="/add-product" component={ addProduct } />
+        <Route path="/view-orders" component={ ViewResponses } />
+
         <Route path="/error" component={ Error } />
         <Route path="/change-customer-username" component={ ChangeCustomerUsername } />
         <Route path="/change-admin-username" component={ ChangeAdminUsername } />
