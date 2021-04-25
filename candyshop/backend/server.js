@@ -7,7 +7,7 @@ const client = require('./routes/connection');
 
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2000;
 
 app.use(cors());
 app.use (express.json());
@@ -20,15 +20,15 @@ async function connectToDb(){
 connectToDb();
 
 
-// if (process.env.NODE_ENV === "production")
-// {
-//     var distDir = __dirname + "/dist/";
-//     app.use(express.static(distDir));
+if (process.env.NODE_ENV === "development")
+{
+    var distDir = __dirname + "/dist/";
+    app.use(express.static(distDir));
 
-//     app.get('/', function(req, res) {
-//         res.sendFile(path.join(__dirname + '/Home.js'));
-//     });
-// }
+    app.get('/', function(req, res) {
+        res.sendFile(path.join(__dirname + '/Home.js'));
+    });
+}
 
 
 const CustomersRouter = require('./routes/customers');

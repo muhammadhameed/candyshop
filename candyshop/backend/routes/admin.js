@@ -67,8 +67,8 @@ router.route('/signupadmin').post( async (req,res) => {
         return;
     }
 
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (err,hash) => {
+    bcrypt.genSalt(10, async (err, salt) => {
+        bcrypt.hash(password, salt, async (err,hash) => {
             if(err) throw err;
             const doc = {"firstName": firstName, "lastName" : lastName, "name": name, "email":email, "password":hash};
             await client.db("Users").collection("Pending Admin").insertOne(doc);
@@ -217,7 +217,7 @@ router.route('/forgotPassword').post(async (req,res) => {
         }
         else{
             bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(password, salt, (err,hash) => {
+                bcrypt.hash(password, salt, async (err,hash) => {
                     if(err) throw err;
 
                     await client.db("Users").collection("Admin").updateOne({"email" : email}, {$set: {"password" : hash}});

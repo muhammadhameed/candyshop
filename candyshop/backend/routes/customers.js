@@ -66,7 +66,7 @@ router.route('/signup').post(async (req,res) => {
 
 
     bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (err,hash) => {
+        bcrypt.hash(password, salt, async (err,hash) => {
             if(err) throw err;
             const doc = {"firstName": firstName, "lastName": lastName, "name" : name, "email":email, "password":hash, "phoneNumber":phoneNumber};
             await client.db("Users").collection("Customers").insertOne(doc);
@@ -212,7 +212,7 @@ router.route('/forgotPassword').post(async (req,res) => {
         }
         else{
             bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(password, salt, (err,hash) => {
+                bcrypt.hash(password, salt, async (err,hash) => {
                     if(err) throw err;
 
                     await client.db("Users").collection("Customers").updateOne({"email" : email}, {$set: {"password" : hash}});
