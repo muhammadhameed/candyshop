@@ -36,15 +36,15 @@ class ViewAdmin extends Component {
                 manageReports: 1
             }
         }
-        ]
-        // id: this.props.location.state.id,
-        // email: this.props.location.state.email,
-        // firstName: this.props.location.state.firstName,
-        // lastName: this.props.location.state.lastName,
+        ],
+        id: "",
+        email: "",
+        firstName: "",
+        lastName: "",
     }
 
     display = () => {
-        const addedTrips = this.state.admins.map((i, index) =>
+        const addedAdmins = this.state.admins.map((i, index) =>
 
             <tbody>
                 <tr>
@@ -156,34 +156,34 @@ class ViewAdmin extends Component {
                         <th className="title-sm-b">Save</th>
                     </tr>
                 </thead>
-                {addedTrips}
+                {addedAdmins}
             </Table>
         );
     }
-    // componentDidMount() {
-    //     const orgObj = {
-    //         id: this.state.id,
-    //         email: this.state.email,
-    //         firstName: this.state.firstName,
-    //         lastName: this.state.lastName
+    componentDidMount() {
+        const orgObj = {
+            id: this.state.id,
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName
 
-    //     };
-    //     let copyObj = {};
-    //     let keysToCopy = Object.keys(orgObj);
-    //     for (let k of keysToCopy) {
-    //         if (orgObj[k] !== "" && orgObj[k] !== 0) {
-    //             copyObj[k] = orgObj[k];
-    //         }
-    //     }
-    //     api("/admin/fetch", copyObj, 200).then(
-    //         (e) => {
-    //             console.log("res", e)
-    //             {
-    //                 this.setState({ admins: e.admins });
-    //                 this.render()
-    //             }
-    //         });
-    // }
+        };
+        let copyObj = {};
+        let keysToCopy = Object.keys(orgObj);
+        for (let k of keysToCopy) {
+            if (orgObj[k] !== "" && orgObj[k] !== 0) {
+                copyObj[k] = orgObj[k];
+            }
+        }
+        api("/admin/", copyObj, 200).then(
+            (e) => {
+                console.log("res", e)
+                {
+                    this.setState({ admins: e.admins });
+                    this.render()
+                }
+            });
+    }
     render() {
         return (
             <div className="home-page_1">
