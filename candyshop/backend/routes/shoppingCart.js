@@ -29,13 +29,10 @@ router.route('/update').post(async (req,res) =>{
 router.route('/checkout').post(async (req,res) => {
     let customerName = req.body.customerName;
     let address = req.body.address;
-    let paymentDetails = req.body.paymentDetails;
 
-    // validate address, how?
     
     let found = await client.db("Users").collection("Customers").findOne({"name":customerName});
-    //await client.db("Users").collection("Customers").updateOne({"name" : customerName}, {$set: {"address": address}});
-    //above line depends on if we're storing address
+    
 
     let price = 0;
     for(let i = 0; i<found.shoppingCart.length; i++){
@@ -52,7 +49,7 @@ router.route('/checkout').post(async (req,res) => {
         "products" : found.shoppingCart,
         "totalPrice" : price,
         "address" : address,
-        "paymentDetails" : paymentDetails,
+        "paymentDetails" : "Cash on Delivery",
         "date" : client.Date()
     };
     await client.db("Orders").collection("Pending Orders").insertOne({doc});
@@ -71,66 +68,6 @@ router.route('/checkout').post(async (req,res) => {
     res.status(200).json("Successful Checkout");
 })
 
-
-
-// router.route('/add').post(async(req,res)=>{
-//     let customerName = req.body.customerName;
-//     let productName = req.body.productName;
-//     let collectionName = req.body.collectionName;
-    
-//     let found = await client.db("Users").collection("Customers").findOne({"name": customerName});
-//     let foundProduct = await client.db("Product").collection(collectionName).findOne({"name":productName});
-    
-//     if(typeof (foundProduct.price) !== "undefined"){ //this means this is a box
-//         price = foundProduct.price;
-
-//         let AddToCart = [{"Box" : productName, "insideBox" : {"price" : price, "name": new Array(), "quantity": new Array()}}]; //this is box when shoppingCart is not empty
-//         await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": AddToCart}});
-//         res.status(200).json("Successfully added to shopping cart");
-//         return;
-//     }
-
-//     else{ //this is not box. Tell frontend that if the person clicks on add to cart on candy after box is full then they should display error message again
-        
-//         if(typeof (found.shoppingCart) === "undefined"){
-//             res.status(400).json("Please select a box first");
-//             return;
-//         }
-
-//         let Cart = found.shoppingCart;
-//         let length = Cart.length;
-//         length = length - 1;
-//         let foundBox = await client.db("Product").collection("Boxes").findOne({"name":Cart[length].Box});
-        
-//         if (typeof (Cart[length].insideBox.quantity) !== "undefined"){
-//             if (foundBox.quantity === (Cart[length].insideBox.quantity.reduce((a, b) => a + b, 0))){
-//                 res.status(400).json("Box is full. Get a new box");
-//                 return;
-//             }
-//         }
-        
-
-//         let CartNames = Cart[length].insideBox.name;
-//         let CartQuantities = Cart[length].insideBox.quantity;
-
-//         if (typeof (Cart[length].insideBox.name) !== "undefined"){
-//             for (let i = 0; i<CartNames.length; i++){
-//                 if (CartNames[i] === productName){
-//                     CartQuantities[i] = CartQuantities[i] + 10;
-//                     await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": Cart}});
-//                     res.status(200).json("Successfully added to shopping cart");
-//                     return;
-//                 }
-//             }
-//         }
-
-//         CartNames.push(productName);
-//         CartQuantities.push(10);
-//         await client.db("Users").collection("Customers").updateOne({"name": customerName}, {$set: {"shoppingCart": Cart}});
-//         res.status(200).json("Successfully added to shopping cart");
-        
-//     }
-// })
 
 
 router.route('/add').post(async(req,res)=>{
@@ -167,5 +104,8 @@ router.route('/add').post(async(req,res)=>{
 })
 
 
-
+ // make new implementation of shopping cart according to dawar's front end
+ // use quantity to find box. only one box at a time. front end will send box, arrays of stuff and the address
+ //no other route of front end will be used
+ //promo code also
 module.exports = router;
