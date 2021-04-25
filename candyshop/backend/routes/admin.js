@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Joi = require('joi');
 const client = require('./connection');
+const bcrypt = require('bcrypt');
+const generator = require('generate-password');
 
 async function connectToDb(){
     await client.connect();
@@ -31,39 +33,6 @@ const schema = Joi.object().keys({ //adjust this to how the body sends the data
 
 });
 
-// router.route('/signupadmin').post( async (req,res) => { //this is for the case front end doesnt implement approval
-//     let firstName = req.body.firstName;
-//     let lastName = req.body.lastName;
-//     let name = req.body.name;
-//     let email = req.body.email;
-//     let password = req.body.password;
-
-//     let data = req.body;
-    
-//     const validation = schema.validate(data);
-//     if(validation.error)
-//     {
-//         res.status(400).json('Error' + validation.error);
-//         return;
-//     }
-    
-
-//     let found1 = await client.db("Users").collection("Admin").findOne({"email" : email});
-//     if(found1 !==null) {
-//         res.status(400).json("User with this email already exists");
-//         return;
-//     }
-
-//     found = await client.db("Users").collection("Admin").findOne({"name" : name});
-//     if(found !==null) {
-//         res.status(400).json("User with this username already exists");
-//         return;
-//     }
-//     const doc = {"firstName": firstName, "lastName" : lastName, "name": name,  "email":email, "password":password};
-//     await client.db("Users").collection("Admin").insertOne(doc);
-//     res.status(200).json("User Added");
-
-// })
 
 router.route('/signupadmin').post( async (req,res) => {
     let firstName = req.body.firstName;
@@ -96,9 +65,17 @@ router.route('/signupadmin').post( async (req,res) => {
         return;
     }
 
-    const doc = {"firstName": firstName, "lastName" : lastName, "name": name, "email":email, "password":password};
-    await client.db("Users").collection("Pending Admin").insertOne(doc);
-    res.status(200).json("User Added");
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err,hash) => {
+            if(err) throw err;
+            const doc = {"firstName": firstName, "lastName" : lastName, "name": name, "email":email, "password":hash};
+            await client.db("Users").collection("Pending Admin").insertOne(doc);
+            res.status(200).json("User Added");
+        })
+    })
+
+
+    
 
 })
 
@@ -117,6 +94,7 @@ router.route('/delete').post(async (req,res) => {
     res.status(200).json("Admin Deleted");
 })
 
+
 router.route('/signinadmin').post( async (req,res) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -125,12 +103,21 @@ router.route('/signinadmin').post( async (req,res) => {
         res.status(400).json("Please fill all spaces");
         return;
     }
-    let found = await client.db("Users").collection("Admin").findOne({"email":email, "password":password});
+    let found = await client.db("Users").collection("Admin").findOne({"email":email});
     if (found === null){
-        res.status(400).json("Incorrect details added. Please try again.");
+        res.status(400).json("Incorrect email");
         return;
     }
-    res.status(200).json("You are signed in. Welcome.");
+
+    bcrypt.compare(password, found.password, function(err, res) {
+        if (res == true){
+            res.status(200).json("You are signed in. Welcome.");
+        }
+        else{
+            res.status(400).json('Incorrect password')
+        }
+    })
+    
 });
 
 
@@ -160,13 +147,23 @@ router.route('/update').post(async (req, res) =>{
     else if (whatToChange == "email"){
         found.email = change;
     }
+
     else if (whatToChange == "password"){
         let oldPassword = req.body.oldPassword;
-        if (found.password !== oldPassword){
-            res.status(400).json("Old password is incorrect");
-            return;
-        }
-        found.password = change;
+
+        bcrypt.compare(oldPassword, found.password, function(err, res) {
+            if (res == true){
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(change, salt, (err,hash) => {
+                        if(err) throw err;
+                        found.password = hash;
+                    })
+                })
+            }
+            else{
+                res.status(400).json('Old password is incorrect')
+            }
+        })
     }
 
     await client.db("Users").collection("Admin").updateOne({"_id": id}, {$set : found});
@@ -192,19 +189,29 @@ router.route('/forgotPassword').post(async (req,res) => {
         }
     });
 
+    var password = generator.generate({numbers:true});
     var mailOptions = {
         from: 'noreplycandyscape@gmail.com',
         to : email,
         subject: 'Password Candyscape',
-        text : 'Your password is ' + found.password
+        text : 'Your new password is ' + password
     };
 
+    
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             res.status(400).json(error);
         }
         else{
-            res.status(200).json('Email sent ' + info.response);
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(password, salt, (err,hash) => {
+                    if(err) throw err;
+
+                    await client.db("Users").collection("Admin").updateOne({"email" : email}, {$set: {"password" : hash}});
+                    res.status(200).json('Email sent');
+                })
+            })
+            
         }
     });
 })
