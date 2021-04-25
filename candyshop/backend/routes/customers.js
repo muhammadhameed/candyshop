@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Joi = require('joi');
 const client = require('./connection');
-
+const bcrypt = require('bcrypt');
+const generator = require('generate-password');
 
 async function connectToDb(){
     await client.connect();
@@ -60,9 +61,17 @@ router.route('/signup').post(async (req,res) => {
         res.status(400).json("User with this username already exists");
         return;
     }
-    const doc = {"firstName": firstName, "lastName": lastName, "name" : name, "email":email, "password":password, "phoneNumber":phoneNumber};
-    await client.db("Users").collection("Customers").insertOne(doc);
-    res.status(200).json("User Added");
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err,hash) => {
+            if(err) throw err;
+            const doc = {"firstName": firstName, "lastName": lastName, "name" : name, "email":email, "password":hash, "phoneNumber":phoneNumber};
+            await client.db("Users").collection("Customers").insertOne(doc);
+            res.status(200).json("User Added");
+        })
+    })
+
+    
 
 })
 
@@ -74,12 +83,21 @@ router.route('/signin').post(async (req,res) => {
         res.status(400).json("Please fill all spaces");
         return;
     }
-    let found = await client.db("Users").collection("Customers").findOne({"email":email, "password":password});
+
+    let found = await client.db("Users").collection("Customers").findOne({"email":email});
     if (found === null){
-        res.status(400).json("Incorrect details");
+        res.status(400).json("Incorrect email");
         return;
     }
-    res.status(200).json("Sucess. You are signed in");
+
+    bcrypt.compare(password, found.password, function(err, res) {
+        if (res == true){
+            res.status(200).json("You are signed in. Welcome.");
+        }
+        else{
+            res.status(400).json('Incorrect password')
+        }
+    })
 })
 
 
@@ -105,12 +123,22 @@ router.route('/update').post(async (req, res) =>{
     }
     else if (whatToChange == "password"){
         let oldPassword = req.body.oldPassword;
-        if (found.password !== oldPassword){
-            res.status(400).json("Old password is incorrect");
-            return;
-        }
-        found.password = change;
+
+        bcrypt.compare(oldPassword, found.password, function(err, res) {
+            if (res == true){
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(change, salt, (err,hash) => {
+                        if(err) throw err;
+                        found.password = hash;
+                    })
+                })
+            }
+            else{
+                res.status(400).json('Old password is incorrect')
+            }
+        })
     }
+
     else if (whatToChange == "phoneNumber"){
         found.phoneNumber = change;
     }
@@ -138,19 +166,29 @@ router.route('/forgotPassword').post(async (req,res) => {
         }
     });
 
+    var password = generator.generate({numbers:true});
     var mailOptions = {
         from: 'noreplycandyscape@gmail.com',
         to : email,
         subject: 'Password Candyscape',
-        text : 'Your password is ' + found.password
+        text : 'Your new password is ' + password
     };
 
+    
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             res.status(400).json(error);
         }
         else{
-            res.status(200).json('Email sent ' + info.response);
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(password, salt, (err,hash) => {
+                    if(err) throw err;
+
+                    await client.db("Users").collection("Customers").updateOne({"email" : email}, {$set: {"password" : hash}});
+                    res.status(200).json('Email sent');
+                })
+            })
+            
         }
     });
 })
