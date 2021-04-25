@@ -36,6 +36,16 @@ const schema = Joi.object().keys({ //adjust this to how the body sends the data
 });
 
 
+router.route('/').get(async(req,res) =>{
+
+    let cursor = await client.db("Users").collection("Pending Admin").find({});
+    let arr = new Array();
+    await cursor.forEach(function  (doc) {arr.push(doc);});
+    res.status(200).json(arr);
+})
+
+
+
 router.route('/signupadmin').post( async (req,res) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
