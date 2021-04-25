@@ -20,6 +20,7 @@
   "homepage": "https://github.com/muhammadhameed/candyshop#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "generate-password": "^1.6.0"
+    "generate-password": "^1.6.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }

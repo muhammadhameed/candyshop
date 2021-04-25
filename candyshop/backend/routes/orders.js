@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const client = require('./connection');
+const auth = require('../middleware/auth');
 
 
 async function connectToDb(){

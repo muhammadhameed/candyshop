@@ -3,6 +3,8 @@ const Joi = require('joi');
 const client = require('./connection');
 const bcrypt = require('bcrypt');
 const generator = require('generate-password');
+const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 
 async function connectToDb(){
     await client.connect();
@@ -70,14 +72,26 @@ router.route('/signupadmin').post( async (req,res) => {
             if(err) throw err;
             const doc = {"firstName": firstName, "lastName" : lastName, "name": name, "email":email, "password":hash};
             await client.db("Users").collection("Pending Admin").insertOne(doc);
-            res.status(200).json("User Added");
-        })
-    })
+            let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
 
+            jwt.sign(
+                { id : found._id},
+                process.env.jwtSecret,
+                {expiresIn: 3600},
 
-    
+                (err,token) => {
+                    if(err) throw err;
+                    res.status(200).json({
+                        token: token,
+                        msg : "User Added"
+                    });
+                }
+            )
+        });
+    });
 
 })
+
 
 router.route('/approve').post(async (req,res) => {
     let name = req.found.name;
@@ -111,12 +125,24 @@ router.route('/signinadmin').post( async (req,res) => {
 
     bcrypt.compare(password, found.password, function(err, res) {
         if (res == true){
-            res.status(200).json("You are signed in. Welcome.");
+            jwt.sign(
+                { id : found._id},
+                process.env.jwtSecret,
+                {expiresIn: 3600},
+
+                (err,token) => {
+                    if(err) throw err;
+                    res.status(200).json({
+                        token: token,
+                        msg : "User Signed In"
+                    });
+                }
+            )
         }
         else{
             res.status(400).json('Incorrect password')
         }
-    })
+    });
     
 });
 
@@ -157,13 +183,13 @@ router.route('/update').post(async (req, res) =>{
                     bcrypt.hash(change, salt, (err,hash) => {
                         if(err) throw err;
                         found.password = hash;
-                    })
-                })
+                    });
+                });
             }
             else{
                 res.status(400).json('Old password is incorrect')
             }
-        })
+        });
     }
 
     await client.db("Users").collection("Admin").updateOne({"_id": id}, {$set : found});
@@ -197,7 +223,7 @@ router.route('/forgotPassword').post(async (req,res) => {
         text : 'Your new password is ' + password
     };
 
-    
+
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             res.status(400).json(error);
@@ -209,8 +235,8 @@ router.route('/forgotPassword').post(async (req,res) => {
 
                     await client.db("Users").collection("Admin").updateOne({"email" : email}, {$set: {"password" : hash}});
                     res.status(200).json('Email sent');
-                })
-            })
+                });
+            });
             
         }
     });
