@@ -33,22 +33,6 @@ if (process.env.NODE_ENV === "development")
         console.log("blah")
     });
 }
-
-if (process.env.NODE_ENV === "production")
-{
-    console.log("reached")
-    var distDir = __dirname + "/dist/";
-    app.use(express.static(path.join(distDir)));
-    console.log("blah")
-
-    app.get('/', function(req, res) {
-        //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        console.log("blahget")
-        //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
-        res.sendFile(path.join(__dirname + '/src/build/index.html'));
-        
-    });
-}
 //sd
 //lk
 
@@ -68,6 +52,22 @@ app.use('/orders', OrdersRouter);
 app.use('/product', ProductRouter);
 app.use('/reviews', ReviewsRouter);
 app.use('/shoppingCart', ShoppingCartRouter);
+
+if (process.env.NODE_ENV === "production")
+{
+    // console.log("reached")
+    // var distDir = __dirname + "/dist/";
+    app.use(express.static('client/build'));
+    console.log("blah")
+
+    app.get('*', (req, res) => {
+        //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
+        console.log("blahget")
+        //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+        
+    });
+}
 
 
 app.get('/home', function(req, res) {
