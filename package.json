@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node candyshop/src/backend/server.js",
-    "heroku-postbuild": "cd candyshop/src && npm install && npm run build"
+    "start": "node candyshop/backend/server.js",
+    "heroku-postbuild": "cd candyshop/backend/src && npm install && npm run build"
   },
   "repository": {
     "type": "git",
