@@ -90,7 +90,6 @@ router.route('/signupadmin').post( async (req,res) => {
 
 
 router.route('/approve').post(async (req,res) => {
-    console.log(req.body)
     let name = req.body.name;
     let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
     await client.db("Users").collection("Admin").insertOne(found);
@@ -101,7 +100,6 @@ router.route('/approve').post(async (req,res) => {
 
 router.route('/delete').post(async (req,res) => {
     let name = req.body.name;
-    let name = req.name;
     let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
     await client.db("Users").collection("Pending Admin").deleteOne({"name" : name});
     res.status(200).json("Admin Deleted");
