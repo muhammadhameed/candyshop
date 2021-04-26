@@ -740,6 +740,10 @@ div {
 .card-body{
   background-color: #E2C6EC;
 }
+.card{
+  background-color: #D776D3;
+  border: none;
+}
 
 .totalText{
   padding-top: 100px;
