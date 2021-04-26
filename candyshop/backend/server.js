@@ -41,9 +41,9 @@ if (process.env.NODE_ENV === "production")
     app.use(express.static(path.join(__dirname, '/routes/customer.js')));
     console.log("blah")
 
-    app.get('/home', function(req, res) {
+    app.get('/', function(req, res) {
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        res.send("path.join(__dirname, 'routes', 'customer.js')");
+        res.sendFile(path.join(__dirname, 'routes', 'customer.js'));
         console.log("blah")
     });
 }
