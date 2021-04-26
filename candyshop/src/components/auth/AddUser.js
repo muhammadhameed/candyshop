@@ -43,7 +43,7 @@ class AddUser extends Component {
         return (
             <div className="home-page">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDySCAPE</p>
                     <p className="title">Add User</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         <FormGroup className="password-container">

@@ -38,7 +38,7 @@ import homeServer from './components/auth/homeServer';
 // import Menu2 from './components/auth/Menu2';
 // import homeClient from './components/auth/homeClient';
 // import homeServer from './components/auth/homeServer';
-
+import CustomerOrderList from './components/auth/CustomerOrderList';
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
@@ -70,7 +70,8 @@ const  App =()=>{
         
         <Route path="/home" component={ Home } />
         <Route path="/create-promo" component={ CreatePromoCode } />
-        
+        <Route path="/customer-orders" component={ CustomerOrderList } />
+
         <Route path="/home-client" component={ homeClient } />
         <Route path="/home-server" component={ homeServer } />
         <Route path="/menu160" component={ Menu160 } />
