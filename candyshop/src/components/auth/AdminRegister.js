@@ -66,7 +66,7 @@ class AdminRegister extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                <p className="brand-name">CANDY SHOP</p>
+                <p className="brand-name">CANDYSCAPE</p>
                 <p className="title">Admin Register</p>
                 <Form className="reg-form mt-3" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

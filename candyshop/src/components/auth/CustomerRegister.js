@@ -64,7 +64,7 @@ class CustomerRegister extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDYSCAPE</p>
                     <p className="title">Register</p>
                     <Form className="reg-form mt-3" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>
