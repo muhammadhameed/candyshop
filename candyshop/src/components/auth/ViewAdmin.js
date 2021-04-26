@@ -11,24 +11,12 @@ import api from "./api.js";
 class ViewAdmin extends Component {
     state = {
         admins: [{
-            id: 10,
-            email: "String - must be email",
+            _id: 10,
+            name: "kdfmkdfm",
             firstName: "String",
             lastName: "String",
+            email: "String - must be email",
             active: 0,
-            permission: {
-                manageAdmins: 1,
-                manageInventory: 1,
-                manageReqList: 1,
-                manageReports: 1
-            }
-        },
-        {
-            id: 10,
-            email: "String - must be email",
-            firstName: "String",
-            lastName: "String",
-            active: 1,
             permission: {
                 manageAdmins: 1,
                 manageInventory: 1,
@@ -37,10 +25,11 @@ class ViewAdmin extends Component {
             }
         }
         ],
-        id: "",
-        email: "",
+        _id: 10,
+        name: "",
         firstName: "",
         lastName: "",
+        email: "",
     }
 
     display = () => {
@@ -48,7 +37,7 @@ class ViewAdmin extends Component {
 
             <tbody>
                 <tr>
-                    <td className="title-sm-b-s">{i.id}</td>
+                    <td className="title-sm-b-s">{i._id}</td>
                     <td className="title-sm-b-s"><Input type="text" value={i.email} onChange={(e) => {
                         const { admins } = this.state;
                         const newadmins = [...admins];
@@ -80,58 +69,76 @@ class ViewAdmin extends Component {
                             const newadmins = [...admins];
                             admins[index].permission.manageAdmins = !admins[index].permission.manageAdmins;
                             this.setState({ admins: newadmins })
-                        }
-                        } checked={i.permission.manageAdmins} />}</td>
+                        }//i.permission.manageAdmins
+                        } checked={1} />}</td>
                     <td className="title-sm-b-s">{<div marginLeft><Input type="checkbox" 
                         onChange={(e) => {
                             const { admins } = this.state;
                             const newadmins = [...admins];
                             admins[index].permission.manageInventory = !admins[index].permission.manageInventory;
                             this.setState({ admins: newadmins })
-                        }
-                        } checked={i.permission.manageInventory} /></div>}</td>
+                        }//i.permission.manageInventory
+                        } checked={1} /></div>}</td>
                     <td className="title-sm-b-s">{<Input type="checkbox"
                         onChange={(e) => {
                             const { admins } = this.state;
                             const newadmins = [...admins];
                             admins[index].permission.manageReqList = !admins[index].permission.manageReqList;
                             this.setState({ admins: newadmins })
-                        }
-                        } checked={i.permission.manageReqList} />}</td>
+                        }//i.permission.manageReqList
+                        } checked={1} />}</td>
                     <td className="title-sm-b-s">{<Input type="checkbox"
                         onChange={(e) => {
                             const { admins } = this.state;
                             const newadmins = [...admins];
                             admins[index].permission.manageReports = !admins[index].permission.manageReports;
                             this.setState({ admins: newadmins })
-                        }
-                        } checked={i.permission.manageReports} />}</td>
+                        }//i.permission.manageReports
+                        } checked={1} />}</td>
                     <td className="title-sm-b-s"><button><FontAwesomeIcon onClick={(e) => {
-                        console.log(
-                            i.id,
-                            i.firstName,
-                            i.lastName,
-                            !!i.active,
-                            !!i.permission.manageAdmins,
-                            !!i.permission.manageInventory,
-                            !!i.permission.manageReqList,
-                            !!i.permission.manageReports
-                        )
-                        api("account/admin/edit",
-                            {
-                                id: i.id,
-                                email: i.email,
-                                firstName: i.firstName,
-                                lastName: i.lastName,
-                                active: !!i.active,
-                                permission: {
-                                    manageAdmins: !!i.permission.manageAdmins,
-                                    manageInventory: !!i.permission.manageInventory,
-                                    manageReqList: !!i.permission.manageReqList,
-                                    manageReports: !!i.permission.manageReports
-                                }
+                        // console.log(
+                        //     i._id,
+                        //     i.firstName,
+                        //     i.lastName,
+                        //     !!i.active,
+                        //     !!i.permission.manageAdmins,
+                        //     !!i.permission.manageInventory,
+                        //     !!i.permission.manageReqList,
+                        //     !!i.permission.manageReports
+                        // )
+
+                        var totalinput = {name:i.name}
+                        
+                        fetch('http://localhost:4000/admin/approve',{
+                            method: 'post',
+                            headers: {
+                            "Content-Type": "application/json",
                             },
-                            200).then(res => { })
+                            body: JSON.stringify(totalinput)
+                        }).then(function(response){
+                            response.text().then(function(text){alert(text);});
+                            // if (response.status != 400)
+                            // {
+                            //     window.location = "http://localhost:3001/home-server/";
+                            // }
+                        }).catch(function(error) {
+                            console.error(error);
+                        })
+                        // api("account/admin/edit",
+                        //     {
+                        //         _id: i._id,
+                        //         email: i.email,
+                        //         firstName: i.firstName,
+                        //         lastName: i.lastName,
+                        //         active: !!i.active,
+                        //         permission: {
+                        //             manageAdmins: !!i.permission.manageAdmins,
+                        //             manageInventory: !!i.permission.manageInventory,
+                        //             manageReqList: !!i.permission.manageReqList,
+                        //             manageReports: !!i.permission.manageReports
+                        //         }
+                        //     },
+                        //     200).then(res => { })
                     }
 
                     } style={{ color: "#2E5984" }} icon={faSave} size="1x" /></button></td>
@@ -162,7 +169,7 @@ class ViewAdmin extends Component {
     }
     componentDidMount() {
         const orgObj = {
-            id: this.state.id,
+            _id: this.state._id,
             email: this.state.email,
             firstName: this.state.firstName,
             lastName: this.state.lastName
@@ -175,14 +182,23 @@ class ViewAdmin extends Component {
                 copyObj[k] = orgObj[k];
             }
         }
-        api("/admin/", copyObj, 200).then(
-            (e) => {
-                console.log("res", e)
-                {
-                    this.setState({ admins: e.admins });
-                    this.render()
-                }
-            });
+
+        fetch('http://localhost:4000/admin/pending/',{
+        method: 'get'
+        }).then(function(response){
+          return response.text();
+        }).then(async function(text){
+          console.log(JSON.parse(text))
+          if (text == '[]')
+          {
+            alert('There are no pending admins to approve or deny.')
+          }
+          var data = JSON.parse(text)
+          console.log(data[0])
+          return data;
+        }).then((res) => {this.setState({admins: res});
+                this.render()
+            })
     }
     render() {
         return (
