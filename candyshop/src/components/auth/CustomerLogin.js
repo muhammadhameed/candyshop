@@ -47,7 +47,7 @@ class CustomerLogin extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                    <p className="brand-name">Candy Scape</p>
+                    <p className="brand-name">CandyScape</p>
                     <p className="title">Customer Login</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

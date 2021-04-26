@@ -90,7 +90,7 @@ class ViewResponses extends Component {
     render() {
 
         return (
-            <div className="home-page_1">
+            <div className="home-page_5">
             <div className="container main">
                 <p className="brand-name">CANDYSCAPE</p>
                 <p className="title">Current Orders</p>
