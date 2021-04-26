@@ -20,19 +20,19 @@ async function connectToDb(){
 connectToDb();
 
 
-if (process.env.NODE_ENV === "development")
-{
-    console.log("reached")
-    var distDir = __dirname + "/dist/";
-    app.use(express.static(path.join(__dirname, '../src/build/index.html')));
-    console.log("blah")
+// if (process.env.NODE_ENV === "development")
+// {
+//     console.log("reached")
+//     var distDir = __dirname + "/dist/";
+//     app.use(express.static(path.join(__dirname, '../src/build/index.html')));
+//     console.log("blah")
 
-    app.get('/', function(req, res) {
-        //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        res.sendFile(path.join(__dirname, '../src', 'build', 'index.html'));
-        console.log("blah")
-    });
-}
+//     app.get('/', function(req, res) {
+//         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
+//         res.sendFile(path.join(__dirname, '../src', 'build', 'index.html'));
+//         console.log("blah")
+//     });
+// }
 //sd
 //lk
 
@@ -65,7 +65,7 @@ if (process.env.NODE_ENV === "production")
         console.log("blahget")
         //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-        return res.redirect('/home');
+        res.redirect('/home');
         
     });
 }
