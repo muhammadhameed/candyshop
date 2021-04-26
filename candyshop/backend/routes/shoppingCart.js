@@ -62,7 +62,7 @@ router.route('/checkout').post(async (req,res) => {
         "totalPrice" : price,
         "address" : address,
         "paymentDetails" : "Cash on Delivery",
-        "date" : client.Date()
+        "date" : new Date()
     };
     await client.db("Orders").collection("Pending Orders").insertOne({doc});
     
@@ -171,7 +171,7 @@ router.route('/confirm').post(async (req, res) => {
         "totalPrice" : price,
         "address" : address,
         "paymentDetails" : "Cash on Delivery",
-        "date" : client.Date()
+        "date" : new Date()
     };
     await client.db("Orders").collection("Pending Orders").insertOne(doc);
 
