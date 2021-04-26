@@ -10,7 +10,7 @@ import { faTimes, faCheck } from "@fortawesome/free-solid-svg-icons";
 import api from "./api.js";
 class ViewResponses extends Component {
     state = {
-        Orders: [1,2],
+        Orders: [],
         rejectOrder: this.rejectOrder,
         acceptOrder: this.acceptOrder,
         currentObj: {}
@@ -65,7 +65,7 @@ class ViewResponses extends Component {
             (e) => {
                 console.log(e)
                 if (e.Orders !== []) {
-                    this.setState({ trips: e.tripReqs });
+                    this.setState({ Orders: e.Orders });
                 }
             });
     }
@@ -74,7 +74,7 @@ class ViewResponses extends Component {
         return (
             <div className="home-page_1">
             <div className="container main">
-                <p className="brand-name">CANDY SHOP</p>
+                <p className="brand-name">CANDYSCAPE</p>
                 <p className="title">Current Orders</p>
             <div style={{ marginLeft: '20px' }}>
                 <div className="main-container">
@@ -88,7 +88,7 @@ class ViewResponses extends Component {
                             <th className="title-sm-b">Accept</th>
                             <th className="title-sm-b">Reject</th>
                         </tr>
-                        {/* {this.state.trips.map(i => {
+                        {this.state.trips.map(i => {
                             return (<tr>
                                 <td className="title-sm-b-s">{i.tripID}</td>
                                 <td className="title-sm-b-s">{i.customerID}</td>
@@ -97,7 +97,7 @@ class ViewResponses extends Component {
                                 {this.if(i)}
                                 {this.if2(i)}
                             </tr>);
-                        })} */}
+                        })}
                     </Table>
                 </div>
             </div>
