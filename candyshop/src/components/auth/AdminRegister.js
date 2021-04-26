@@ -41,7 +41,7 @@ class AdminRegister extends Component {
         var totalinput = {firstName, lastName, name, email, password};
         
         if (this.state.password === this.state.rePassword)
-            fetch('http://localhost:5000/admin/signupadmin/',{
+            fetch('http://localhost:4000/admin/signupadmin/',{
                 method: 'post',
                 headers: {
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ class AdminRegister extends Component {
                 response.text().then(function(text){alert(text);});
                 if (response.status != 400)
                 {
-                    window.location = "http://localhost:3000/login-admin/";
+                    window.location = "http://localhost:3001/login-admin/";
                 }
             }).catch(function(error) {
                 console.error(error);

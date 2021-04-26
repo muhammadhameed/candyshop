@@ -26,7 +26,7 @@ class AdminLogin extends Component {
         var email = this.state.email;
         var password = this.state.password;
         var totalinput = {email, password};
-        fetch('http://localhost:5000/admin/signinadmin/',{
+        fetch('http://localhost:4000/admin/signinadmin/',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",
