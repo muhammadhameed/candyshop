@@ -52,6 +52,10 @@ if (process.env.NODE_ENV === "production")
 
 
 app.get('/home', function(req, res) {
+    res.sendFile(path.join(__dirname, 'Home.html'));
+});
+
+app.get('/homejs', function(req, res) {
     res.sendFile(path.join(__dirname, 'Home.js'));
 });
 
