@@ -29,6 +29,12 @@ router.route('/newDiscount/').get(async(req,res) =>{
 router.route('/add').post(async (req,res) => {
     let discountCode = req.body.discountCode;
     let discount = req.body.discount;
+    if(discount > 50){
+        res.status(400).json("Discount must be less than 50");
+        return;
+    }
+    discount = discount
+
     let cursor = await client.db('Discount').collection('New Discount').find({})
     await cursor.forEach( async function (doc) {
         await client.db('Discount').collection('Old Discount').insertOne(doc);
@@ -40,7 +46,7 @@ router.route('/add').post(async (req,res) => {
         res.status(400).json("Please enter a unique discount code");
         return;
     }
-    await client.db('Discount').collection('New Discount').insertOne({'discountCode' : discountCode, 'discount' : discount, 'date' : new Date()});
+    await client.db('Discount').collection('New Discount').insertOne({'discountCode' : discountCode, 'discount' : discount/100, 'date' : new Date()});
     res.status(200).json("New discount added");
 })
 
