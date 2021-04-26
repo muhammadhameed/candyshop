@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "development")
     app.use(express.static(distDir));
 
     app.get('/', function(req, res) {
-        res.sendFile(path.join(__dirname + '/Home.js'));
+        res.sendFile(path.join(__dirname + '/auth/Home.js'));
     });
 }
 
