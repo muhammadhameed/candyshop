@@ -65,20 +65,44 @@ if (process.env.NODE_ENV === "production")
         console.log("blahget")
         //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+        return res.redirect('/home');
         
     });
 }
 
+app.use('/home',express.static('client/build'))
+app.use('/register',express.static('client/build'))
+app.use('/shoppingCart',express.static('client/build'))
+app.use('/create-promo',express.static('client/build'))
+app.use('/customer-orders',express.static('client/build'))
 
-app.get('/home', function(req, res) {
-    res.sendFile(path.join(__dirname, 'Home.html'));
-});
+app.use('/home-client',express.static('client/build'))
+app.use('/adduser',express.static('client/build'))
+app.use('/home-server',express.static('client/build'))
+app.use('/menu160',express.static('client/build'))
+app.use('/menu320',express.static('client/build'))
 
-app.get('/homejs', function(req, res) {
-    res.sendFile(path.join(__dirname, 'Home.js'));
-});
+app.use('/menu500',express.static('client/build'))
+app.use('/success',express.static('client/build'))
+app.use('/menu',express.static('client/build'))
+app.use('/add-product',express.static('client/build'))
+app.use('/view-orders',express.static('client/build'))
 
-app.use('/home-server', express.static(path.join(distDir+'/src/build/index.html')))
+app.use('/error',express.static('client/build'))
+app.use('/change-customer-username',express.static('client/build'))
+app.use('/change-admin-username',express.static('client/build'))
+app.use('/registerAdmin',express.static('client/build'))
+app.use('/login-admin',express.static('client/build'))
+
+app.use('/login',express.static('client/build'))
+app.use('/resetpassword',express.static('client/build'))
+app.use('/forgot-password',express.static('client/build'))
+app.use('/forgot-password-admin',express.static('client/build'))
+app.use('/change-password',express.static('client/build'))
+
+app.use('/change-password-admin',express.static('client/build'))
+app.use('/view-admins',express.static('client/build'))
+
 
 
 
