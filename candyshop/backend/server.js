@@ -76,7 +76,7 @@ app.get('/homejs', function(req, res) {
     res.sendFile(path.join(__dirname, 'Home.js'));
 });
 
-app.use('/home-server', express.static('candyshop/build'))
+app.use('/home-server', express.static(path.join(distDir+'/src/build/index.html')))
 
 
 
