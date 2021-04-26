@@ -208,6 +208,16 @@ body {
   background-repeat:space;
   z-index: -999;background-color: #D776D3;
 }
+.home-page_5 {
+  height: 100vh;
+  background: url(./components/img/WhatsApp\ Image\ 2021-04-26\ at\ 00.31.00.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: contain;
+  background-repeat:space;
+  z-index: -999;background-color: #D776D3;
+}
 .home-page_2 {
   height: 100vh;
   background: url(./components/img/WhatsApp\ Image\ 2021-04-11\ at\ 06.02.59.jpeg) no-repeat center center fixed; 
