@@ -1,1 +1,1 @@
-web: node server.js
+web: node candyshop/backend/server.js
