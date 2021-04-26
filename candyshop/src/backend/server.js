@@ -44,28 +44,11 @@ if (process.env.NODE_ENV === "production")
     app.get('/', function(req, res) {
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
         console.log("blahget")
-        //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
-        res.sendFile(path.join('../build/index.html'));
+        return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
+        //res.sendFile(path.join(__dirname, 'routes', 'customer.js'));
         
     });
 }
-
-const AdminRouter = require('./routes/admin');
-const CustomersRouter = require('./routes/customers');
-const DiscountRouter = require('./routes/discount');
-const OrdersRouter = require('./routes/orders');
-const ProductRouter = require('./routes/product');
-const ReviewsRouter = require('./routes/reviews');
-const ShoppingCartRouter = require('./routes/shoppingCart');
-
-
-app.use('/admin', AdminRouter);
-app.use('/customers', CustomersRouter);
-app.use('/discount', DiscountRouter);
-app.use('/orders', OrdersRouter);
-app.use('/product', ProductRouter);
-app.use('/reviews', ReviewsRouter);
-app.use('/shoppingCart', ShoppingCartRouter);
 
 
 app.get('/home', function(req, res) {
