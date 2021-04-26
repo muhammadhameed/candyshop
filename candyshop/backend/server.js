@@ -65,7 +65,6 @@ if (process.env.NODE_ENV === "production")
         console.log("blahget")
         //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-        res.redirect('/home');
         
     });
 }
