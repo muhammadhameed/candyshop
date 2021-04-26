@@ -69,4 +69,11 @@ router.route('/pendingOrders/confirm').post(async (req,res) => {
 
 })
 
+
+router.route('/pendingOrders/delete').post(async (req, res) => {
+    let orderNumber = req.body.orderNumber;
+    await client.db('Orders').collection('PendingOrders').deleteOne({'orderNumber' : orderNumber});
+    res.status(200).json("Order deleted");
+})
+
 module.exports = router;
