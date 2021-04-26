@@ -43,9 +43,10 @@ if (process.env.NODE_ENV === "production")
 
     app.get('/', function(req, res) {
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        window.location = "https://candyscape.herokuapp.com/home/";
+        console.log("blahget")
+        return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
         //res.sendFile(path.join(__dirname, 'routes', 'customer.js'));
-        console.log("blah")
+        
     });
 }
 
