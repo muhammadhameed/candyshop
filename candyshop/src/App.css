@@ -315,6 +315,14 @@ input[type="email"]:hover ~ .pop-up {
   font-size: 250%;
   text-shadow: 2px 2px 4px #000000
 }
+.titleD {
+  text-align: center;
+  font-family:Imprima;
+  color: rgb(0, 0, 0);
+  margin-top: 2% auto;
+  font-size: 250%;
+}
+
 .title_1{
     text-align: center;
     font-family:lobster;
@@ -337,20 +345,17 @@ input[type="email"]:hover ~ .pop-up {
   color: rgb(97, 215, 245);
   text-shadow: 0.5px 0.5px 0.5px #5bf15b
 }
-.orderNow-btn {
-  
-  
-  /* position: relative; */
-  width: 15%;
+
+.confirmOrder-btn {
+  margin: 0 auto;
+  margin-top: 2%;
+  width: 60%;
   border-radius: 20px;
-  margin-top: -700px;
-  margin-left: 475px ;
   background-color: #9464E2;
   border: none;
   font-size: 130%;
-  color: rgb(0, 0, 0);
+  color:  rgb(0, 0, 0);
   text-shadow: 0.5px 0.5px 0.5px #000000
- 
 }
 
 .aboutt-btn {
@@ -413,7 +418,7 @@ ul#horizontal-list {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 4%;
+  margin-bottom: "4px";
 }
 .pdd{
   margin-top: 30px;
@@ -478,10 +483,31 @@ div.text_box {
   top: 20%;
   width: 50%;
   left:25%;
-  background-color:#6d0b44;
+  background-color: #6d0b44;
   border-radius: 10%;
   border-width: 50%;
   border-color: rgb(177, 11, 11);
+}
+.Modal1 {
+  position: relative;
+  top: 20%;
+  width: 50%;
+  left:25%;
+  background-color: #E2C6EC;
+  border-width: 50%;
+  border-color: rgb(0, 0, 0);
+}
+.weightPopUp{
+  text-align: center;
+  font-family:Imprima;
+  color: rgb(0, 0, 0);
+  margin-top: 2% auto;
+  font-size: 200%;
+}
+
+
+.xyz{
+  background-color: "orange" ;
 }
 .col-sm-12 mt-5 mb-2{
   margin-left: 90%;
@@ -668,7 +694,7 @@ div {
   position: absolute;
   top: 0%;
   right: 0%;
-  background-color: lightcoral;
+  background-color: rgb(247, 205, 205);
   color: white;
 }
 
@@ -682,6 +708,60 @@ div {
 .farm-main-container {
   background-color: white;
   z-index: 3;
+}
+
+.a320p{
+  padding-top: 100px;
+
+}
+.a321p{
+  padding-top: 400px;
+
+}
+.addToCartText{
+  font-family: Imprima;
+  font-style: Regular;
+  font-size: 80px;
+  text-align: center;
+  color: #4B3252;
+  vertical-align: middle;
+}
+
+.cartText{
+  padding-top: 100px;
+  font-family: Imprima;
+  font-style: Regular;
+  font-size: 80px;
+  text-align: center;
+  color: #4B3252;
+  vertical-align: middle;
+}
+
+.card-body{
+  background-color: #E2C6EC;
+}
+.card{
+  background-color: #D776D3;
+  border: none;
+}
+
+.totalText{
+  padding-top: 100px;
+  padding-bottom: 25px;
+  font-family: Imprima;
+  font-style: Regular;
+  font-size: 40px;
+  text-align: center;
+  color: #4B3252;
+  vertical-align: middle;
+}
+.paymentMethodText{
+  font-family: Imprima;
+  font-style: Regular;
+  font-size: 40px;
+  text-align: center;
+  color: #4B3252;
+  vertical-align: middle;
 }
 
 .inner-main-container {
@@ -720,7 +800,7 @@ div {
 }
 
 .manualBg{
-  padding-left: 5px;
+  padding-left: 70px;
   background-color: #E2C6EC  ;
  
 }
@@ -739,6 +819,10 @@ div {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   /* Tab */
+  .card-body{
+   width: 100;
+  }
+  
   .navbar-brand {
     padding-top: 0%;
     padding-bottom: 0%;
@@ -869,7 +953,43 @@ color: linear-gradient(180deg, #B755AD 0%, rgba(237, 146, 228, 0) 100%);
     width: 30%;
   }
 }
+.modal {
+  display: none; 
+   position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
 
+
+/* Modal Content/Box */
+ .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+ }
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 }

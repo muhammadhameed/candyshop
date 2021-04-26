@@ -24,6 +24,7 @@ import Home from './components/auth/Home';
 import Menu from './components/auth/Menu';
 import Menu160 from './components/auth/Menu160';
 import Menu320 from './components/auth/Menu320';
+import Success from './components/auth/Success';
 import Menu500 from './components/auth/Menu500';
 
 
@@ -37,7 +38,7 @@ import homeServer from './components/auth/homeServer';
 // import Menu2 from './components/auth/Menu2';
 // import homeClient from './components/auth/homeClient';
 // import homeServer from './components/auth/homeServer';
-
+import CustomerOrderList from './components/auth/CustomerOrderList';
 
 import AdminLogin from './components/auth/AdminLogin';
 // import shoppingCart from './components/auth/shoppingCart';
@@ -69,12 +70,14 @@ const  App =()=>{
         
         <Route path="/home" component={ Home } />
         <Route path="/create-promo" component={ CreatePromoCode } />
+        <Route path="/customer-orders" component={ CustomerOrderList } />
 
         <Route path="/home-client" component={ homeClient } />
         <Route path="/home-server" component={ homeServer } />
         <Route path="/menu160" component={ Menu160 } />
         <Route path="/menu320" component={ Menu320 } />
         <Route path="/menu500" component={ Menu500 } />
+        <Route path="/success" component={ Success } />
         <Route path="/menu" component={ Menu } />
         {/* <Route path="/menu160" component={ Menu160 } />
         <Route path="/menu320" component={ Menu320 } />

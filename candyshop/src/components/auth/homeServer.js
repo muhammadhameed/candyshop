@@ -29,13 +29,27 @@ class homeServer extends Component {
                         </Button>
                     </div>
                     </Link>
-                    {/* <Link to = "/menu"> */}
+                    <Link to = "/view-admins">
+                    <div className="btn-handler">
+                        <Button className="signup-btn">View Admin Requests
+                        
+                        </Button>
+                    </div>
+                    </Link>
+                    <Link to = "/create-promo">
+                    <div className="btn-handler">
+                        <Button className="signup-btn">Create Promo
+                        
+                        </Button>
+                    </div>
+                    </Link>
+                    <Link to = "/view-orders">
                     <div className="btn-handler">
                         <Button className="signup-btn">Orders
                         
                         </Button>
                     </div>
-                    {/* </Link> */}
+                    </Link>
                    
   
                 <Link to ="/change-password-admin">

@@ -48,7 +48,7 @@ class AdminLogin extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDYSCAPE</p>
                     <p className="title">Admin Login</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

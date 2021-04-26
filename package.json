@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node candyshop/backend/server.js",
-    "heroku-postbuild": "cd candyshop/src/components && NPM_CONFIG_PRODUCTION=false npm install && npm start"
+    "heroku-postbuild": "cd candyshop/src && NPM_CONFIG_PRODUCTION=false npm install && npm run build",
+    "postdeploy": "cd candyshop/src && npm start"
   },
   "repository": {
     "type": "git",
