@@ -24,12 +24,12 @@ if (process.env.NODE_ENV === "development")
 {
     console.log("reached")
     var distDir = __dirname + "/dist/";
-    app.use(express.static(path.join(__dirname, '/auth/Home.js')));
+    app.use(express.static(path.join(__dirname, '/build/index.html')));
     console.log("blah")
 
     app.get('/', function(req, res) {
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        res.sendFile(path.join(__dirname, 'auth', 'Home.js'));
+        res.sendFile(path.join(__dirname, 'build', 'index.html'));
         console.log("blah")
     });
 }
@@ -55,7 +55,6 @@ const ShoppingCartRouter = require('./routes/shoppingCart');
 const ProductRouter = require('./routes/product');
 const DiscountRouter = require('./routes/discount');
 const OrdersRouter = require('./routes/orders');
-const ReviewsRouter = require('./routes/reviews');
 
 app.use('/customers', CustomersRouter);
 app.use('/admin', AdminRouter);
@@ -63,7 +62,6 @@ app.use('/shoppingCart', ShoppingCartRouter);
 app.use('/product', ProductRouter);
 app.use('/discount', DiscountRouter);
 app.use('/orders', OrdersRouter);
-app.use('/reviews', ReviewsRouter);
 
 
 // if(process.env.NODE_ENV === 'production'){
