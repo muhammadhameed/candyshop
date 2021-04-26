@@ -30,7 +30,7 @@ class Menu extends Component {
         ).catch(e => console.log(e))
     }
     render(){
-        let text = "CLICK ON THE PREFERRED BOX :)"
+        let text = "CLICK ON THE PREFERRED BOX TO FILL CANDIES :)"
         return(
                
             <div className="outBG">

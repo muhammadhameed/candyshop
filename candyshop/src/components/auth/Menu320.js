@@ -76,6 +76,7 @@ const Hi3 = () => {
       
 
 <div style={{backgroundColor: "purple"}}>
+
 <div class="row" >
   <div class="col-sm-4"  >
     <div class="card">
