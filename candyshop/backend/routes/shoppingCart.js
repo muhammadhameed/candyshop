@@ -39,12 +39,24 @@ router.route('/checkout').post(async (req,res) => {
         price += found.shoppingCart[i].price;
     }
 
-    let count = await client.db("Orders").collection("Pending Orders").countDocuments();
-    let count1 = await client.db("Orders").collection("Confirmed Orders").countDocuments();
-    let orderNumber = count + count1;
+    let foundpOrder = await client.db("Orders").collection("Pending Orders").find({}).sort({_id:-1}).limit(1);
+    let foundcOrder = await client.db("Orders").collection("Confirmed Orders").find({}).sort({_id:-1}).limit(1);
+    var count = 1;
+    let arrP = await foundpOrder.toArray();
+    let arrC = await foundcOrder.toArray();
+    
+    if(typeof arrP[0]!== "undefined" && typeof arrC[0]!=="undefined"){
+        count = Math.max( arrC[0].orderNumber, arrP[0].orderNumber) + 1;
+    }
+    else if(typeof arrP[0]!== "undefined"){
+        count = arrP[0].orderNumber + 1;
+    }
+    else if(typeof arrc[0]!== "undefined"){
+        count = arrC[0].orderNumber + 1;
+    }
 
     let doc = {
-        "orderNumber" : orderNumber,
+        "orderNumber" : count,
         "customerName" : found.name,
         "products" : found.shoppingCart,
         "totalPrice" : price,
@@ -104,28 +116,56 @@ router.route('/add').post(async(req,res)=>{
 })
 
 
- // make new implementation of shopping cart according to dawar's front end
- // use quantity to find box. only one box at a time. front end will send box, arrays of stuff and the address
+ // make new implementation of shopping cart according to new front end
+ // use quantity to find box. only one box at a time. front end will send box, arrays of products and the address
  //no other route of back end will be used
  //promo code also
 
- router.route('/confirm').post(async (req, res) => {
+router.route('/confirm').post(async (req, res) => {
     let customerName = req.body.customerName;
     let boxType = req.body.boxType;
     let names = req.body.names;
     let quantities = req.body.quantities;
     let address = req.body.address;
+    let discountCode = req.body.discountCode;
     
-    let foundBox = await client.db("Product").collection("Boxes").findOne({"quantity":boxType});
-    price = foundBox.price;    
+    if (typeof discountCode !== "undefined"){
+        let foundDiscount = await client.db('Discount').collection('New Discount').findOne({'discountCode' : discountCode});
+        if (foundDiscount === null){
+            res.status(400).json('Invalid promo code');
+            return;
+        }
+        var foundBox = await client.db("Product").collection("Boxes").findOne({"quantity":boxType});
+        var price = foundBox.price * (1 - foundDiscount.discount);     
+    }
+    else {
+        var foundBox = await client.db("Product").collection("Boxes").findOne({"quantity":boxType});
+        var price = foundBox.price; 
+    }
+  
 
-    let count = await client.db("Orders").collection("Pending Orders").countDocuments();
-    let count1 = await client.db("Orders").collection("Confirmed Orders").countDocuments();
-    let orderNumber = count + count1;
+    
+    let foundpOrder = await client.db("Orders").collection("Pending Orders").find({}).sort({_id:-1}).limit(1);
+    let foundcOrder = await client.db("Orders").collection("Confirmed Orders").find({}).sort({_id:-1}).limit(1);
+    var count = 1;
+    let arrP = await foundpOrder.toArray();
+    let arrC = await foundcOrder.toArray();
+    
+    if(typeof arrP[0]!== "undefined" && typeof arrC[0]!=="undefined"){
+        count = Math.max( arrC[0].orderNumber, arrP[0].orderNumber) + 1;
+    }
+    else if(typeof arrP[0]!== "undefined"){
+        count = arrP[0].orderNumber + 1;
+    }
+    else if(typeof arrc[0]!== "undefined"){
+        count = arrC[0].orderNumber + 1;
+    }
+
+
     Cart = {"Box" : foundBox.name, 'name':names, 'quantity':quantities, 'price': price}
 
     let doc = {
-        "orderNumber" : orderNumber,
+        "orderNumber" : count,
         "customerName" : customerName,
         "products" : Cart,
         "totalPrice" : price,
@@ -135,8 +175,7 @@ router.route('/add').post(async(req,res)=>{
     };
     await client.db("Orders").collection("Pending Orders").insertOne(doc);
 
-
- })
+})
 
 
 

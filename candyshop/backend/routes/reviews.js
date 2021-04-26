@@ -18,9 +18,21 @@ router.route('/').get(async (req,res)=>{
 router.route('/add').post(async (req,res) =>{
     let customerName = req.body.customerName;
     let review = req.body.review;
-    let count = await client.db("Reviews").collection("Reviews").countDocuments();
 
-    await client.db("Reviews").collections("Reviews").insertOne({"reviewNumber" : count, "customerName" : customerName, "review" : review});
+
+    let found = await client.db("Users").collection("Customers").findOne({"name" : customerName});
+    if(found ===null) {
+        res.status(400).json("User does not exist");
+        return;
+    }
+    
+    found = await client.db("Reviews").collection("Reviews").find({}).sort({_id:-1}).limit(1);
+    var count = 1;
+    let arr = await found.toArray();
+    if(typeof arr[0]!== "undefined"){
+        count = arr[0].reviewNumber + 1;
+    }
+    await client.db("Reviews").collection("Reviews").insertOne({"reviewNumber" : count, "customerName" : customerName, "review" : review});
     res.status(200).json("Review Added");
 
 })
@@ -28,7 +40,10 @@ router.route('/add').post(async (req,res) =>{
 router.route('/delete').post(async (req,res) =>{
     let reviewNumber = req.body.reviewNumber;
 
-    await client.db("Reviews").collections("Reviews").deleteOne({"reviewNumber" : reviewNumber});
+    await client.db("Reviews").collection("Reviews").deleteOne({"reviewNumber" : reviewNumber});
     res.status(200).json("Review Deleted");
 
 })
+
+
+module.exports = router;

@@ -28,7 +28,7 @@ router.route('/confirmedOrders/').get(async (req,res)=>{
 })
 
 
-router.route('/pendingOrders/confirm').get(async (req,res) => {
+router.route('/pendingOrders/confirm').post(async (req,res) => {
     let orderNumber = req.body.orderNumber;
     let found = await client.db("Orders").collection("Pending Orders").findOne({"orderNumber" : orderNumber});
     let foundCustomer = await client.db("Users").colllection("Customers").findOne({"name" : found.customerName});

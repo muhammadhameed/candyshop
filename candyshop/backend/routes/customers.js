@@ -108,8 +108,8 @@ router.route('/signin').post(async (req,res) => {
         return;
     }
 
-    bcrypt.compare(password, found.password, function(err, res) {
-        if (res == true){
+    bcrypt.compare(password, found.password, function(err, response) {
+        if (response == true){
             
             jwt.sign(
                 { id : found._id},
@@ -155,8 +155,8 @@ router.route('/update').post(async (req, res) =>{
     else if (whatToChange == "password"){
         let oldPassword = req.body.oldPassword;
 
-        bcrypt.compare(oldPassword, found.password, function(err, res) {
-            if (res == true){
+        bcrypt.compare(oldPassword, found.password, function(err, response) {
+            if (response == true){
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(change, salt, (err,hash) => {
                         if(err) throw err;

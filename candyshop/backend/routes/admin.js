@@ -52,7 +52,6 @@ router.route('/signupadmin').post( async (req,res) => {
     let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
-
     let data = req.body;
     
     const validation = schema.validate(data);
@@ -91,15 +90,16 @@ router.route('/signupadmin').post( async (req,res) => {
 
 
 router.route('/approve').post(async (req,res) => {
-    let name = req.found.name;
+    let name = req.body.name;
     let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
     await client.db("Users").collection("Admin").insertOne(found);
     await client.db("Users").collection("Pending Admin").deleteOne({"name" : name});
     res.status(200).json("Admin Approved");
 })
 
+
 router.route('/delete').post(async (req,res) => {
-    let name = req.found.name;
+    let name = req.body.name;
     let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
     await client.db("Users").collection("Pending Admin").deleteOne({"name" : name});
     res.status(200).json("Admin Deleted");
@@ -120,8 +120,8 @@ router.route('/signinadmin').post( async (req,res) => {
         return;
     }
 
-    bcrypt.compare(password, found.password, function(err, res) {
-        if (res == true){
+    bcrypt.compare(password, found.password, function(err, response) {
+        if (response == true){
             jwt.sign(
                 { id : found._id},
                 process.env.jwtSecret,
@@ -130,8 +130,8 @@ router.route('/signinadmin').post( async (req,res) => {
                 (err,token) => {
                     if(err) throw err;
                     res.status(200).json({
-                        token: token,
-                        msg : "User Signed In"
+                        token,
+                        "msg" : "User Signed In"
                     });
                 }
             )
@@ -174,8 +174,8 @@ router.route('/update').post(async (req, res) =>{
     else if (whatToChange == "password"){
         let oldPassword = req.body.oldPassword;
 
-        bcrypt.compare(oldPassword, found.password, function(err, res) {
-            if (res == true){
+        bcrypt.compare(oldPassword, found.password, function(err, response) {
+            if (response == true){
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(change, salt, (err,hash) => {
                         if(err) throw err;
