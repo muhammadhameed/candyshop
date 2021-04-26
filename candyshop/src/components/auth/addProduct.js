@@ -91,7 +91,7 @@ class addProduct extends Component {
 <div className ="home-page_1">
       <Modal
         className="Modal"
-        isOpen={this.state.modal}
+        isOpen={Modal}
         toggle={this.toggle}
         align="centre"
         size = "big"
