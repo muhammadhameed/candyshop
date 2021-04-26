@@ -202,10 +202,10 @@ class ViewAdmin extends Component {
     }
     render() {
         return (
-            <div className="home-page_1">
+            <div className="home-page_5">
                 
-                    <p className="brand-name">CANDY SHOP</p>
-            <div style={{ marginLeft: '20px' }}>
+                    <p className="brand-name">CANDYSCAPE</p>
+            <div style={{ marginLeft: '20px', marginTop:'100px' }}>
                 <div className="main-container">
                     <div className="title">View Admin</div>
                     {this.display()}
