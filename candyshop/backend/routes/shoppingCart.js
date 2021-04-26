@@ -129,6 +129,19 @@ router.route('/confirm').post(async (req, res) => {
     let address = req.body.address;
     let discountCode = req.body.discountCode;
     
+    if (typeof address === "undefined"){
+        res.status(400).json("Address is empty");
+        return;
+    }
+    if (typeof names === "undefined"){
+        res.status(400).json("Please enter name of products");
+        return;
+    }
+    if (typeof quantities === "undefined"){
+        res.status(400).json("Please enter quantities of products");
+        return;
+    }
+
     if (typeof discountCode !== "undefined"){
         let foundDiscount = await client.db('Discount').collection('New Discount').findOne({'discountCode' : discountCode});
         if (foundDiscount === null){

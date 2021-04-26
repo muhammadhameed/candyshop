@@ -45,7 +45,6 @@ router.route('/pending').get(async(req,res) =>{
 })
 
 
-
 router.route('/signupadmin').post( async (req,res) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
