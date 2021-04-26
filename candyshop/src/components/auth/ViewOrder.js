@@ -17,19 +17,30 @@ class ViewResponses extends Component {
 
     }
     acceptOrder = (item) => {
-         api("order-req/edit", { id: item.id, accepted: 1 }, 200).then
-         (res => {if(res.statusCode == 200)
-         {  
-            this.setState({ [item.accepted]: 1 })}
-         else{
-             alert("Error")
-         }
-        })
+        var totalinput = {orderNumber:item._id}
+        
+        fetch('http://localhost:4000/orders/pendingOrders/confirm',{
+            method: 'post',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(totalinput)
+        }).then(function(response){
+            response.text().then(function(text){window.location = "http://localhost:3000/view-orders/";});
+            // if (response.status != 400)
+            // {
+            //     window.location = "http://localhost:3001/home-server/";
+            // }
+        }).then(() => {this.setState({ [item.accepted]: -1 });
+        }).catch(function(error) {
+            console.error(error);
+            alert("Error");
+        }) 
     }
 
     rejectOrder = (item) => {
         console.log(item)
-         api("order-req/edit", { id: item.id, accepted: -1 }, 200).then
+         api("order-req/edit", { _id: item._id, accepted: -1 }, 200).then
          (res => {if(res.statusCode == 200)
          {  
             this.setState({ [item.accepted]: -1 })}
@@ -50,7 +61,7 @@ class ViewResponses extends Component {
     if2 = (e) => {
         if (e.accepted == -1)
             return (<td className="title-sm-b-s">Rejected</td>);
-        else if (e.accepted === 0)
+        else if (e.accepted == 0)
             return (
                 <td className="title-sm-b-s"><button><FontAwesomeIcon onClick={(res) => {this.rejectOrder(e)}
                 } style={{ color: "#2E5984" }} icon={faTimes} size="2x" /></button></td>);
@@ -59,15 +70,22 @@ class ViewResponses extends Component {
     };
     componentDidMount() {
 
-        api("order-req/fetch", {
-            tripID: window.location.href.substring(window.location.href.lastIndexOf('=') + 1)
-        }, 200).then(
-            (e) => {
-                console.log(e)
-                if (e.Orders !== []) {
-                    this.setState({ Orders: e.Orders });
-                }
-            });
+        fetch('http://localhost:4000/orders/pendingOrders/',{
+        method: 'get'
+        }).then(function(response){
+          return response.text();
+        }).then(async function(text){
+          console.log(JSON.parse(text))
+          if (text == '[]')
+          {
+            alert('There are no pending orders to approve or deny.')
+          }
+          var data = JSON.parse(text)
+          console.log(data[0])
+          return data;
+        }).then((res) => {this.setState({Orders: res});
+                this.render()
+            })
     }
     render() {
 
@@ -88,10 +106,10 @@ class ViewResponses extends Component {
                             <th className="title-sm-b">Accept</th>
                             <th className="title-sm-b">Reject</th>
                         </tr>
-                        {this.state.trips.map(i => {
+                        {this.state.Orders.map(i => {
                             return (<tr>
-                                <td className="title-sm-b-s">{i.tripID}</td>
-                                <td className="title-sm-b-s">{i.customerID}</td>
+                                <td className="title-sm-b-s">{i._id}</td>
+                                <td className="title-sm-b-s">{i.customerName}</td>
                                 <td className="title-sm-b-s">{i.numberOfBoxes}</td>
                                 <td className="title-sm-b-s">{i.amountDue}</td>
                                 {this.if(i)}
