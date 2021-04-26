@@ -132,7 +132,6 @@ const Hi2 = () => {
       }));
     };
     const crossHandler = () =>{
-      //window.location.href = "http://localhost:3000/menu160"
       setWeightE(0)
     }
     const renderElement=()=>{

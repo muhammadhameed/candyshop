@@ -358,6 +358,34 @@ input[type="email"]:hover ~ .pop-up {
   text-shadow: 0.5px 0.5px 0.5px #000000
 }
 
+/* .orderNow-btn {
+  margin: 0 auto;
+  width: 15%;
+  border-radius: 20px;
+  background-color: #9464E2;
+  border: 1px solid #000;
+  font-size: 130%;
+  color:  rgb(0, 0, 0);
+  text-shadow: 0.5px 0.5px 0.5px #000000
+} */
+.orderNow-btn {
+  
+  
+  /* position: relative; */
+  width: 15%;
+  border-radius: 20px;
+  /* margin-top: -700px; */
+  margin-top: -40%;
+  margin-left: -33% ;
+  background-color: #9464E2;
+  border: none;
+  font-size: 130%;
+  color: rgb(0, 0, 0);
+  text-shadow: 0.5px 0.5px 0.5px #000000
+ 
+}
+
+
 .aboutt-btn {
   
   
@@ -384,7 +412,6 @@ input[type="email"]:hover ~ .pop-up {
 
 .tableD {
 	display: table;   /* Allow the centering to work */
-  margin-top: 500px;
 	margin: 0 auto;
 }
 
@@ -415,6 +442,7 @@ ul#horizontal-list {
 }
 
 .btn-handler {
+  margin-top: -100px;
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -445,19 +473,18 @@ div.text_box {
 
 .outBG{
   padding-top: 5.7%;
-  background-color: #D776D3;
+  /* background-color: #D776D3; */
   
 }
 .tt{
-  font-size: 450%;
+  font-size: 300%;
   width: 100%;
   position: absolute;
-  left:-10%;
-  top: 10%;
+  align-self: center;
   color: #4B3252;
   text-align: center;
   font-family: Imprima;
-  background-color: #D776D3;
+  /* background-color: #D776D3; */
   border: #999;
   
 
@@ -739,9 +766,14 @@ div {
 
 .card-body{
   background-color: #E2C6EC;
+  border: 1.5px solid #000;
+}
+.card-img-top{
+  border: 1.5px solid #000;
 }
 .card{
   background-color: #D776D3;
+  
   border: none;
 }
 
@@ -800,14 +832,17 @@ div {
 }
 
 .manualBg{
-  padding-left: 70px;
+  align-self: center;
+  /* border-width: 200%; */
+  border: 2px solid #000;
+  /* border-radius: 50%; */
   background-color: #E2C6EC  ;
  
 }
 
-.space{
+/* .space{
   padding-right: 250px;
-}
+} */
 
 .top-icon {
   float: right;

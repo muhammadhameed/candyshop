@@ -26,15 +26,14 @@ class Home extends Component {
             <figcaption>
                 <p></p>
                 <p></p>
-                <div className ="btn-handler" marginLeft="100px">
+            <div className ="btn-handler" >
                 {/* <li className="space" onClick={()=>this.setState(160)}><a href='http://localhost:3000/menu2'><img src={s} /></a></li> */}
-            <div className ="btn-handler_1">
-                <p></p>
+            
             <Button className="orderNow-btn"  onClick={() => {
                                 this.props.history.push('/login');
                             }}>ORDER NOW</Button>
-                            </div>
-                            </div>
+            
+            </div>
             </figcaption>
             </figure>
                

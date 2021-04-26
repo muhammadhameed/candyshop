@@ -1,1 +1,1 @@
-web: node candyshop/backend/server.js
+web: npm start

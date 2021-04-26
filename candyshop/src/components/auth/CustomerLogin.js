@@ -25,7 +25,7 @@ class CustomerLogin extends Component {
         var email = this.state.email;
         var password = this.state.password;
         var totalinput = {email, password};
-        fetch('http://localhost:7000/customers/signin/',{
+        fetch('http://localhost:4000/customers/signin/',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",

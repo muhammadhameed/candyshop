@@ -67,7 +67,7 @@ class addProduct extends Component {
     var totalinput = {collectionName, productName, quantity, price};
     console.log(totalinput);
     
-    fetch('http://localhost:3000/product/add/',{
+    fetch('http://localhost:4000/product/add/',{
         method: 'post',
         headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ class addProduct extends Component {
         response.text().then(function(text){alert(text);});
         if (response.status != 400)
         {
-            window.location = "http://localhost:3001/home-server/";
+            window.location = "http://localhost:3000/home-server/";
         }
     }).catch(function(error) {
         console.error(error);

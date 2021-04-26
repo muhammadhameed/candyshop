@@ -41,7 +41,7 @@ class CustomerRegister extends Component {
         var totalinput = {firstName, lastName, name, email, password, phoneNumber};
         
         if (this.state.password === this.state.rePassword)
-            fetch('http://localhost:7000/customers/signup/',{
+            fetch('http://localhost:4000/customers/signup/',{
                 method: 'post',
                 headers: {
                 "Content-Type": "application/json",

@@ -28,7 +28,7 @@ class ChangeCustomerPassword extends Component {
         var totalinput = {customerName, whatToChange, change, oldPassword};
         
         if (this.state.password === this.state.rePassword)
-            fetch('http://localhost:5000/customers/update',{
+            fetch('http://localhost:4000/customers/update',{
                 method: 'post',
                 headers: {
                 "Content-Type": "application/json",
