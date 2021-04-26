@@ -21,7 +21,7 @@ class ForgotCustomerPassword extends Component {
         var email = this.state.email;
         var totalinput = {email};
         
-        fetch('http://localhost:5000/customers/forgotPassword',{
+        fetch('http://localhost:4000/customers/forgotPassword',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",
@@ -44,7 +44,7 @@ class ForgotCustomerPassword extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDYSCAPE</p>
                     <p className="title">Change Password</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         

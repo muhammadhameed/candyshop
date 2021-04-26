@@ -38,60 +38,50 @@ if (process.env.NODE_ENV === "production")
 {
     console.log("reached")
     var distDir = __dirname + "/dist/";
-    app.use(express.static(path.join(__dirname, '/routes/customer.js')));
+    app.use(express.static(path.join(distDir)));
     console.log("blah")
 
     app.get('/', function(req, res) {
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        window.location = "https://candyscape.herokuapp.com/home/";
-        //res.sendFile(path.join(__dirname, 'routes', 'customer.js'));
-        console.log("blah")
+        console.log("blahget")
+        //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
+        res.sendFile(path.join(__dirname + '/src/build/index.html'));
+        
     });
 }
+//sd
+//lk
 
-// if (process.env.NODE_ENV === "production")
-// {
-//     console.log("reached")
-//     var distDir = __dirname + "/dist/";
-//     app.use(express.static(path.join(__dirname, '../src/build/index.html')));
-//     console.log("blah")
-
-//     app.get('/', function(req, res) {
-//         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-//         res.sendFile(path.join(__dirname, '../src', 'build', 'index.html'));
-//         console.log("blah")
-//     });
-// }
-
-
-const CustomersRouter = require('./routes/customers');
 const AdminRouter = require('./routes/admin');
-const ShoppingCartRouter = require('./routes/shoppingCart');
-const ProductRouter = require('./routes/product');
+const CustomersRouter = require('./routes/customers');
 const DiscountRouter = require('./routes/discount');
 const OrdersRouter = require('./routes/orders');
+const ProductRouter = require('./routes/product');
+const ReviewsRouter = require('./routes/reviews');
+const ShoppingCartRouter = require('./routes/shoppingCart');
 
-app.use('/customers', CustomersRouter);
+
 app.use('/admin', AdminRouter);
-app.use('/shoppingCart', ShoppingCartRouter);
-app.use('/product', ProductRouter);
+app.use('/customers', CustomersRouter);
 app.use('/discount', DiscountRouter);
 app.use('/orders', OrdersRouter);
+app.use('/product', ProductRouter);
+app.use('/reviews', ReviewsRouter);
+app.use('/shoppingCart', ShoppingCartRouter);
 
 
-// if(process.env.NODE_ENV === 'production'){
-//     app.use(express.static ('candyshop/build'));
+app.get('/home', function(req, res) {
+    res.sendFile(path.join(__dirname, 'Home.html'));
+});
 
-//     app.get('*', (req,res) => {
-//         res.sendFile(path.join(_dirname, 'candyshop', 'build', 'index.html'));
+app.get('/homejs', function(req, res) {
+    res.sendFile(path.join(__dirname, 'Home.js'));
+});
 
-//     }); 
-// }
+app.use('/home-server', express.static(path.join(distDir+'/src/build/index.html')))
 
-// app.use(express.static(path.join(_dirname, '../build')));
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../build'))
-// })
+
+
 
 
 app.listen(port, () => {

@@ -41,7 +41,7 @@ class CustomerRegister extends Component {
         var totalinput = {firstName, lastName, name, email, password, phoneNumber};
         
         if (this.state.password === this.state.rePassword)
-            fetch('http://localhost:7000/customers/signup/',{
+            fetch('http://localhost:4000/customers/signup/',{
                 method: 'post',
                 headers: {
                 "Content-Type": "application/json",
@@ -64,7 +64,7 @@ class CustomerRegister extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDYSCAPE</p>
                     <p className="title">Register</p>
                     <Form className="reg-form mt-3" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

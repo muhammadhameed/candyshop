@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const client = require('./connection');
 const auth = require('../middleware/auth');
+var ObjectId = require('mongodb').ObjectId;
 
 
 async function connectToDb(){
@@ -30,11 +31,14 @@ router.route('/confirmedOrders/').get(async (req,res)=>{
 
 router.route('/pendingOrders/confirm').post(async (req,res) => {
     let orderNumber = req.body.orderNumber;
-    let found = await client.db("Orders").collection("Pending Orders").findOne({"orderNumber" : orderNumber});
-    let foundCustomer = await client.db("Users").colllection("Customers").findOne({"name" : found.customerName});
+    var o_id = new ObjectId(orderNumber);
+    console.log(orderNumber)
+    let found = await client.db("Orders").collection("Pending Orders").findOne({"_id" : o_id});
+    console.log(found)
+    let foundCustomer = await client.db("Users").collection("Customers").findOne({"name" : found.customerName});
     
     await client.db("Orders").collection("Confirmed Orders").insertOne(found);
-    await client.db("Orders").colllection("Pending Orders").deleteOne({"orderNumber" : orderNumber});
+    await client.db("Orders").collection("Pending Orders").deleteOne({"_id" : o_id});
     
 
     var nodeMailer = require('nodemailer');
@@ -64,5 +68,13 @@ router.route('/pendingOrders/confirm').post(async (req,res) => {
 
 
 })
+
+
+router.route('/pendingOrders/delete').post(async (req, res) => {
+    let orderNumber = req.body.orderNumber;
+    await client.db('Orders').collection('PendingOrders').deleteOne({'orderNumber' : orderNumber});
+    res.status(200).json("Order deleted");
+})
+
 
 module.exports = router;

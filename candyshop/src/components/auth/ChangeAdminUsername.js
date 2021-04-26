@@ -26,7 +26,7 @@ class ChangeAdminUsername extends Component {
         var whatToChange = "username";
         var totalinput = {adminName, whatToChange, change};
         
-        fetch('http://localhost:5000/admin/update',{
+        fetch('http://localhost:4000/admin/update',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ class ChangeAdminUsername extends Component {
         return (
             <div className="home-page_2">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDYSCAPE</p>
                     <p className="title">Change Username</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

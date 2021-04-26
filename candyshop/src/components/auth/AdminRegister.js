@@ -51,7 +51,7 @@ class AdminRegister extends Component {
                 response.text().then(function(text){alert(text);});
                 if (response.status != 400)
                 {
-                    window.location = "http://localhost:3001/login-admin/";
+                    window.location = "http://localhost:3000/login-admin/";
                 }
             }).catch(function(error) {
                 console.error(error);
@@ -66,7 +66,7 @@ class AdminRegister extends Component {
         return (
             <div className="home-page_1">
                 <div className="container main">
-                <p className="brand-name">CANDY SHOP</p>
+                <p className="brand-name">CANDYSCAPE</p>
                 <p className="title">Admin Register</p>
                 <Form className="reg-form mt-3" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

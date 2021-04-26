@@ -8,28 +8,53 @@ async function connectToDb(){
 }
 connectToDb();
 
-router.route('/').get(async(req,res) =>{
+router.route('/oldDiscount/').get(async(req,res) =>{
 
-    let cursor = await client.db("Product").collection("Candy").find({});
+    let cursor = await client.db("Discount").collection("Old Discount").find({});
     let arr = new Array();
     await cursor.forEach(function  (doc) {arr.push(doc);});
     res.status(200).json(arr);
 })
 
+
+router.route('/newDiscount/').get(async(req,res) =>{
+
+    let cursor = await client.db("Discount").collection("New Discount").find({});
+    let arr = new Array();
+    await cursor.forEach(function  (doc) {arr.push(doc);});
+    res.status(200).json(arr);
+})
+
+
 router.route('/add').post(async (req,res) => {
     let discountCode = req.body.discountCode;
     let discount = req.body.discount;
     let cursor = await client.db('Discount').collection('New Discount').find({})
-    await cursor.forEach( async function (doc) {await client.db('Discount').collection('Old Discount').insertOne(doc)} );
+    await cursor.forEach( async function (doc) {
+        await client.db('Discount').collection('Old Discount').insertOne(doc);
+        await client.db('Discount').collection('New Discount').deleteOne({"discountCode" : doc.discountCode});   
+    });
     
-    await client.db('Discount').collection('New Discount').insertOne({'discountCode' : discountCode, 'discount' : discount, 'date' : client.Date()});
+    let found = await client.db("Discount").collection('Old Discount').findOne({"discountCode" : discountCode});
+    if (found !== null){
+        res.status(400).json("Please enter a unique discount code");
+        return;
+    }
+    await client.db('Discount').collection('New Discount').insertOne({'discountCode' : discountCode, 'discount' : discount, 'date' : new Date()});
+    res.status(200).json("New discount added");
 })
 
-router.route('/delete').post(async (req,res) => {
+
+router.route('/end').post(async (req,res) => {
     let discountCode = req.body.discountCode;
     let found = await client.db('Discount').collection('New Discount').findOne({'discountCode' : discountCode});
+
+    if (found === null){
+        res.status(400).jason("Enter a valid discount code");
+    }
     await client.db('Discount').collection('Old Discount').insertOne(found);
     await client.db('Discount').collection('New Discount').deleteOne({'discountCode' : discountCode});
+    res.status(200).json("Discount removed");
 })
 
 module.exports = router;

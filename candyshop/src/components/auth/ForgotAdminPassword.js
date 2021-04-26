@@ -21,7 +21,7 @@ class ForgotAdminPassword extends Component {
         var email = this.state.email;
         var totalinput = {email};
         
-        fetch('http://localhost:5000/admin/forgotPassword',{
+        fetch('http://localhost:4000/admin/forgotPassword',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",
@@ -44,7 +44,7 @@ class ForgotAdminPassword extends Component {
         return (
             <div className="home-page">
                 <div className="container main">
-                    <p className="brand-name">CANDY SHOP</p>
+                    <p className="brand-name">CANDYSCAPE</p>
                     <p className="title">Forgot Password</p>
                     <Form className="reg-form" noValidate onSubmit={this.onSubmit}>
                         <FormGroup>

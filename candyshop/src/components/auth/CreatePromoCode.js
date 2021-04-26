@@ -33,21 +33,28 @@ class CreatePromoCode extends Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    const userData = {
-      code: this.state.code,
-      maxDiscount: this.state.maxDiscount,
-      discountPercentage: this.state.discountPercentage,
+    const totalinput = {
+      discountCode: this.state.code,
+      discount: this.state.discountPercentage,
     }
 
-    api("code/create", userData, 200).then((res) => {
-      if (res.statusCode == 200) {
-        this.props.history.push("/view-promo/admin");
-        console.log(res)
-      }
-      else {
-        alert("Error")
-      }
+    fetch('http://localhost:4000/discount/add',{
+        method: 'post',
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(totalinput)
+    }).then(function(response){
+        response.text().then(function(text){alert(text);});
+        if (response.status != 400)
+        {
+            window.location = "http://localhost:3000/home-server/";
+        }
+    }).catch(function(error) {
+        console.error(error);
     })
+
+    
   };
   render() {
     return (
