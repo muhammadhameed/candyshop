@@ -56,45 +56,16 @@ class ViewAdmin extends Component {
                         admins[index].lastName = e.target.value;
                         this.setState({ admins: newadmins })
                     }} /></td>
-                    <td className="title-sm-b-s">{<Input type="checkbox" onChange={(e) => {
+                    <div style={{marginBlockStart:"20px",marginLeft:"65px"}}>
+                    <div className="title-sm-b-s" >{<Input type="checkbox" onChange={(e) => {
                         const { admins } = this.state;
                         const newadmins = [...admins];
                         admins[index].active = !admins[index].active;
                         this.setState({ admins: newadmins })
                     }
-                    } checked={i.active} />}</td>
-                    <td className="title-sm-b-s">{<Input type="checkbox"
-                        onChange={(e) => {
-                            const { admins } = this.state;
-                            const newadmins = [...admins];
-                            admins[index].permission.manageAdmins = !admins[index].permission.manageAdmins;
-                            this.setState({ admins: newadmins })
-                        }//i.permission.manageAdmins
-                        } checked={1} />}</td>
-                    <td className="title-sm-b-s">{<div marginLeft><Input type="checkbox" 
-                        onChange={(e) => {
-                            const { admins } = this.state;
-                            const newadmins = [...admins];
-                            admins[index].permission.manageInventory = !admins[index].permission.manageInventory;
-                            this.setState({ admins: newadmins })
-                        }//i.permission.manageInventory
-                        } checked={1} /></div>}</td>
-                    <td className="title-sm-b-s">{<Input type="checkbox"
-                        onChange={(e) => {
-                            const { admins } = this.state;
-                            const newadmins = [...admins];
-                            admins[index].permission.manageReqList = !admins[index].permission.manageReqList;
-                            this.setState({ admins: newadmins })
-                        }//i.permission.manageReqList
-                        } checked={1} />}</td>
-                    <td className="title-sm-b-s">{<Input type="checkbox"
-                        onChange={(e) => {
-                            const { admins } = this.state;
-                            const newadmins = [...admins];
-                            admins[index].permission.manageReports = !admins[index].permission.manageReports;
-                            this.setState({ admins: newadmins })
-                        }//i.permission.manageReports
-                        } checked={1} />}</td>
+                   
+                    } checked={i.active} />}</div>
+                    </div>
                     <td className="title-sm-b-s"><button><FontAwesomeIcon onClick={(e) => {
                         // console.log(
                         //     i._id,
@@ -116,7 +87,7 @@ class ViewAdmin extends Component {
                             },
                             body: JSON.stringify(totalinput)
                         }).then(function(response){
-                            response.text().then(function(text){alert(text);});
+                            response.text().then(function(text){window.location = "http://localhost:3000/view-admins/";});
                             // if (response.status != 400)
                             // {
                             //     window.location = "http://localhost:3001/home-server/";
@@ -155,11 +126,7 @@ class ViewAdmin extends Component {
                         <th className="title-sm-b">Email</th>
                         <th className="title-sm-b">Name</th>
                         <th className="title-sm-b">Surname</th>
-                        <th className="title-sm-b">Active</th>
                         <th className="title-sm-b">Admin</th>
-                        <th className="title-sm-b">Inventory</th>
-                        <th className="title-sm-b">ReqList</th>
-                        <th className="title-sm-b">Reports</th>
                         <th className="title-sm-b">Save</th>
                     </tr>
                 </thead>
