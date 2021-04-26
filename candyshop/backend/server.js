@@ -49,6 +49,7 @@ if (process.env.NODE_ENV === "production")
         
     });
 }
+//sd
 
 const AdminRouter = require('./routes/admin');
 const CustomersRouter = require('./routes/customers');
@@ -77,6 +78,7 @@ app.get('/homejs', function(req, res) {
 });
 
 app.use('/home-server', express.static(path.join(distDir+'/src/build/index.html')))
+
 
 
 
