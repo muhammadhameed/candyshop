@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "production")
 {
     console.log("reached")
     var distDir = __dirname + "/dist/";
-    app.use(express.static(path.join(__dirname, 'routes/customer.js')));
+    app.use(express.static(path.join(__dirname, '/routes/customer.js')));
     console.log("blah")
 
     app.get('/', function(req, res) {
