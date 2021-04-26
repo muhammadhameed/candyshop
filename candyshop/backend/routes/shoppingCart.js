@@ -106,6 +106,39 @@ router.route('/add').post(async(req,res)=>{
 
  // make new implementation of shopping cart according to dawar's front end
  // use quantity to find box. only one box at a time. front end will send box, arrays of stuff and the address
- //no other route of front end will be used
+ //no other route of back end will be used
  //promo code also
+
+ router.route('/confirm').post(async (req, res) => {
+    let customerName = req.body.customerName;
+    let boxType = req.body.boxType;
+    let names = req.body.names;
+    let quantities = req.body.quantities;
+    let address = req.body.address;
+    
+    let foundBox = await client.db("Product").collection("Boxes").findOne({"quantity":boxType});
+    price = foundBox.price;    
+
+    let count = await client.db("Orders").collection("Pending Orders").countDocuments();
+    let count1 = await client.db("Orders").collection("Confirmed Orders").countDocuments();
+    let orderNumber = count + count1;
+    Cart = {"Box" : foundBox.name, 'name':names, 'quantity':quantities, 'price': price}
+
+    let doc = {
+        "orderNumber" : orderNumber,
+        "customerName" : customerName,
+        "products" : Cart,
+        "totalPrice" : price,
+        "address" : address,
+        "paymentDetails" : "Cash on Delivery",
+        "date" : client.Date()
+    };
+    await client.db("Orders").collection("Pending Orders").insertOne(doc);
+
+
+ })
+
+
+
+
 module.exports = router;

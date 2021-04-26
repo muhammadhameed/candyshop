@@ -36,14 +36,14 @@ const CustomersRouter = require('./routes/customers');
 const AdminRouter = require('./routes/admin');
 const ShoppingCartRouter = require('./routes/shoppingCart');
 const ProductRouter = require('./routes/product');
-const SignInRouter = require('./routes/signin');
+const DiscountRouter = require('./routes/discount');
 const OrdersRouter = require('./routes/orders');
 
 app.use('/customers', CustomersRouter);
 app.use('/admin', AdminRouter);
 app.use('/shoppingCart', ShoppingCartRouter);
 app.use('/product', ProductRouter);
-app.use('/signin', SignInRouter);
+app.use('/discount', DiscountRouter);
 app.use('/orders', OrdersRouter);
 
 
