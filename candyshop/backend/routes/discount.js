@@ -44,6 +44,7 @@ router.route('/add').post(async (req,res) => {
     res.status(200).json("New discount added");
 })
 
+
 router.route('/end').post(async (req,res) => {
     let discountCode = req.body.discountCode;
     let found = await client.db('Discount').collection('New Discount').findOne({'discountCode' : discountCode});
