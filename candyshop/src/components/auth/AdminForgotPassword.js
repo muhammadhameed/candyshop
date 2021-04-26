@@ -23,7 +23,7 @@ class AdminForgotPassword extends Component {
         var email = this.state.email;
         var totalinput = {email};
         
-        fetch('http://localhost:5000/admin/forgotPassword',{
+        fetch('http://localhost:4000/admin/forgotPassword',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",

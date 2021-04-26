@@ -29,7 +29,7 @@ class ChangeAdminPassword extends Component {
         var totalinput = {adminName, whatToChange, change, oldPassword};
         
         if (this.state.password === this.state.rePassword)
-            fetch('http://localhost:5000/admin/update',{
+            fetch('http://localhost:4000/admin/update',{
                 method: 'post',
                 headers: {
                 "Content-Type": "application/json",

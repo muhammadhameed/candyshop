@@ -26,7 +26,7 @@ class ChangeAdminUsername extends Component {
         var whatToChange = "username";
         var totalinput = {adminName, whatToChange, change};
         
-        fetch('http://localhost:5000/admin/update',{
+        fetch('http://localhost:4000/admin/update',{
             method: 'post',
             headers: {
             "Content-Type": "application/json",
