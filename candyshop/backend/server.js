@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "development")
     app.use(express.static(distDir));
     console.log("blah")
 
-    app.get('/', function(req, res) {
+    app.get('*', function(req, res) {
         res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
         //res.sendFile(path.join(__dirname + '/auth/Home.js'));
         console.log("blah")
