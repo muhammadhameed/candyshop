@@ -38,12 +38,12 @@ if (process.env.NODE_ENV === "production")
 {
     console.log("reached")
     var distDir = __dirname + "/dist/";
-    app.use(express.static(path.join(__dirname, '../candyshop/src/build/index.html')));
+    app.use(express.static(path.join(__dirname, '../candyshop/candyshop/src/build/index.html')));
     console.log("blah")
 
     app.get('/', function(req, res) {
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
-        res.sendFile(path.join(__dirname, '../candyshop','src', 'build', 'index.html'));
+        res.sendFile(path.join(__dirname, '../candyshop','candyshop','src', 'build', 'index.html'));
         console.log("blah")
     });
 }
