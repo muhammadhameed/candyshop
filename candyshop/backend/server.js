@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === "production")
         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
         console.log("blahget")
         //return res.redirect('/home'); //"https://candyscape.herokuapp.com/home/";
-        res.sendFile(path.join('../build/index.html'));
+        res.sendFile(path.join(__dirname + '/build/index.html'));
         
     });
 }
