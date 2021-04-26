@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === "production")
 
 
 app.get('/home', function(req, res) {
-    res.sendFile(path.join(__dirname + '../src/components/auth/Home.js'));
+    res.sendFile(path.resolve('../src/components/auth/Home.js'));
 });
 
 
