@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const client = require('./connection');
+const auth = require('../middleware/auth');
 
 async function connectToDb(){
     await client.connect();
@@ -35,7 +36,7 @@ router.route('/add').post( async (req,res) => {
         return;
     }
     
-    await client.db("Product").collection(collectionName).insertOne({"name":productName, "price": price});
+    await client.db("Product").collection(collectionName).insertOne({"name":productName, "quantity":quantity, "price": price});
     res.status(200).json("Product successfully added");
 
 })

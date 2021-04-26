@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server.js",
-    "heroku-postbuild": "cd candyshop && npm install && npm run build"
+    "start": "node candyshop/backend/server.js",
+    "heroku-postbuild": "cd candyshop/src/components && NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   "homepage": "https://github.com/muhammadhameed/candyshop#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "generate-password": "^1.6.0"
+    "generate-password": "^1.6.0",
+    "joi": "^17.4.0",
+    "joi-password-complexity": "^5.1.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }

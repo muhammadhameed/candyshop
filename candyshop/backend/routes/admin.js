@@ -3,6 +3,8 @@ const Joi = require('joi');
 const client = require('./connection');
 const bcrypt = require('bcrypt');
 const generator = require('generate-password');
+const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 
 async function connectToDb(){
     await client.connect();
@@ -34,13 +36,22 @@ const schema = Joi.object().keys({ //adjust this to how the body sends the data
 });
 
 
+router.route('/pending').get(async(req,res) =>{
+
+    let cursor = await client.db("Users").collection("Pending Admin").find({});
+    let arr = new Array();
+    await cursor.forEach(function  (doc) {arr.push(doc);});
+    res.status(200).json(arr);
+})
+
+
+
 router.route('/signupadmin').post( async (req,res) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
     let name = req.body.name;
     let email = req.body.email;
     let password = req.body.password;
-
     let data = req.body;
     
     const validation = schema.validate(data);
@@ -65,30 +76,30 @@ router.route('/signupadmin').post( async (req,res) => {
         return;
     }
 
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (err,hash) => {
+    bcrypt.genSalt(10, async (err, salt) => {
+        bcrypt.hash(password, salt, async (err,hash) => {
             if(err) throw err;
             const doc = {"firstName": firstName, "lastName" : lastName, "name": name, "email":email, "password":hash};
             await client.db("Users").collection("Pending Admin").insertOne(doc);
-            res.status(200).json("User Added");
-        })
-    })
-
-
-    
+            let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
+            res.status(200).json("User added");
+        });
+    });
 
 })
 
+
 router.route('/approve').post(async (req,res) => {
-    let name = req.found.name;
+    let name = req.body.name;
     let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
     await client.db("Users").collection("Admin").insertOne(found);
     await client.db("Users").collection("Pending Admin").deleteOne({"name" : name});
     res.status(200).json("Admin Approved");
 })
 
+
 router.route('/delete').post(async (req,res) => {
-    let name = req.found.name;
+    let name = req.body.name;
     let found = await client.db("Users").collection("Pending Admin").findOne({"name" : name});
     await client.db("Users").collection("Pending Admin").deleteOne({"name" : name});
     res.status(200).json("Admin Deleted");
@@ -109,14 +120,26 @@ router.route('/signinadmin').post( async (req,res) => {
         return;
     }
 
-    bcrypt.compare(password, found.password, function(err, res) {
-        if (res == true){
-            res.status(200).json("You are signed in. Welcome.");
+    bcrypt.compare(password, found.password, function(err, response) {
+        if (response == true){
+            jwt.sign(
+                { id : found._id},
+                process.env.jwtSecret,
+                {expiresIn: 3600},
+
+                (err,token) => {
+                    if(err) throw err;
+                    res.status(200).json({
+                        token,
+                        "msg" : "User Signed In"
+                    });
+                }
+            )
         }
         else{
             res.status(400).json('Incorrect password')
         }
-    })
+    });
     
 });
 
@@ -151,19 +174,19 @@ router.route('/update').post(async (req, res) =>{
     else if (whatToChange == "password"){
         let oldPassword = req.body.oldPassword;
 
-        bcrypt.compare(oldPassword, found.password, function(err, res) {
-            if (res == true){
+        bcrypt.compare(oldPassword, found.password, function(err, response) {
+            if (response == true){
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(change, salt, (err,hash) => {
                         if(err) throw err;
                         found.password = hash;
-                    })
-                })
+                    });
+                });
             }
             else{
                 res.status(400).json('Old password is incorrect')
             }
-        })
+        });
     }
 
     await client.db("Users").collection("Admin").updateOne({"_id": id}, {$set : found});
@@ -197,20 +220,20 @@ router.route('/forgotPassword').post(async (req,res) => {
         text : 'Your new password is ' + password
     };
 
-    
+
     transporter.sendMail(mailOptions, function(error, info){
         if(error){
             res.status(400).json(error);
         }
         else{
             bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(password, salt, (err,hash) => {
+                bcrypt.hash(password, salt, async (err,hash) => {
                     if(err) throw err;
 
                     await client.db("Users").collection("Admin").updateOne({"email" : email}, {$set: {"password" : hash}});
                     res.status(200).json('Email sent');
-                })
-            })
+                });
+            });
             
         }
     });

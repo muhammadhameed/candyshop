@@ -7,7 +7,7 @@ const client = require('./routes/connection');
 
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2000;
 
 app.use(cors());
 app.use (express.json());
@@ -20,13 +20,45 @@ async function connectToDb(){
 connectToDb();
 
 
+if (process.env.NODE_ENV === "development")
+{
+    console.log("reached")
+    var distDir = __dirname + "/dist/";
+    app.use(express.static(path.join(__dirname, '../src/build/index.html')));
+    console.log("blah")
+
+    app.get('/', function(req, res) {
+        //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
+        res.sendFile(path.join(__dirname, '../src', 'build', 'index.html'));
+        console.log("blah")
+    });
+}
+
+if (process.env.NODE_ENV === "production")
+{
+    console.log("reached")
+    var distDir = __dirname + "/dist/";
+    app.use(express.static(path.join(__dirname, '/routes/customer.js')));
+    console.log("blah")
+
+    app.get('/home', function(req, res) {
+        //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
+        res.send("path.join(__dirname, 'routes', 'customer.js')");
+        console.log("blah")
+    });
+}
+
 // if (process.env.NODE_ENV === "production")
 // {
+//     console.log("reached")
 //     var distDir = __dirname + "/dist/";
-//     app.use(express.static(distDir));
+//     app.use(express.static(path.join(__dirname, '../src/build/index.html')));
+//     console.log("blah")
 
 //     app.get('/', function(req, res) {
-//         res.sendFile(path.join(__dirname + '/Home.js'));
+//         //res.sendFile(path.resolve(__dirname,  "build", "Home.js"))
+//         res.sendFile(path.join(__dirname, '../src', 'build', 'index.html'));
+//         console.log("blah")
 //     });
 // }
 
@@ -35,14 +67,14 @@ const CustomersRouter = require('./routes/customers');
 const AdminRouter = require('./routes/admin');
 const ShoppingCartRouter = require('./routes/shoppingCart');
 const ProductRouter = require('./routes/product');
-const SignInRouter = require('./routes/signin');
+const DiscountRouter = require('./routes/discount');
 const OrdersRouter = require('./routes/orders');
 
 app.use('/customers', CustomersRouter);
 app.use('/admin', AdminRouter);
 app.use('/shoppingCart', ShoppingCartRouter);
 app.use('/product', ProductRouter);
-app.use('/signin', SignInRouter);
+app.use('/discount', DiscountRouter);
 app.use('/orders', OrdersRouter);
 
 
